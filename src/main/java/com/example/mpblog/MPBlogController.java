@@ -15,10 +15,10 @@ public class MPBlogController {
         this.mpBlogService = mpBlogService;
     }
 
-    @GetMapping("/loginform")
+    @GetMapping("/registerdialog")
     public String loginForm(Model model) {
         model.addAttribute("user", new MPBlogUser());
-        return "loginform";
+        return "registerdialog";
     }
 
     @GetMapping("/showentries")

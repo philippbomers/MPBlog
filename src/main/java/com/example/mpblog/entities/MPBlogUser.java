@@ -1,11 +1,13 @@
 package com.example.mpblog.entities;
 
+import jdk.jfr.BooleanFlag;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,10 +19,13 @@ public class MPBlogUser {
     private int id;
 
     @UniqueElements
+    @Min(3)
     private String userName;
 
+    @BooleanFlag
     private boolean adminRights;
 
+    @Min(6)
     private String password;
 
     @OneToMany(mappedBy = "mpBlogUser")

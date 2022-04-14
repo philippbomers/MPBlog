@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register Dialog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+<h3>Register a new user:</h3>
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+    <p><label for="username">Username:</label> <input type="text" th:field="*{userName}" id="username"/></p>
+    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+    <p><label for="password">Password:</label> <input type="password" th:field="*{password}" id="password"/></p>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    <label for="adminrights">Administrator?</label>
+    <select id="adminrights" th:field="*{adminRights}">
+        <option value="true">Yes</option>
+        <option value="false" selected>No</option>
+    </select>
+    <p th:if="${#fields.hasErrors('adminRights')}" th:errors="*{adminRights}"></p>
+    <p><input type="submit" value="Send"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>

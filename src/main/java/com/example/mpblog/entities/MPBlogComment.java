@@ -1,9 +1,11 @@
 package com.example.mpblog.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,8 +16,10 @@ public class MPBlogComment {
     @GeneratedValue
     private int id;
 
+    @Min(3)
     private String userComment;
 
+    @CreatedDate
     private Date date;
 
     @ManyToOne
