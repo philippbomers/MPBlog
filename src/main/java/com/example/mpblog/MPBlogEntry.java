@@ -2,6 +2,7 @@ package com.example.mpblog;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class MPBlogEntry {
     }
 
     public List<MPBlogComment> getMpBlogComments() {
-        return mpBlogComments;
+        return mpBlogComments.stream().sorted(Comparator.comparing(MPBlogComment::getDate).reversed()).toList();
     }
 
     public void setMpBlogComments(List<MPBlogComment> mpBlogComments) {

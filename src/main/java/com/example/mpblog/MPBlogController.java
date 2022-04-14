@@ -31,6 +31,4 @@ public class MPBlogController {
         model.addAttribute("entry", this.mpBlogService.getMPBlogEntry(id));
         return "entrydetails";
     }
-
-
 }
