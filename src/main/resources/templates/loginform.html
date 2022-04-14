@@ -2,9 +2,38 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
+<h3>Please enter your credentials:</h3>
+<div class="field">
+    <label class="label">Username</label>
+    <div class="control has-icons-left has-icons-right">
+        <input class="input is-success" type="text" placeholder="Text input" value="user name">
+        <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+        <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+    </div>
+    <p class="help is-success">This username is available</p>
+</div>
+<div class="field">
+    <label class="label">Password</label>
+    <div class="control has-icons-left has-icons-right">
+        <input class="input is-success" type="password" placeholder="Text input" value="password">
+        <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+        <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+    </div>
+    <p class="help is-success">This username is available</p>
+</div>
 
 </body>
 </html>
