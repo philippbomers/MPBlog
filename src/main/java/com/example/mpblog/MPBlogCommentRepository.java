@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface MPBlogCommentRepository extends CrudRepository<MPBlogComment, Integer> {
     List<MPBlogComment> findAll();
+
     MPBlogComment findById(int id);
+
     List<MPBlogComment> findByMpBlogEntry(MPBlogEntry blogEntry);
 }

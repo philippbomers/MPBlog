@@ -55,13 +55,13 @@ public class MPBlogEntry {
         return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getRealDate() {
         SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
         return DateFor.format(date);
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public MPBlogUser getMpBlogUser() {

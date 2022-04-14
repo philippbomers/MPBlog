@@ -28,7 +28,7 @@ public class MPBlogService {
         this.mpBlogUserRepository.save(mpBlogUser);
     }
 
-    public void addMPBlogComment(MPBlogComment mpBlogComment){
+    public void addMPBlogComment(MPBlogComment mpBlogComment) {
         this.mpBlogCommentRepository.save(mpBlogComment);
     }
 
@@ -37,7 +37,7 @@ public class MPBlogService {
         return result.stream().sorted(Comparator.comparing(MPBlogEntry::getDate).reversed()).toList();
     }
 
-    public List<MPBlogComment> getMPBlogComment(){
+    public List<MPBlogComment> getMPBlogComment() {
         List<MPBlogComment> result = this.mpBlogCommentRepository.findAll();
         return result.stream().sorted(Comparator.comparing(MPBlogComment::getDate).reversed()).toList();
     }
@@ -54,7 +54,7 @@ public class MPBlogService {
         return this.mpBlogUserRepository.findById(id);
     }
 
-    public MPBlogComment getMPBlogComment(int id){
+    public MPBlogComment getMPBlogComment(int id) {
         return this.mpBlogCommentRepository.findById(id);
     }
 
@@ -62,7 +62,7 @@ public class MPBlogService {
         return this.mpBlogUserRepository.findByUserName(username);
     }
 
-    public List<MPBlogComment> getMPBlogComment(MPBlogEntry mpBlogEntry){
+    public List<MPBlogComment> getMPBlogComment(MPBlogEntry mpBlogEntry) {
         return this.mpBlogCommentRepository.findByMpBlogEntry(mpBlogEntry);
     }
 }

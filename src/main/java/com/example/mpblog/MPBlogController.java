@@ -15,19 +15,19 @@ public class MPBlogController {
     }
 
     @GetMapping("/loginform")
-    public String loginForm(Model model){
-        model.addAttribute("user",new MPBlogUser());
+    public String loginForm(Model model) {
+        model.addAttribute("user", new MPBlogUser());
         return "loginform";
     }
 
     @GetMapping("/showentries")
-    public String showEntries(Model model){
+    public String showEntries(Model model) {
         model.addAttribute("entries", mpBlogService.getMPBlogEntry());
         return "showentries";
     }
 
     @GetMapping("{id}/entrydetails")
-    public String entryDetails(Model model, @PathVariable int id){
+    public String entryDetails(Model model, @PathVariable int id) {
         model.addAttribute("entry", this.mpBlogService.getMPBlogEntry(id));
         return "entrydetails";
     }

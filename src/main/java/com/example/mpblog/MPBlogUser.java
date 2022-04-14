@@ -25,6 +25,8 @@ public class MPBlogUser {
 
     @OneToMany(mappedBy = "mpBlogUser")
     private List<MPBlogEntry> mpBlogEntryList;
+    @OneToMany(mappedBy = "mpBlogUser")
+    private Collection<MPBlogEntry> mpBlogEntry;
 
     public MPBlogUser() {
     }
@@ -60,9 +62,6 @@ public class MPBlogUser {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @OneToMany(mappedBy = "mpBlogUser")
-    private Collection<MPBlogEntry> mpBlogEntry;
 
     public Collection<MPBlogEntry> getMpBlogEntry() {
         return mpBlogEntry;
