@@ -2,8 +2,8 @@ package com.example.mpblog;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MPBlogEntry {
@@ -20,6 +20,9 @@ public class MPBlogEntry {
 
     @ManyToOne
     private MPBlogUser mpBlogUser;
+
+    @OneToMany(mappedBy = "mpBlogEntry")
+    private List<MPBlogComment> mpBlogComments;
 
     public MPBlogEntry() {
     }
@@ -52,7 +55,7 @@ public class MPBlogEntry {
         return date;
     }
 
-    public String getRealDate(){
+    public String getRealDate() {
         SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
         return DateFor.format(date);
     }
@@ -69,7 +72,15 @@ public class MPBlogEntry {
         this.mpBlogUser = mpBlogUser;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.getMpBlogUser().getUserName();
+    }
+
+    public List<MPBlogComment> getMpBlogComments() {
+        return mpBlogComments;
+    }
+
+    public void setMpBlogComments(List<MPBlogComment> mpBlogComments) {
+        this.mpBlogComments = mpBlogComments;
     }
 }

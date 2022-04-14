@@ -31,6 +31,9 @@
         <td th:text="*{entry.content}"></td>
         <td th:text="*{entry.realDate}"></td>
         <td th:text="*{entry.username}"></td>
+        <td th:each="comment:*{entry.mpBlogComments}">
+            <p th:text="*{comment.id}"></p>
+        </td>
     </tr>
 </table>
 </body>
