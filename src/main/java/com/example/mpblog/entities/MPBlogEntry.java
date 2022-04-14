@@ -1,11 +1,9 @@
 package com.example.mpblog.entities;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -18,10 +16,10 @@ public class MPBlogEntry {
     @GeneratedValue
     private int id;
 
-    @Min(3)
+    @Length(min = 3)
     private String title;
 
-    @Min(3)
+    @Length(min = 3)
     private String content;
 
     @CreatedDate

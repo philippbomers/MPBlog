@@ -8,16 +8,22 @@
 </head>
 <body>
 <h3>Register a new user:</h3>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
-    <p><label for="username">Username:</label> <input type="text" th:field="*{userName}" id="username"/></p>
+<form action="#" th:action="@{/registerdialog}" th:object="${mpBlogUser}" method="post">
+    <p>Username: <label>
+        <input type="text" th:field="*{userName}"/>
+    </label></p>
     <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
-    <p><label for="password">Password:</label> <input type="password" th:field="*{password}" id="password"/></p>
+    <p>Password: <label>
+        <input type="text" th:field="*{password}"/>
+    </label></p>
     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-    <label for="admin-rights">Administrator?</label>
-    <select id="admin-rights" th:field="*{adminRights}">
-        <option value="true">Yes</option>
-        <option value="false" selected>No</option>
-    </select>
+    Admin:
+    <label>
+        <select th:field="*{adminRights}">
+            <option value="true">Yes</option>
+            <option value="false" selected>No</option>
+        </select>
+    </label>
     <p th:if="${#fields.hasErrors('adminRights')}" th:errors="*{adminRights}"></p>
     <p><input type="submit" value="Send"/> <input type="reset" value="Reset"/></p>
 </form>

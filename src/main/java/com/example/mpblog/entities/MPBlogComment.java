@@ -1,11 +1,12 @@
 package com.example.mpblog.entities;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ public class MPBlogComment {
     @GeneratedValue
     private int id;
 
-    @Min(3)
+    @Length(min = 3)
     private String userComment;
 
     @CreatedDate
@@ -51,13 +52,13 @@ public class MPBlogComment {
         return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getRealDate() {
         SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
         return DateFor.format(date);
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public MPBlogUser getMpBlogUser() {
