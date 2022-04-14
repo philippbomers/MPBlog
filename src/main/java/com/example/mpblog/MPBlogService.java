@@ -1,5 +1,11 @@
 package com.example.mpblog;
 
+import com.example.mpblog.entities.MPBlogComment;
+import com.example.mpblog.entities.MPBlogEntry;
+import com.example.mpblog.entities.MPBlogUser;
+import com.example.mpblog.repositories.MPBlogCommentRepository;
+import com.example.mpblog.repositories.MPBlogEntryRepository;
+import com.example.mpblog.repositories.MPBlogUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

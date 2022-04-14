@@ -1,5 +1,6 @@
-package com.example.mpblog;
+package com.example.mpblog.repositories;
 
+import com.example.mpblog.entities.MPBlogUser;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

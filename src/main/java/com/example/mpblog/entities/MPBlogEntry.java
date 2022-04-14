@@ -1,4 +1,4 @@
-package com.example.mpblog;
+package com.example.mpblog.entities;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;

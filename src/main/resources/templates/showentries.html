@@ -23,7 +23,7 @@
             Created by
         </th>
         <th>
-            Comments
+            Other
         </th>
     </tr>
     <tr th:each="entry:${entries}">
@@ -31,8 +31,8 @@
         <td th:text="*{entry.content}"></td>
         <td th:text="*{entry.realDate}"></td>
         <td th:text="*{entry.username}"></td>
-        <td th:each="comment:*{entry.mpBlogComments}">
-            <p th:text="*{comment.id}"></p><br>
+        <td>
+            <a th:href="@{/{id}/entrydetails(id=${entry.id})}">Show Details</a>
         </td>
     </tr>
 </table>

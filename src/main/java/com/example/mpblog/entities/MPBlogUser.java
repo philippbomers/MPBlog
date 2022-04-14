@@ -1,4 +1,4 @@
-package com.example.mpblog;
+package com.example.mpblog.entities;
 
 import org.hibernate.validator.constraints.UniqueElements;
 

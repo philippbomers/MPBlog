@@ -1,9 +1,10 @@
-package com.example.mpblog;
+package com.example.mpblog.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -44,6 +45,11 @@ public class MPBlogComment {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getRealDate() {
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
+        return DateFor.format(date);
     }
 
     public void setDate(Date date) {
