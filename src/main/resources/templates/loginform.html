@@ -7,33 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
+
 <h3>Please enter your credentials:</h3>
-<div class="field">
-    <label class="label">Username</label>
-    <div class="control has-icons-left has-icons-right">
-        <input class="input is-success" type="text" placeholder="Text input" value="user name">
-        <span class="icon is-small is-left">
-      <i class="fas fa-user"></i>
-    </span>
-        <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-    </div>
-    <p class="help is-success">This username is available</p>
-</div>
-<div class="field">
-    <label class="label">Password</label>
-    <div class="control has-icons-left has-icons-right">
-        <input class="input is-success" type="password" placeholder="Text input" value="password">
-        <span class="icon is-small is-left">
-      <i class="fas fa-user"></i>
-    </span>
-        <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-    </div>
-    <p class="help is-success">This username is available</p>
-</div>
+<form action="#" th:action="@{/homepage}" th:object="${user}" method="post">
+    <p><label for="username">Username:</label> <input type="text" th:field="*{userName}" id="username"/></p>
+    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+    <p><label for="password">Password:</label> <input type="password" th:field="*{password}" id="password"/></p>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    <p><input type="submit" value="Send"/> <input type="reset" value="Reset"/></p>
+</form>
 
 </body>
 </html>

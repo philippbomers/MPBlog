@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="https://www.thymeleaf.org">
+    <title>Title</title>
+</head>
+<body>
+<h3>Entries ordered by date</h3>
+<table>
+    <tr>
+        <td>
+            Title
+        </td>
+        <td>
+            Content
+        </td>
+        <td>
+            Date
+        </td>
+        <td>
+            Created by
+        </td>
+        <td>
+            Comments
+        </td>
+    </tr>
+    <tr th:each="entry:${entries}">
+        <td th:text="*{entry.title}"></td>
+        <td th:text="*{entry.content}"></td>
+        <td th:text="*{entry.date}"></td>
+        <td th:text="*{entry.username}"></td>
+    </tr>
+</table>
+</body>
+</html>

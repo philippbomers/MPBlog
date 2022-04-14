@@ -61,4 +61,8 @@ public class MPBlogEntry {
     public void setMpBlogUser(MPBlogUser mpBlogUser) {
         this.mpBlogUser = mpBlogUser;
     }
+
+    public String getUsername(){
+        return this.getMpBlogUser().getUserName();
+    }
 }

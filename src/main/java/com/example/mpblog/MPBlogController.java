@@ -13,10 +13,17 @@ public class MPBlogController {
         this.mpBlogService = mpBlogService;
     }
 
-    @GetMapping("/loginForm")
+    @GetMapping("/loginform")
     public String loginForm(Model model){
-        model.addAttribute("emptyUser",new MPBlogUser());
+        model.addAttribute("user",new MPBlogUser());
         return "loginform";
     }
+
+    @GetMapping("/showentries")
+    public String showEntries(Model model){
+        model.addAttribute("entries", mpBlogService.getMPBlogEntry());
+        return "showentries";
+    }
+
 
 }

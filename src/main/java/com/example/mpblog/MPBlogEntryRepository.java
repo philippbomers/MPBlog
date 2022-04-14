@@ -8,11 +8,8 @@ import java.util.List;
 
 @Repository
 public interface MPBlogEntryRepository extends CrudRepository<MPBlogEntry, Integer> {
-    @Override
-    default List<MPBlogEntry> findAll(){
-        return findAll(Sort.by(Sort.Direction.DESC, "date"));
-    }
-    List<MPBlogEntry> findAll(Sort date);
+
+    List<MPBlogEntry> findAll();
+
     MPBlogEntry findById(int id);
-    List<MPBlogEntry> sortByDate();
 }
