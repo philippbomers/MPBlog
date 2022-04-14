@@ -18,7 +18,6 @@ public class MPBlogUser {
     @GeneratedValue
     private int id;
 
-    @UniqueElements
     @Min(3)
     private String userName;
 

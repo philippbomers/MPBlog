@@ -16,7 +16,6 @@ public class MPBlogService {
 
     private final MPBlogEntryRepository mpBlogEntryRepository;
     private final MPBlogUserRepository mpBlogUserRepository;
-
     private final MPBlogCommentRepository mpBlogCommentRepository;
 
 
@@ -30,7 +29,7 @@ public class MPBlogService {
         this.mpBlogEntryRepository.save(mpBlogEntry);
     }
 
-    public void addMPBlogEntry(MPBlogUser mpBlogUser) {
+    public void addMPBlogUser(MPBlogUser mpBlogUser) {
         this.mpBlogUserRepository.save(mpBlogUser);
     }
 

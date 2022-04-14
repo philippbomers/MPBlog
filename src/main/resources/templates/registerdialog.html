@@ -13,8 +13,8 @@
     <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
     <p><label for="password">Password:</label> <input type="password" th:field="*{password}" id="password"/></p>
     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-    <label for="adminrights">Administrator?</label>
-    <select id="adminrights" th:field="*{adminRights}">
+    <label for="admin-rights">Administrator?</label>
+    <select id="admin-rights" th:field="*{adminRights}">
         <option value="true">Yes</option>
         <option value="false" selected>No</option>
     </select>
