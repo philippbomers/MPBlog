@@ -11,10 +11,13 @@ public class MPBlogService {
     private final MPBlogEntryRepository mpBlogEntryRepository;
     private final MPBlogUserRepository mpBlogUserRepository;
 
+    private final MPBlogCommentRepository mpBlogCommentRepository;
 
-    public MPBlogService(MPBlogEntryRepository mpBlogEntryRepository, MPBlogUserRepository mpBlogUserRepository) {
+
+    public MPBlogService(MPBlogEntryRepository mpBlogEntryRepository, MPBlogUserRepository mpBlogUserRepository, MPBlogCommentRepository mpBlogCommentRepository) {
         this.mpBlogEntryRepository = mpBlogEntryRepository;
         this.mpBlogUserRepository = mpBlogUserRepository;
+        this.mpBlogCommentRepository = mpBlogCommentRepository;
     }
 
     public void addMPBlogEntry(MPBlogEntry mpBlogEntry) {
@@ -25,9 +28,18 @@ public class MPBlogService {
         this.mpBlogUserRepository.save(mpBlogUser);
     }
 
+    public void addMPBlogComment(MPBlogComment mpBlogComment){
+        this.mpBlogCommentRepository.save(mpBlogComment);
+    }
+
     public List<MPBlogEntry> getMPBlogEntry() {
         List<MPBlogEntry> result = this.mpBlogEntryRepository.findAll();
         return result.stream().sorted(Comparator.comparing(MPBlogEntry::getDate).reversed()).toList();
+    }
+
+    public List<MPBlogComment> getMPBlogComment(){
+        List<MPBlogComment> result = this.mpBlogCommentRepository.findAll();
+        return result.stream().sorted(Comparator.comparing(MPBlogComment::getDate).reversed()).toList();
     }
 
     public List<MPBlogUser> getMPBlogUser() {
@@ -42,7 +54,15 @@ public class MPBlogService {
         return this.mpBlogUserRepository.findById(id);
     }
 
+    public MPBlogComment getMPBlogComment(int id){
+        return this.mpBlogCommentRepository.findById(id);
+    }
+
     public MPBlogUser getMPBlogUser(String username) {
         return this.mpBlogUserRepository.findByUserName(username);
+    }
+
+    public List<MPBlogComment> getMPBlogComment(MPBlogEntry mpBlogEntry){
+        return this.mpBlogCommentRepository.findByMpBlogEntry(mpBlogEntry);
     }
 }

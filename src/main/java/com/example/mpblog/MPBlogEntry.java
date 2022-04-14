@@ -1,6 +1,8 @@
 package com.example.mpblog;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -48,6 +50,11 @@ public class MPBlogEntry {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getRealDate(){
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
+        return DateFor.format(date);
     }
 
     public void setDate(Date date) {

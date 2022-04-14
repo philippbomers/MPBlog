@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" xmlns:th="https://www.thymeleaf.org">
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MPBlog Entries</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
-<h3>Entries ordered by date</h3>
-<table>
+<h3 class="title">Entries ordered by date</h3>
+<table class="table">
     <tr>
-        <td>
+        <th>
             Title
-        </td>
-        <td>
+        </th>
+        <th>
             Content
-        </td>
-        <td>
+        </th>
+        <th>
             Date
-        </td>
-        <td>
+        </th>
+        <th>
             Created by
-        </td>
-        <td>
+        </th>
+        <th>
             Comments
-        </td>
+        </th>
     </tr>
     <tr th:each="entry:${entries}">
         <td th:text="*{entry.title}"></td>
         <td th:text="*{entry.content}"></td>
-        <td th:text="*{entry.date}"></td>
+        <td th:text="*{entry.realDate}"></td>
         <td th:text="*{entry.username}"></td>
     </tr>
 </table>
