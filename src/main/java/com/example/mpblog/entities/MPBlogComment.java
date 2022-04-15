@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -31,6 +32,7 @@ public class MPBlogComment {
 
     public MPBlogComment() {
     }
+
 
     public int getId() {
         return id;

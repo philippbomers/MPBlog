@@ -1,6 +1,7 @@
 package com.example.mpblog.services;
 
 import com.example.mpblog.entities.MPBlogSession;
+import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogSessionRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,9 @@ public class MPBlogSessionService {
 
     public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId, Instant instant) {
         return mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, instant);
+    }
+
+    public MPBlogUser findMPBlogUserByMpBlogUserId(int id) {
+        return mpBlogSessionRepository.findMPBlogUserByMpBlogUserId(id);
     }
 }

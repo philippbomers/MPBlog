@@ -32,4 +32,8 @@ public class MPBlogCommentService {
     public List<MPBlogComment> getMPBlogComment(MPBlogEntry mpBlogEntry) {
         return this.mpBlogCommentRepository.findByMpBlogEntry(mpBlogEntry);
     }
+
+    public void save(MPBlogComment mpBlogComment) {
+        mpBlogCommentRepository.save(mpBlogComment);
+    }
 }

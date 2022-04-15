@@ -27,6 +27,7 @@
             <p class="content" th:text="*{comment.userComment}"></p>
         </article>
     </div>
+    <a class="button" th:href="@{/{id}/addcomment(id=*{entry.id})}">New Comment</a>
 </div>
 
 

@@ -1,5 +1,6 @@
 package com.example.mpblog.services;
 
+import com.example.mpblog.entities.MPBlogComment;
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
