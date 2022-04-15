@@ -5,6 +5,9 @@ import com.example.mpblog.repositories.MPBlogSessionRepository;
 import com.mysql.cj.Session;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Optional;
+
 @Service
 public class MPBlogSessionService {
 
@@ -15,5 +18,9 @@ public class MPBlogSessionService {
 
     public void save(MPBlogSession mpBlogSession) {
         mpBlogSessionRepository.save(mpBlogSession);
+    }
+
+    public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId, Instant instant) {
+        return mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, instant);
     }
 }

@@ -20,11 +20,9 @@ import java.util.Optional;
 @Controller
 public class MPBlogUserController {
     private final MPBlogUserService mpBlogUserService;
-    private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogUserController(MPBlogUserService mpBlogUserService, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogUserController(MPBlogUserService mpBlogUserService) {
         this.mpBlogUserService = mpBlogUserService;
-        this.mpBlogSessionService = mpBlogSessionService;
     }
 
     @GetMapping("/registerdialog")
@@ -43,18 +41,4 @@ public class MPBlogUserController {
         }
     }
 
-    @PostMapping("/login")
-    public String login(HttpServletResponse response) {
-        Optional<MPBlogUser> optionalUser = mpBlogUserService.findByUsernameAndPassword("...", "...");
-        if (optionalUser.isPresent()) {
-            MPBlogSession mpBlogSession = new MPBlogSession(optionalUser.get(), Instant.now().plusSeconds(7*24*60*60));
-            mpBlogSessionService.save(mpBlogSession);
-            Cookie cookie = new Cookie("sessionId", mpBlogSession.getId());
-            response.addCookie(cookie);
-// Login erfolgreich
-            return "redirect:/";
-        }
-// Login nicht erfolgreich
-        return "login";
-    }
 }
