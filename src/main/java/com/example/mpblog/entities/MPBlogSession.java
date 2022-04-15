@@ -20,9 +20,6 @@ public class MPBlogSession {
     public MPBlogSession() {
     }
 
-    public MPBlogSession(MPBlogUser mpBlogUser, Instant plusSeconds) {
-    }
-
     public String getId() {
         return id;
     }
