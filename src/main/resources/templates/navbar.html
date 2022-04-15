@@ -1,7 +1,7 @@
 <!--TODO: Make navbar responsive: https://bulma.io/documentation/components/navbar/ -->
 <nav aria-label="main navigation" class="navbar" role="navigation" th:fragment="navbar">
     <div class="navbar-brand">
-        <a class="navbar-item" th:href="@{/showentries}">
+        <a class="navbar-item" th:href="@{/}">
             <img alt="Logo" th:src="@{images/logo.png}">
         </a>
 
@@ -23,6 +23,9 @@
             <div class="buttons">
                 <a class="button is-primary" th:href="@{/registerdialog}">
                     <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" th:href="@{/login}">
+                    Log in
                 </a>
             </div>
         </div>
