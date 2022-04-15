@@ -19,14 +19,6 @@
         <input th:field="*{password}" type="text"/>
     </label></p>
     <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
-    Admin:
-    <label>
-        <select th:field="*{adminRights}">
-            <option value="true">Yes</option>
-            <option selected value="false">No</option>
-        </select>
-    </label>
-    <p th:errors="*{adminRights}" th:if="${#fields.hasErrors('adminRights')}"></p>
     <p><input type="submit" value="Send"/> <input type="reset" value="Reset"/></p>
 </form>
 </body>

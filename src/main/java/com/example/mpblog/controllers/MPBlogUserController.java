@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -33,6 +34,19 @@ public class MPBlogUserController {
             this.mpBlogUserService.addMPBlogUser(mpBlogUser);
             return "registersuccessfully";
         }
+    }
+
+    @GetMapping("/bloguserlist")
+    public String userList(Model model) {
+        model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
+        return "bloguserlist";
+    }
+
+    @GetMapping("/switchAdminRights/{id}/bloguserlist")
+    public String register(@PathVariable int id, Model model) {
+        this.mpBlogUserService.changeUserAdminStatus(this.mpBlogUserService.getMPBlogUsers(id));
+        model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
+        return "bloguserlist";
     }
 
 }

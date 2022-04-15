@@ -21,22 +21,25 @@ public class MPBlogUserService {
     }
 
 
-    public List<MPBlogUser> getMPBlogUser() {
+    public List<MPBlogUser> getMPBlogUsers() {
         return this.mpBlogUserRepository.findAll();
     }
 
 
-    public MPBlogUser getMPBlogUser(int id) {
+    public MPBlogUser getMPBlogUsers(int id) {
         return this.mpBlogUserRepository.findById(id);
     }
 
-    public MPBlogUser getMPBlogUser(String username) {
+    public MPBlogUser getMPBlogUsers(String username) {
         return this.mpBlogUserRepository.findByUserName(username);
     }
 
-    public Optional<MPBlogUser> getMPBlogUser(MPBlogUser mpBlogUser) {
+    public Optional<MPBlogUser> getMPBlogUsers(MPBlogUser mpBlogUser) {
         return this.mpBlogUserRepository.findByUserNameAndPassword(mpBlogUser.getUserName(), mpBlogUser.getPassword());
     }
 
-    ;
+    public void changeUserAdminStatus(MPBlogUser mpBlogUser){
+        mpBlogUser.setAdminRights(!mpBlogUser.isAdminRights());
+        this.mpBlogUserRepository.save(mpBlogUser);
+    }
 }

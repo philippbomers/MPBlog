@@ -36,7 +36,7 @@ public class MPBlogSessionController {
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("login") MPBlogUser mpBlogUser, BindingResult bindingResult, HttpServletResponse response) {
-        Optional<MPBlogUser> optionalUser = mpBlogUserService.getMPBlogUser(mpBlogUser);
+        Optional<MPBlogUser> optionalUser = mpBlogUserService.getMPBlogUsers(mpBlogUser);
 
         if (optionalUser.isPresent() && !bindingResult.hasErrors()) {
             MPBlogSession mpBlogSession = new MPBlogSession(optionalUser.get(), Instant.now().plusSeconds(7 * 24 * 60 * 60));
