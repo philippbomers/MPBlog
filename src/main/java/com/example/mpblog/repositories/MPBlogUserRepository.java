@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MPBlogUserRepository extends CrudRepository<MPBlogUser, Integer> {
@@ -13,4 +14,6 @@ public interface MPBlogUserRepository extends CrudRepository<MPBlogUser, Integer
     MPBlogUser findById(int id);
 
     MPBlogUser findByUserName(String username);
+
+    Optional<MPBlogUser> findByUsernameAndPassword(String username, String password);
 }

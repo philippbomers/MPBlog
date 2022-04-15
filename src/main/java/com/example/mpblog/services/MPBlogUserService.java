@@ -5,6 +5,7 @@ import com.example.mpblog.repositories.MPBlogUserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MPBlogUserService {
@@ -32,4 +33,8 @@ public class MPBlogUserService {
     public MPBlogUser getMPBlogUser(String username) {
         return this.mpBlogUserRepository.findByUserName(username);
     }
+
+    public Optional<MPBlogUser> findByUsernameAndPassword(String userName, String password) {
+        return this.mpBlogUserRepository.findByUsernameAndPassword(userName, password);
+    };
 }
