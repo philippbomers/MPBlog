@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel = "icon" th:src="@{images/logo.png}" type = "image/x-icon">
 </head>
 <body>
-
+<div th:insert="navbar :: navbar">  </div>
 <h3>Please enter your credentials:</h3>
 <form action="#" th:action="@{/homepage}" th:object="${mpBlogUser}" method="post">
     <p><label for="username">Username:</label> <input type="text" th:field="*{userName}" id="username"/></p>

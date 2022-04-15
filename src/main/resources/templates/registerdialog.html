@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register Dialog</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel = "icon" th:src="@{images/logo.png}" type = "image/x-icon">
 </head>
 <body>
+<div th:insert="navbar :: navbar">  </div>
 <h3>Register a new user:</h3>
 <form action="#" th:action="@{/registerdialog}" th:object="${mpBlogUser}" method="post">
     <p>Username: <label>
