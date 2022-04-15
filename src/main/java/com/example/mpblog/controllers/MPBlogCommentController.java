@@ -1,16 +1,14 @@
 package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogComment;
+import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.services.MPBlogCommentService;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,12 +32,12 @@ public class MPBlogCommentController {
     }
 
     @PostMapping("/{id}/addcomment")
-    public String message(@Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id) {
+    public String message(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id) {
         if (bindingResult.hasErrors()) {
             return "commentform";
         }
-        comment.setMpBlogEntry(mpBlogEntryService.getMPBlogEntry(id));
-        comment.setMpBlogUser(this.mpBlogSessionService.findMPBlogUserByMpBlogUserId(id));
+        comment.setMpBlogEntry(this.mpBlogEntryService.getMPBlogEntry(id).get());
+        comment.setMpBlogUser(this.mpBlogSessionService.findBySessionId(sessionId).get().getMpBlogUser());
         mpBlogCommentService.save(comment);
 
         return "redirect:/";

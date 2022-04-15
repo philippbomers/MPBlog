@@ -44,9 +44,9 @@ public class MPBlogUserController {
 
     @GetMapping("/switchAdminRights/{id}/bloguserlist")
     public String register(@PathVariable int id, Model model) {
-        this.mpBlogUserService.changeUserAdminStatus(this.mpBlogUserService.getMPBlogUsers(id));
+        this.mpBlogUserService.changeUserAdminStatus(this.mpBlogUserService.getMPBlogUser(id));
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "bloguserlist";
+        return "redirect:/bloguserlist";
     }
 
 }

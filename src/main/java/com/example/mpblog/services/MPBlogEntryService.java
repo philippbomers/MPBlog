@@ -1,12 +1,12 @@
 package com.example.mpblog.services;
 
-import com.example.mpblog.entities.MPBlogComment;
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MPBlogEntryService {
@@ -26,7 +26,7 @@ public class MPBlogEntryService {
         return result.stream().sorted(Comparator.comparing(MPBlogEntry::getDate).reversed()).toList();
     }
 
-    public MPBlogEntry getMPBlogEntry(int id) {
+    public Optional<MPBlogEntry> getMPBlogEntry(Integer id) {
         return this.mpBlogEntryRepository.findById(id);
     }
 }

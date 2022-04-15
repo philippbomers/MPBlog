@@ -22,7 +22,7 @@ public class MPBlogEntryController {
 
     @GetMapping("{id}/entrydetails")
     public String entryDetails(Model model, @PathVariable int id) {
-        model.addAttribute("entry", this.mpBlogEntryService.getMPBlogEntry(id));
+        model.addAttribute("entry", this.mpBlogEntryService.getMPBlogEntry(id).get());
         return "entrydetails";
     }
 }

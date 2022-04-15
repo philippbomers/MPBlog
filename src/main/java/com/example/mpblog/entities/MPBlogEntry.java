@@ -1,7 +1,7 @@
 package com.example.mpblog.entities;
 
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ public class MPBlogEntry {
     @Length(min = 3)
     private String content;
 
-    @CreatedDate
+    @UpdateTimestamp
     private Date date;
 
     @ManyToOne

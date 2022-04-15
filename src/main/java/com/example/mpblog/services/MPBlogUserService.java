@@ -26,7 +26,7 @@ public class MPBlogUserService {
     }
 
 
-    public MPBlogUser getMPBlogUsers(int id) {
+    public MPBlogUser getMPBlogUser(int id) {
         return this.mpBlogUserRepository.findById(id);
     }
 
@@ -38,7 +38,7 @@ public class MPBlogUserService {
         return this.mpBlogUserRepository.findByUserNameAndPassword(mpBlogUser.getUserName(), mpBlogUser.getPassword());
     }
 
-    public void changeUserAdminStatus(MPBlogUser mpBlogUser){
+    public void changeUserAdminStatus(MPBlogUser mpBlogUser) {
         mpBlogUser.setAdminRights(!mpBlogUser.isAdminRights());
         this.mpBlogUserRepository.save(mpBlogUser);
     }
