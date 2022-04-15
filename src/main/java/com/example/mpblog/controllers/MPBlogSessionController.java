@@ -1,12 +1,16 @@
 package com.example.mpblog.controllers;
 
+import com.example.mpblog.LoginDTO;
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
@@ -24,15 +28,22 @@ public class MPBlogSessionController {
         this.mpBlogUserService = mpBlogUserService;
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("login", new LoginDTO("", ""));
+        return "login";
+    }
 
     @PostMapping("/login")
-    public String login(HttpServletResponse response) {
-        Optional<MPBlogUser> optionalUser = mpBlogUserService.findByUsernameAndPassword("...", "...");
+    public String login(@ModelAttribute("login") LoginDTO login, BindingResult bindingResult, HttpServletResponse response) {
+        Optional<MPBlogUser> optionalUser = mpBlogUserService.findByUsernameAndPassword(login.getUsername(), login.getPassword());
+
         if (optionalUser.isPresent()) {
             MPBlogSession mpBlogSession = new MPBlogSession(optionalUser.get(), Instant.now().plusSeconds(7*24*60*60));
             mpBlogSessionService.save(mpBlogSession);
             Cookie cookie = new Cookie("sessionId", mpBlogSession.getId());
             response.addCookie(cookie);
+
 // Login erfolgreich
             return "redirect:/";
         }
