@@ -45,7 +45,7 @@ public class MPBlogSessionController {
             response.addCookie(cookie);
 
 // Login erfolgreich
-            return "redirect:/";
+            return "redirect:/showentries";
         }
 // Login nicht erfolgreich
         return "login";

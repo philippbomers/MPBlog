@@ -15,5 +15,5 @@ public interface MPBlogUserRepository extends CrudRepository<MPBlogUser, Integer
 
     MPBlogUser findByUserName(String username);
 
-    Optional<MPBlogUser> findByUsernameAndPassword(String username, String password);
+    Optional<MPBlogUser> findByUserNameAndPassword(String username, String password);
 }
