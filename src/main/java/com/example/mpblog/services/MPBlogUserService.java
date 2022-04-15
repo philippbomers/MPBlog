@@ -34,7 +34,9 @@ public class MPBlogUserService {
         return this.mpBlogUserRepository.findByUserName(username);
     }
 
-    public Optional<MPBlogUser> findByUsernameAndPassword(String userName, String password) {
-        return this.mpBlogUserRepository.findByUserNameAndPassword(userName, password);
-    };
+    public Optional<MPBlogUser> getMPBlogUser(MPBlogUser mpBlogUser) {
+        return this.mpBlogUserRepository.findByUserNameAndPassword(mpBlogUser.getUserName(), mpBlogUser.getPassword());
+    }
+
+    ;
 }

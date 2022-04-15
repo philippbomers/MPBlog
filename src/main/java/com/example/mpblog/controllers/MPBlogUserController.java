@@ -1,8 +1,6 @@
 package com.example.mpblog.controllers;
 
-import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
-import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.time.Instant;
-import java.util.Optional;
 
 @Controller
 public class MPBlogUserController {

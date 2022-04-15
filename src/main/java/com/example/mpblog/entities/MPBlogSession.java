@@ -17,7 +17,8 @@ public class MPBlogSession {
 
     private Instant expiresAt;
 
-    public MPBlogSession() {}
+    public MPBlogSession() {
+    }
 
     public MPBlogSession(MPBlogUser mpBlogUser, Instant plusSeconds) {
     }

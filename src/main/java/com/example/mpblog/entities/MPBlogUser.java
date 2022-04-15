@@ -17,13 +17,13 @@ public class MPBlogUser {
     @GeneratedValue
     private int id;
 
-    @Length(min = 3)
+    @Length(min = 3, max = 30)
     private String userName;
 
     @BooleanFlag
     private boolean adminRights;
 
-    @Length(min = 3)
+    @Length(min = 3, max = 30)
     private String password;
 
     @OneToMany(mappedBy = "mpBlogUser")

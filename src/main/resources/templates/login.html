@@ -11,8 +11,8 @@
 <div th:insert="navbar :: navbar"></div>
 <h1>Login</h1>
 <form th:action="@{/login}" th:object="${login}" method="post">
-    Username: <input type="text" th:field="*{username}"><br/>
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+    Username: <input type="text" th:field="*{userName}"><br/>
+    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
     Passwort: <input type="password" th:field="*{password}"><br/>
     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     <button type="submit">Login</button>

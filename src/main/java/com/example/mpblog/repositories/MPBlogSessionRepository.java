@@ -1,7 +1,6 @@
 package com.example.mpblog.repositories;
 
 import com.example.mpblog.entities.MPBlogSession;
-import com.mysql.cj.Session;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
