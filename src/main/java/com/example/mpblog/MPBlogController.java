@@ -1,6 +1,9 @@
 package com.example.mpblog;
 
 import com.example.mpblog.entities.MPBlogUser;
+import com.example.mpblog.services.MPBlogCommentService;
+import com.example.mpblog.services.MPBlogEntryService;
+import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +15,15 @@ import javax.validation.Valid;
 @Controller
 public class MPBlogController {
 
-    private final MPBlogService mpBlogService;
+    private final MPBlogCommentService mpBlogCommentService;
+    private final MPBlogEntryService mpBlogEntryService;
+    private final MPBlogUserService mpBlogUserService;
 
     @Autowired
-    public MPBlogController(MPBlogService mpBlogService) {
-        this.mpBlogService = mpBlogService;
+    public MPBlogController(MPBlogCommentService mpBlogCommentService, MPBlogEntryService mpBlogEntryService, MPBlogUserService mpBlogUserService) {
+        this.mpBlogCommentService = mpBlogCommentService;
+        this.mpBlogEntryService = mpBlogEntryService;
+        this.mpBlogUserService = mpBlogUserService;
     }
 
     @GetMapping("/registerdialog")
@@ -30,7 +37,7 @@ public class MPBlogController {
         if (bindingResult.hasErrors()) {
             return "registerdialog";
         } else {
-            this.mpBlogService.addMPBlogUser(mpBlogUser);
+            this.mpBlogUserService.addMPBlogUser(mpBlogUser);
             return "registersuccessfully";
         }
     }
@@ -38,13 +45,13 @@ public class MPBlogController {
 
     @GetMapping("/showentries")
     public String showEntries(Model model) {
-        model.addAttribute("entries", mpBlogService.getMPBlogEntry());
+        model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
         return "showentries";
     }
 
     @GetMapping("{id}/entrydetails")
     public String entryDetails(Model model, @PathVariable int id) {
-        model.addAttribute("entry", this.mpBlogService.getMPBlogEntry(id));
+        model.addAttribute("entry", this.mpBlogEntryService.getMPBlogEntry(id));
         return "entrydetails";
     }
 }

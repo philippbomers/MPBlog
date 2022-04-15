@@ -9,7 +9,7 @@
 <body>
 
 <h3>Please enter your credentials:</h3>
-<form action="#" th:action="@{/homepage}" th:object="${user}" method="post">
+<form action="#" th:action="@{/homepage}" th:object="${mpBlogUser}" method="post">
     <p><label for="username">Username:</label> <input type="text" th:field="*{userName}" id="username"/></p>
     <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
     <p><label for="password">Password:</label> <input type="password" th:field="*{password}" id="password"/></p>
