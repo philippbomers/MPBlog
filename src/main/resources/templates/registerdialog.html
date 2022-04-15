@@ -2,31 +2,31 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Register Dialog</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel = "icon" th:src="@{images/logo.png}" type = "image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
+    <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
 </head>
 <body>
-<div th:insert="navbar :: navbar">  </div>
+<div th:insert="navbar :: navbar"></div>
 <h3>Register a new user:</h3>
-<form action="#" th:action="@{/registerdialog}" th:object="${mpBlogUser}" method="post">
+<form action="#" method="post" th:action="@{/registerdialog}" th:object="${mpBlogUser}">
     <p>Username: <label>
-        <input type="text" th:field="*{userName}"/>
+        <input th:field="*{userName}" type="text"/>
     </label></p>
-    <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+    <p th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
     <p>Password: <label>
-        <input type="text" th:field="*{password}"/>
+        <input th:field="*{password}" type="text"/>
     </label></p>
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
     Admin:
     <label>
         <select th:field="*{adminRights}">
             <option value="true">Yes</option>
-            <option value="false" selected>No</option>
+            <option selected value="false">No</option>
         </select>
     </label>
-    <p th:if="${#fields.hasErrors('adminRights')}" th:errors="*{adminRights}"></p>
+    <p th:errors="*{adminRights}" th:if="${#fields.hasErrors('adminRights')}"></p>
     <p><input type="submit" value="Send"/> <input type="reset" value="Reset"/></p>
 </form>
 </body>
