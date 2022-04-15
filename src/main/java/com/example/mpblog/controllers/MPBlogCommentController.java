@@ -1,7 +1,6 @@
 package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogComment;
-import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.services.MPBlogCommentService;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
@@ -40,6 +39,6 @@ public class MPBlogCommentController {
         comment.setMpBlogUser(this.mpBlogSessionService.findBySessionId(sessionId).get().getMpBlogUser());
         mpBlogCommentService.save(comment);
 
-        return "redirect:/";
+        return "redirect:/" + id + "/entrydetails";
     }
 }

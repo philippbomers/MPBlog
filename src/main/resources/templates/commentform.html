@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Title</title>
+    <title>Comment Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
 </head>
 <body>
 <div th:insert="navbar :: navbar"></div>
 <h3>Comment Form</h3>
-<form th:action="@{/{id}/addcomment(id=${entryId})}" th:object="${comment}" method="post">
-    <textarea th:field="*{userComment}"></textarea>
-    <p th:if="${#fields.hasErrors('userComment')}" th:errors="*{userComment}"></p>
+<form method="post" th:action="@{/{id}/addcomment(id=${entryId})}" th:object="${comment}">
+    <label for="inputarea">
+        Insert your Comment:
+    </label><br>
+    <textarea th:field="*{userComment}" id="inputarea"></textarea>
+    <p th:errors="*{userComment}" th:if="${#fields.hasErrors('userComment')}"></p>
     <br>
     <button type="submit">Send</button>
 </form>
