@@ -40,7 +40,7 @@ public class MPBlogSession {
         return expiresAt;
     }
 
-    public void setExpiresAt(Instant expiresAt) {
-        this.expiresAt = expiresAt;
+    public void setExpiresAt() {
+        this.expiresAt = Instant.now().plusSeconds(7 * 24 * 60 * 60);
     }
 }

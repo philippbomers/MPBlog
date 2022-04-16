@@ -41,7 +41,7 @@ public class MPBlogSessionController {
         if (!sessionId.isEmpty() && optionalUser.isPresent() && !bindingResult.hasErrors()) {
             MPBlogSession mpBlogSession = new MPBlogSession();
             mpBlogSession.setMpBlogUser(optionalUser.get());
-            mpBlogSession.setExpiresAt(Instant.now().plusSeconds(7 * 24 * 60 * 60));
+            mpBlogSession.setExpiresAt();
             this.mpBlogSessionService.save(mpBlogSession);
             Cookie cookie = new Cookie("sessionId", mpBlogSession.getId());
             response.addCookie(cookie);
@@ -57,10 +57,10 @@ public class MPBlogSessionController {
     public String home(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
         if (!sessionId.isEmpty()) {
             Optional<MPBlogSession> optionalSession = mpBlogSessionService.findByIdAndExpiresAtAfter(
-                    sessionId, Instant.now());
+                    sessionId);
             if (optionalSession.isPresent()) {
                 MPBlogSession session = optionalSession.get();
-                session.setExpiresAt(Instant.now().plusSeconds(7 * 24 * 60 * 60));
+                session.setExpiresAt();
             }
         }
         return "homepage";

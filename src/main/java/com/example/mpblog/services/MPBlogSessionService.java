@@ -20,7 +20,7 @@ public class MPBlogSessionService {
         this.mpBlogSessionRepository.save(mpBlogSession);
     }
 
-    public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId, Instant instant) {
-        return this.mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, instant);
+    public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId) {
+        return this.mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, Instant.now().plusSeconds(7*24*60*60));
     }
 }

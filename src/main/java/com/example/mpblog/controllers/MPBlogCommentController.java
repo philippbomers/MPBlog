@@ -37,7 +37,7 @@ public class MPBlogCommentController {
     @PostMapping("/{id}/addcomment")
     public String message(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id) {
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
-        Optional<MPBlogSession> session = this.mpBlogSessionService.findByIdAndExpiresAtAfter(sessionId, Instant.now());
+        Optional<MPBlogSession> session = this.mpBlogSessionService.findByIdAndExpiresAtAfter(sessionId);
         if (bindingResult.hasErrors() ||
                 blogEntry.isEmpty() ||
                 session.isEmpty()) {
