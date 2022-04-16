@@ -1,4 +1,47 @@
-<!--TODO: Make navbar responsive: https://bulma.io/documentation/components/navbar/ -->
+<head th:fragment="htmlhead">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>MPBlog</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
+    <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            margin: 0 0 100px;
+            /* bottom = footer height */
+            padding: 25px;
+        }
+        footer {
+            background-color: orange;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 100px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+
 <nav aria-label="main navigation" class="navbar" role="navigation" th:fragment="navbar">
     <div class="navbar-brand">
         <a class="navbar-item" th:href="@{/}">
@@ -12,7 +55,7 @@
         </a>
     </div>
 
-    <div class="navbar-menu" id="navbarBasic">
+    <div class="navbar-menu" id="navbar">
         <div class="navbar-start">
             <a class="navbar-item" th:href="@{/showentries}">Blog</a>
             <a class="navbar-item" th:href="@{/bloguserlist}">Users</a>
@@ -22,23 +65,24 @@
     <div class="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
-                <a class="button is-primary" th:href="@{/registerdialog}" th:if="${sessionUser == null}">
+                <a class="button is-warning" th:href="@{/registerdialog}" th:if="${sessionUser == null}">
                     <strong>Sign up</strong>
                 </a>
-                <a class="button is-light" th:href="@{/login}" th:if="${sessionUser == null}">
+                <a class="button is-success" th:href="@{/login}" th:if="${sessionUser == null}">
                     Log in
                 </a>
-                <a class="button is-light" th:href="@{/userdetails}" th:if="${sessionUser != null}">
+                <a class="button is-primary" th:href="@{/userdetails}" th:if="${sessionUser != null}">
                     Profile
                 </a>
                 <form th:if="${sessionUser != null}" method="post" th:action="@{/logout}">
-                    <button type="submit">Logout</button>
+                    <button class="button is-danger" type="submit">Logout</button>
                 </form>
             </div>
         </div>
     </div>
 </nav>
-<footer class="footer" th:fragment="footer">
+
+<footer class="footer p-5" th:fragment="footer">
     <div class="content has-text-centered">
         <p>
             <strong>MP BLOG</strong><br>by <a href="https://github.com/philippbomers">Philip Bomers</a>

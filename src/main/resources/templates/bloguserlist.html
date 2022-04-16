@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>User List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
-    <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
-</head>
+<head th:insert="standarditems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
 <div th:insert="standarditems :: navbar"></div>
 <h3 class="title">Users</h3>
