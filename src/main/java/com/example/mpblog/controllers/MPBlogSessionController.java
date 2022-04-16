@@ -7,10 +7,7 @@ import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +15,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
+@ControllerAdvice
 public class MPBlogSessionController {
     private final MPBlogSessionService mpBlogSessionService;
     private final MPBlogUserService mpBlogUserService;
@@ -59,6 +57,19 @@ public class MPBlogSessionController {
             }
         }
         return "homepage";
+    }
+
+    @ModelAttribute("sessionUser")
+    public MPBlogUser sessionUser(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
+        if (!sessionId.isEmpty()) {
+            Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findByIdAndExpiresAtAfter(sessionId);
+            if (optionalSession.isPresent()) {
+                MPBlogSession session = optionalSession.get();
+                session.setExpiresAt();
+                return session.getMpBlogUser();
+            }
+        }
+        return null;
     }
 
 }
