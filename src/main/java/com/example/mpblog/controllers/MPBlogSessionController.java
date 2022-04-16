@@ -47,23 +47,14 @@ public class MPBlogSessionController {
     }
 
     @GetMapping("/")
-    public String home(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
-        if (!sessionId.isEmpty()) {
-            Optional<MPBlogSession> optionalSession = mpBlogSessionService.findByIdAndExpiresAtAfter(
-                    sessionId);
-            if (optionalSession.isPresent()) {
-                MPBlogSession session = optionalSession.get();
-                session.setExpiresAt();
-            }
-        }
+    public String home() {
         return "homepage";
     }
 
-/*
     @ModelAttribute("sessionUser")
     public MPBlogUser sessionUser(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
         if (!sessionId.isEmpty()) {
-            Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findByIdAndExpiresAtAfter(sessionId);
+            Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
             if (optionalSession.isPresent()) {
                 MPBlogSession session = optionalSession.get();
                 session.setExpiresAt();
@@ -72,6 +63,5 @@ public class MPBlogSessionController {
         }
         return null;
     }
-*/
 
 }

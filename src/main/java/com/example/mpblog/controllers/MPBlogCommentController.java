@@ -3,7 +3,6 @@ package com.example.mpblog.controllers;
 import com.example.mpblog.entities.MPBlogComment;
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.entities.MPBlogSession;
-import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.services.MPBlogCommentService;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
@@ -38,14 +37,13 @@ public class MPBlogCommentController {
     @PostMapping("/{id}/addcomment")
     public String message(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id) {
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
-        Optional<MPBlogSession> mpBlogSession = this.mpBlogSessionService.findByIdAndExpiresAtAfter(sessionId);
+        Optional<MPBlogSession> mpBlogSession = this.mpBlogSessionService.findById(sessionId);
         if (bindingResult.hasErrors() || blogEntry.isEmpty() || mpBlogSession.isEmpty()) {
             return "commentform";
         }
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogSession.get().getMpBlogUser());
         mpBlogCommentService.save(comment);
-
-        return id + "/entrydetails";
+        return "entrydetails";
     }
 }
