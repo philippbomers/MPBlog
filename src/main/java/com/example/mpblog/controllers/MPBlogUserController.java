@@ -13,11 +13,9 @@ import javax.validation.Valid;
 @Controller
 public class MPBlogUserController {
     private final MPBlogUserService mpBlogUserService;
-    private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogUserController(MPBlogUserService mpBlogUserService, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogUserController(MPBlogUserService mpBlogUserService) {
         this.mpBlogUserService = mpBlogUserService;
-        this.mpBlogSessionService = mpBlogSessionService;
     }
 
     @GetMapping("/registerdialog")
@@ -50,9 +48,7 @@ public class MPBlogUserController {
     }
 
     @GetMapping("/userdetails")
-    public String userDetails(@CookieValue(name = "sessionId") String sessionId, Model model){
-        model.addAttribute("sessionUser", mpBlogSessionService.findById(sessionId).get().getMpBlogUser());
-        model.addAttribute("sessionId", sessionId);
+    public String userDetails() {
         return "userdetails";
     }
 

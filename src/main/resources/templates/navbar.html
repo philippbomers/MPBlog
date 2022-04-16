@@ -28,6 +28,9 @@
                 <a class="button is-light" th:href="@{/login}" th:if="${sessionUser == null}">
                     Log in
                 </a>
+                <a class="button is-light" th:href="@{/userdetails}" th:if="${sessionUser != null}">
+                    Profile
+                </a>
                 <form th:if="${sessionUser != null}" method="post" th:action="@{/logout}">
                     <button type="submit">Logout</button>
                 </form>
