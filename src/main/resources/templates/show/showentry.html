@@ -27,7 +27,7 @@
 
         </article>
     </div>
-    <a class="button" th:href="@{/{id}/addcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>
+    <a class="button" th:href="@{/{id}/newcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>
 </div>
 
 <div th:insert="standarditems :: footer"></div>

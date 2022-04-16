@@ -4,7 +4,7 @@
 <body class="is-centered has-text-centered">
 <div th:insert="standarditems :: navbar"></div>
 <h3>Register a new user:</h3>
-<form action="#" method="post" th:action="@{/registerdialog}" th:object="${mpBlogUser}">
+<form action="#" method="post" th:action="@{/newuser}" th:object="${mpBlogUser}">
     <p>Username: <label>
         <input th:field="*{userName}" type="text"/>
     </label></p>

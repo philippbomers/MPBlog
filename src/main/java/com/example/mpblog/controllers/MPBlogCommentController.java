@@ -30,26 +30,25 @@ public class MPBlogCommentController {
         this.mpBlogSessionService = mpBlogSessionService;
     }
 
-    @GetMapping("/{id}/addcomment")
+    @GetMapping("/{id}/newcomment")
     public String entryDetails(Model model, @PathVariable int id) {
         model.addAttribute("entryId", id);
         model.addAttribute("comment", new MPBlogComment());
-        return "newcomment";
+        return "new/newcomment";
     }
 
-    @PostMapping("/{id}/addcomment")
+    @PostMapping("/{id}/newcomment")
     public String message(@CookieValue(name = "sessionId") String sessionId, @Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id, Model model) {
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
         if (bindingResult.hasErrors() || blogEntry.isEmpty() || mpBlogUser.isEmpty()) {
-            return "newcomment";
+            return "new/newcomment";
         }
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogUser.get());
         mpBlogCommentService.save(comment);
-
         model.addAttribute("entry", blogEntry.get());
-        return "showentry";
+        return "show/showentry";
     }
 
     @GetMapping("/{id}/deleteComment")
@@ -61,7 +60,7 @@ public class MPBlogCommentController {
                 optionalSession.get().getMpBlogUser().isAdminRights()) {
             int newID = comment.getMpBlogEntry().getId();
             mpBlogCommentRepository.delete(comment);
-            return "redirect:/" + newID+ "showentry";
+            return "redirect:/" + newID+ "/showentry";
         }
         throw new IllegalArgumentException("User is not authorized to delete this comment!");
     }

@@ -4,7 +4,6 @@ import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
-import com.example.mpblog.repositories.MPBlogSessionRepository;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import org.springframework.stereotype.Controller;
@@ -19,46 +18,44 @@ import java.util.Optional;
 public class MPBlogEntryController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogEntryRepository mpBlogEntryRepository;
-    private final MPBlogSessionRepository mpBlogSessionRepository;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogSessionRepository mpBlogSessionRepository, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogSessionService mpBlogSessionService) {
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogEntryRepository = mpBlogEntryRepository;
-        this.mpBlogSessionRepository = mpBlogSessionRepository;
         this.mpBlogSessionService = mpBlogSessionService;
     }
     @GetMapping("/newEntry")
     public String entry(Model model) {
         model.addAttribute("entry", new MPBlogEntry());
-        return "newentry";
+        return "new/newentry";
     }
 
     @PostMapping("/newEntry")
     public String message(@CookieValue(name = "sessionId") String sessionId, @Valid @ModelAttribute("entry") MPBlogEntry entry, BindingResult bindingResult) {
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
         if (bindingResult.hasErrors() || mpBlogUser.isEmpty()) {
-            return "newentry";
+            return "new/newentry";
         }
         entry.setMpBlogUser(mpBlogUser.get());
         mpBlogEntryRepository.save(entry);
-        return "redirect:/showentries";
+        return "redirect:/listentries";
     }
 
-    @GetMapping("/showentries")
+    @GetMapping("/listentries")
     public String showEntries(Model model) {
         model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
-        return "listentries";
+        return "list/listentries";
     }
 
-    @GetMapping("/{id}/entrydetails")
+    @GetMapping("/{id}/showentry")
     public String entryDetails(@PathVariable int id, Model model) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
         if (entry.isPresent()) {
             model.addAttribute("entry", entry.get());
-            return "showentry";
+            return "show/showentry";
         }
-        return "redirect:/showentries";
+        return "redirect:/showentry";
     }
 
     @GetMapping("/{id}/deleteEntry")
@@ -69,7 +66,7 @@ public class MPBlogEntryController {
                 (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
                 optionalSession.get().getMpBlogUser().isAdminRights())) {
             mpBlogEntryRepository.delete(entry);
-            return "redirect:/showentries";
+            return "redirect:/listentries";
         }
         throw new IllegalArgumentException("User is not authorized to delete this entry!");
 

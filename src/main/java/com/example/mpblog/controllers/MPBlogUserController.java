@@ -23,38 +23,38 @@ public class MPBlogUserController {
             return "redirect:/";
         }
         model.addAttribute("mpBlogUser", new MPBlogUser());
-        return "newuser";
+        return "new/newuser";
     }
 
-    @PostMapping("/registerdialog")
+    @PostMapping("/newuser")
     public String register(@Valid @ModelAttribute("mpBlogUser") MPBlogUser mpBlogUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "newuser";
+            return "new/newuser";
         } else {
             this.mpBlogUserService.addMPBlogUser(mpBlogUser);
             return "registersuccessfully";
         }
     }
 
-    @GetMapping("/bloguserlist")
+    @GetMapping("/listuser")
     public String userList(Model model) {
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "listuser";
+        return "list/listuser";
     }
 
-    @GetMapping("/switchAdminRights/{id}/bloguserlist")
+    @GetMapping("/switchAdminRights/{id}/listuser")
     public String register(@PathVariable int id, Model model) {
         this.mpBlogUserService.changeUserAdminStatus(this.mpBlogUserService.getMPBlogUser(id));
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "redirect:/bloguserlist";
+        return "redirect:/listuser";
     }
 
-    @GetMapping("/userdetails")
+    @GetMapping("/showuser")
     public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
         if(sessionId == null || sessionId.isEmpty()){
             return "redirect:/";
         }
-        return "showuser";
+        return "show/showuser";
     }
 
 }

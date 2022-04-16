@@ -6,7 +6,7 @@
 <div th:if="${sessionUser != null}">
     <div class="container">
         <h3 class="title">Comment Form</h3>
-        <form method="post" th:action="@{/{id}/addcomment(id=${entryId})}" th:object="${comment}">
+        <form method="post" th:action="@{/{id}/newcomment(id=${entryId})}" th:object="${comment}">
             <div class="field">
                 <label for="inputarea" class="label">
                     Insert your Comment:
