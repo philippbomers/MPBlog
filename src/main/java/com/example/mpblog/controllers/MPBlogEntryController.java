@@ -75,15 +75,15 @@ public class MPBlogEntryController {
     @GetMapping("/{id}/editEntry")
     public String editEntryForm(Model model, @PathVariable int id) {
         model.addAttribute("entry", mpBlogEntryRepository.findById(id));
-        return "entryeditform";
+        return "update/editentry";
     }
 
-    @PostMapping("/{id}/updateEntry")
+    @PostMapping("/{id}/editEntry")
     public String updateEntry(@ModelAttribute("MPBlogEntry") MPBlogEntry mpBlogEntry, @PathVariable int id) {
         //update entry in the database
         mpBlogEntryRepository.updateTitle(id, mpBlogEntry.getTitle());
         mpBlogEntryRepository.updateContent(id, mpBlogEntry.getContent());
-        return "redirect:/showentries";
+        return "redirect:/listentries";
     }
     /*@PostMapping("/{id}/editEntry")
     public String editEntry(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {

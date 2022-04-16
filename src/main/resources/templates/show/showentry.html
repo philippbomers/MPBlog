@@ -14,6 +14,12 @@
             <p class="content" th:text="*{entry.content}"></p>
         </article>
     </div>
+    <span th:if="${sessionUser != null}">
+                            <a class="button is-warning" th:href="@{/{id}/editEntry(id=*{entry.id})}"
+                               th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
+                                Edit Entry
+                            </a>
+            </span>
     <h1 class="title mt-5">Comments</h1>
     <div class="tile is-parent" th:each="comment:*{entry.mpBlogComments}">
         <article class="tile is-child notification is-primary">
