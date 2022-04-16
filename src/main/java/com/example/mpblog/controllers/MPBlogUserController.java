@@ -1,7 +1,6 @@
 package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogUser;
-import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +23,13 @@ public class MPBlogUserController {
             return "redirect:/";
         }
         model.addAttribute("mpBlogUser", new MPBlogUser());
-        return "registerdialog";
+        return "newuser";
     }
 
     @PostMapping("/registerdialog")
     public String register(@Valid @ModelAttribute("mpBlogUser") MPBlogUser mpBlogUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "registerdialog";
+            return "newuser";
         } else {
             this.mpBlogUserService.addMPBlogUser(mpBlogUser);
             return "registersuccessfully";
@@ -40,7 +39,7 @@ public class MPBlogUserController {
     @GetMapping("/bloguserlist")
     public String userList(Model model) {
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "bloguserlist";
+        return "listuser";
     }
 
     @GetMapping("/switchAdminRights/{id}/bloguserlist")
@@ -55,7 +54,7 @@ public class MPBlogUserController {
         if(sessionId == null || sessionId.isEmpty()){
             return "redirect:/";
         }
-        return "userdetails";
+        return "showuser";
     }
 
 }

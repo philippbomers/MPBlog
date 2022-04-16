@@ -48,7 +48,7 @@ public class MPBlogEntryController {
     @GetMapping("/showentries")
     public String showEntries(Model model) {
         model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
-        return "showentries";
+        return "listentries";
     }
 
     @GetMapping("/{id}/entrydetails")
@@ -56,7 +56,7 @@ public class MPBlogEntryController {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
         if (entry.isPresent()) {
             model.addAttribute("entry", entry.get());
-            return "entrydetails";
+            return "showentry";
         }
         return "redirect:/showentries";
     }

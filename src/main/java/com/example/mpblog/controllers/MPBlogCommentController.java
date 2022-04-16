@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -35,7 +34,7 @@ public class MPBlogCommentController {
     public String entryDetails(Model model, @PathVariable int id) {
         model.addAttribute("entryId", id);
         model.addAttribute("comment", new MPBlogComment());
-        return "commentform";
+        return "newcomment";
     }
 
     @PostMapping("/{id}/addcomment")
@@ -43,14 +42,14 @@ public class MPBlogCommentController {
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
         if (bindingResult.hasErrors() || blogEntry.isEmpty() || mpBlogUser.isEmpty()) {
-            return "commentform";
+            return "newcomment";
         }
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogUser.get());
         mpBlogCommentService.save(comment);
 
         model.addAttribute("entry", blogEntry.get());
-        return "entrydetails";
+        return "showentry";
     }
 
     @GetMapping("/{id}/deleteComment")
@@ -62,7 +61,7 @@ public class MPBlogCommentController {
                 optionalSession.get().getMpBlogUser().isAdminRights()) {
             int newID = comment.getMpBlogEntry().getId();
             mpBlogCommentRepository.delete(comment);
-            return "redirect:/" + newID+ "/entrydetails";
+            return "redirect:/" + newID+ "showentry";
         }
         throw new IllegalArgumentException("User is not authorized to delete this comment!");
     }
