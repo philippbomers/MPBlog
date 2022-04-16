@@ -18,17 +18,19 @@
         });
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <link rel="icon" th:href="@{/images/logo.png}" type="image/png">
     <style>
         html {
             position: relative;
             min-height: 100%;
         }
+
         body {
             margin: 0 0 100px;
             /* bottom = footer height */
             padding: 25px;
         }
+
         footer {
             background-color: orange;
             position: absolute;
@@ -74,7 +76,7 @@
                 <a class="button is-primary" th:href="@{/userdetails}" th:if="${sessionUser != null}">
                     Profile
                 </a>
-                <form th:if="${sessionUser != null}" method="post" th:action="@{/logout}">
+                <form method="post" th:action="@{/logout}" th:if="${sessionUser != null}">
                     <button class="button is-danger" type="submit">Logout</button>
                 </form>
             </div>
@@ -86,7 +88,7 @@
     <div class="content has-text-centered">
         <p>
             <strong>MP BLOG</strong><br>by <a href="https://github.com/philippbomers">Philip Bomers</a>
-            and  <a href="https://github.com/mkatran">Mehmet Katran</a>.
+            and <a href="https://github.com/mkatran">Mehmet Katran</a>.
         </p>
     </div>
 </footer>

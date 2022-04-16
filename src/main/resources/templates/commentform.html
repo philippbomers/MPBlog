@@ -9,7 +9,7 @@
         <label for="inputarea">
             Insert your Comment:
         </label><br>
-        <textarea th:field="*{userComment}" id="inputarea"></textarea>
+        <textarea id="inputarea" th:field="*{userComment}"></textarea>
         <p th:errors="*{userComment}" th:if="${#fields.hasErrors('userComment')}"></p>
         <br>
         <button type="submit">Send</button>

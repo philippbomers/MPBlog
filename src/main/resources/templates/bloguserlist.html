@@ -23,7 +23,8 @@
                             <span th:case="true">Yes</span>
                             <span th:case="false">No</span>
                         </p>
-                        <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}" th:if="${sessionUser?.adminRights}"> Switch</a>
+                        <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}"
+                           th:if="${sessionUser?.adminRights}"> Switch</a>
                     </td>
                 </tr>
             </table>

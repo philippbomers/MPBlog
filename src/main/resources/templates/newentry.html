@@ -10,12 +10,12 @@
             Insert title:
         </label>
         <br>
-        <textarea th:field="*{title}" id="titlearea"></textarea>
+        <textarea id="titlearea" th:field="*{title}"></textarea>
         <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
         <label for="inputarea">
             Insert your Entry:
         </label><br>
-        <textarea th:field="*{content}" id="inputarea"></textarea>
+        <textarea id="inputarea" th:field="*{content}"></textarea>
         <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
         <br>
         <button type="submit">Send</button>

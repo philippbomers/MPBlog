@@ -8,12 +8,12 @@
     <label for="username">
         Username:
     </label>
-    <input th:field="*{userName}" type="text" id="username"><br/>
+    <input id="username" th:field="*{userName}" type="text"><br/>
     <p th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
     <label for="password">
         Passwort:
     </label>
-    <input th:field="*{password}" type="password" id="password"><br/>
+    <input id="password" th:field="*{password}" type="password"><br/>
     <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
     <button type="submit">Login</button>
 </form>
