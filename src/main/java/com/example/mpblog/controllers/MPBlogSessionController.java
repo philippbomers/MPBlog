@@ -59,6 +59,7 @@ public class MPBlogSessionController {
         return "homepage";
     }
 
+/*
     @ModelAttribute("sessionUser")
     public MPBlogUser sessionUser(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
         if (!sessionId.isEmpty()) {
@@ -71,5 +72,6 @@ public class MPBlogSessionController {
         }
         return null;
     }
+*/
 
 }
