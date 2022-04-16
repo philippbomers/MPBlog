@@ -7,8 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
 </head>
-<body>
-<div th:insert="navbar :: navbar"></div>
+<body class="is-centered has-text-centered">
+<div th:insert="standarditems :: navbar"></div>
 <h3 class="title">Users</h3>
 <table class="table">
     <tr>
@@ -26,9 +26,10 @@
                 <span th:case="true">Yes</span>
                 <span th:case="false">No</span>
             </p>
-            <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}" th:if="${sessionUser.adminRights}"> Switch</a>
+            <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}" th:if="${sessionUser?.adminRights}"> Switch</a>
         </td>
     </tr>
 </table>
+<div th:insert="standarditems :: footer"></div>
 </body>
 </html>

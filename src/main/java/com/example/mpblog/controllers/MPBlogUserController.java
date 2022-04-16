@@ -19,7 +19,10 @@ public class MPBlogUserController {
     }
 
     @GetMapping("/registerdialog")
-    public String registerDialog(Model model) {
+    public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
+        if(sessionId != null || !sessionId.isEmpty()){
+            return "redirect:/";
+        }
         model.addAttribute("mpBlogUser", new MPBlogUser());
         return "registerdialog";
     }
@@ -48,7 +51,10 @@ public class MPBlogUserController {
     }
 
     @GetMapping("/userdetails")
-    public String userDetails() {
+    public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
+        if(sessionId == null || sessionId.isEmpty()){
+            return "redirect:/";
+        }
         return "userdetails";
     }
 

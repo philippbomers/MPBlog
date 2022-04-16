@@ -7,9 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
 </head>
-<body>
-<div th:insert="navbar :: navbar"></div>
+<body class="is-centered has-text-centered">
+<div th:insert="standarditems :: navbar"></div>
 <h3>User Details</h3>
 Username: <span th:text="${sessionUser.userName}"></span>
+<div th:insert="standarditems :: footer"></div>
 </body>
 </html>
