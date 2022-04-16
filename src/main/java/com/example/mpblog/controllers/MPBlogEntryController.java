@@ -71,4 +71,30 @@ public class MPBlogEntryController {
         }
         throw new IllegalArgumentException("User is not authorized to delete this entry!");
     }
+
+    @GetMapping("/{id}/editEntry")
+    public String editEntryForm(Model model, @PathVariable int id) {
+        model.addAttribute("entry", mpBlogEntryRepository.findById(id));
+        return "entryeditform";
+    }
+
+    @PostMapping("/{id}/updateEntry")
+    public String updateEntry(@ModelAttribute("MPBlogEntry") MPBlogEntry mpBlogEntry, @PathVariable int id) {
+        //update entry in the database
+        mpBlogEntryRepository.updateTitle(id, mpBlogEntry.getTitle());
+        mpBlogEntryRepository.updateContent(id, mpBlogEntry.getContent());
+        return "redirect:/showentries";
+    }
+    /*@PostMapping("/{id}/editEntry")
+    public String editEntry(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
+        MPBlogEntry entry = mpBlogEntryRepository.findById(id);
+        Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
+        if (optionalSession.isPresent() &&
+                (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
+                        optionalSession.get().getMpBlogUser().isAdminRights())) {
+            mpBlogEntryRepository.delete(entry);
+            return "redirect:/showentries";
+        }
+        throw new IllegalArgumentException("User is not authorized to delete this entry!");
+    }*/
 }
