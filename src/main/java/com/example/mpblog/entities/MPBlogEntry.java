@@ -37,7 +37,7 @@ public class MPBlogEntry {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -45,7 +45,7 @@ public class MPBlogEntry {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -53,7 +53,7 @@ public class MPBlogEntry {
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     public void setContent(String content) {
@@ -61,7 +61,7 @@ public class MPBlogEntry {
     }
 
     public Date getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(Date date) {
@@ -69,12 +69,11 @@ public class MPBlogEntry {
     }
 
     public String getRealDate() {
-        SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
-        return DateFor.format(date);
+        return new SimpleDateFormat("dd.MM.yyyy").format(this.date);
     }
 
     public MPBlogUser getMpBlogUser() {
-        return mpBlogUser;
+        return this.mpBlogUser;
     }
 
     public void setMpBlogUser(MPBlogUser mpBlogUser) {

@@ -19,7 +19,6 @@ public record MPBlogSessionService(MPBlogSessionRepository mpBlogSessionReposito
     }
 
     public Optional<MPBlogUser> findMPBlogUserById(String sessionId) {
-        Optional<MPBlogSession> mpBlogSession = this.findById(sessionId);
-        return mpBlogSession.map(MPBlogSession::getMpBlogUser);
+        return this.findById(sessionId).map(MPBlogSession::getMpBlogUser);
     }
 }

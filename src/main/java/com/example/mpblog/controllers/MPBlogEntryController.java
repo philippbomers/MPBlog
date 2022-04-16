@@ -70,6 +70,5 @@ public class MPBlogEntryController {
             return "redirect:/listentries";
         }
         throw new IllegalArgumentException("User is not authorized to delete this entry!");
-
     }
 }

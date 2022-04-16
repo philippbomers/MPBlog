@@ -51,10 +51,7 @@ public class MPBlogUserController {
 
     @GetMapping("/showuser")
     public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
-        if (sessionId == null || sessionId.isEmpty()) {
-            return "redirect:/";
-        }
-        return "show/showuser";
+        return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "show/showuser";
     }
 
 }

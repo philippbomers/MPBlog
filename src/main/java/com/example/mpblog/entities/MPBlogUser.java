@@ -35,7 +35,7 @@ public class MPBlogUser {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -43,7 +43,7 @@ public class MPBlogUser {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
@@ -51,7 +51,7 @@ public class MPBlogUser {
     }
 
     public boolean isAdminRights() {
-        return adminRights;
+        return this.adminRights;
     }
 
     public void setAdminRights(boolean adminRights) {
@@ -59,7 +59,7 @@ public class MPBlogUser {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -67,7 +67,7 @@ public class MPBlogUser {
     }
 
     public Collection<MPBlogEntry> getMpBlogEntry() {
-        return mpBlogEntry;
+        return this.mpBlogEntry;
     }
 
     public void setMpBlogEntry(Collection<MPBlogEntry> mpBlogEntry) {
@@ -75,7 +75,7 @@ public class MPBlogUser {
     }
 
     public List<MPBlogEntry> getMpBlogEntryList() {
-        return mpBlogEntryList;
+        return this.mpBlogEntryList;
     }
 
     public void setMpBlogEntryList(List<MPBlogEntry> mpBlogEntryList) {

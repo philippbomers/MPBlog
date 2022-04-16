@@ -21,7 +21,7 @@ public class MPBlogSession {
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -29,7 +29,7 @@ public class MPBlogSession {
     }
 
     public MPBlogUser getMpBlogUser() {
-        return mpBlogUser;
+        return this.mpBlogUser;
     }
 
     public void setMpBlogUser(MPBlogUser mpBlogUser) {
@@ -37,7 +37,7 @@ public class MPBlogSession {
     }
 
     public Instant getExpiresAt() {
-        return expiresAt;
+        return this.expiresAt;
     }
 
     public void setExpiresAt() {

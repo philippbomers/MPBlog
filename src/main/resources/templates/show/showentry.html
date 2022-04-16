@@ -26,6 +26,7 @@
                                 Delete Comment
                             </a>
             </span>
+
         </article>
     </div>
     <a class="button" th:href="@{/{id}/newcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>

@@ -14,7 +14,6 @@ public record MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
         this.mpBlogUserRepository.save(mpBlogUser);
     }
 
-
     public List<MPBlogUser> getMPBlogUsers() {
         return this.mpBlogUserRepository.findAll();
     }
