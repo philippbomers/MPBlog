@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.time.Instant;
 import java.util.Optional;
 
 @Controller
@@ -37,19 +36,15 @@ public class MPBlogSessionController {
     @PostMapping("/login")
     public String login(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @Valid @ModelAttribute("login") MPBlogUser mpBlogUser, BindingResult bindingResult, HttpServletResponse response) {
         Optional<MPBlogUser> optionalUser = this.mpBlogUserService.getMPBlogUsers(mpBlogUser);
-
-        if (!sessionId.isEmpty() && optionalUser.isPresent() && !bindingResult.hasErrors()) {
+        if (sessionId.isEmpty() && optionalUser.isPresent() && !bindingResult.hasErrors()) {
             MPBlogSession mpBlogSession = new MPBlogSession();
             mpBlogSession.setMpBlogUser(optionalUser.get());
             mpBlogSession.setExpiresAt();
             this.mpBlogSessionService.save(mpBlogSession);
             Cookie cookie = new Cookie("sessionId", mpBlogSession.getId());
             response.addCookie(cookie);
-
-// Login erfolgreich
             return "redirect:/";
         }
-// Login nicht erfolgreich
         return "login";
     }
 

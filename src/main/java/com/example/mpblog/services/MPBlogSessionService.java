@@ -21,6 +21,6 @@ public class MPBlogSessionService {
     }
 
     public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId) {
-        return this.mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, Instant.now().plusSeconds(7*24*60*60));
+        return this.mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, Instant.now().plusSeconds(7 * 24 * 60 * 60));
     }
 }

@@ -26,7 +26,7 @@ public class MPBlogEntryController {
     @GetMapping("{id}/entrydetails")
     public String entryDetails(Model model, @PathVariable int id) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
-        if(entry.isPresent()){
+        if (entry.isPresent()) {
             model.addAttribute("entry", entry.get());
             return "entrydetails";
         }
