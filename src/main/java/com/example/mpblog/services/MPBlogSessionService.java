@@ -27,8 +27,4 @@ public class MPBlogSessionService {
     public Optional<MPBlogSession> findById(int id) {
         return this.mpBlogSessionRepository.findById(String.valueOf(id));
     }
-
-    public Optional<MPBlogSession> findBySessionId(String sessionId) {
-        return this.mpBlogSessionRepository.findById(sessionId);
-    }
 }
