@@ -18,7 +18,7 @@
         });
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
-    <link rel="icon" th:src="@{images/logo.png}" type="image/x-icon">
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
     <style>
         html {
             position: relative;
@@ -44,7 +44,7 @@
 <nav aria-label="main navigation" class="navbar" role="navigation" th:fragment="navbar">
     <div class="navbar-brand">
         <a class="navbar-item" th:href="@{/}">
-            <img alt="Logo" th:src="@{images/logo.png}">
+            <img alt="Logo" th:src="@{/images/logo.png}">
         </a>
 
         <a aria-expanded="false" aria-label="menu" class="navbar-burger" data-target="navbar" role="button">

@@ -4,27 +4,31 @@
 <body class="is-centered has-text-centered">
 <div th:insert="standarditems :: navbar"></div>
 <h3 class="title">Users</h3>
-<div class="table-container">
-    <table class="table">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Administrator Rights
-            </th>
-        </tr>
-        <tr th:each="mpBlogUser:${mpBlogUsers}">
-            <td th:text="*{mpBlogUser.userName}"></td>
-            <td>
-                <p th:switch="*{mpBlogUser.adminRights}">
-                    <span th:case="true">Yes</span>
-                    <span th:case="false">No</span>
-                </p>
-                <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}" th:if="${sessionUser?.adminRights}"> Switch</a>
-            </td>
-        </tr>
-    </table>
+<div class="section">
+    <div class="columns is-centered">
+        <div class="column is-narrow">
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Administrator Rights
+                    </th>
+                </tr>
+                <tr th:each="mpBlogUser:${mpBlogUsers}">
+                    <td th:text="*{mpBlogUser.userName}"></td>
+                    <td>
+                        <p th:switch="*{mpBlogUser.adminRights}">
+                            <span th:case="true">Yes</span>
+                            <span th:case="false">No</span>
+                        </p>
+                        <a th:href="@{/switchAdminRights/{id}/bloguserlist(id=*{mpBlogUser.id})}" th:if="${sessionUser?.adminRights}"> Switch</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 <div th:insert="standarditems :: footer"></div>
 </body>

@@ -51,14 +51,14 @@ public class MPBlogEntryController {
         return "showentries";
     }
 
-    @GetMapping("{id}/entrydetails")
-    public String entryDetails(Model model, @PathVariable int id) {
+    @GetMapping("/{id}/entrydetails")
+    public String entryDetails(@PathVariable int id, Model model) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
         if (entry.isPresent()) {
             model.addAttribute("entry", entry.get());
             return "entrydetails";
         }
-        return "showentries";
+        return "redirect:/showentries";
     }
 
     @GetMapping("/{id}/deleteEntry")
