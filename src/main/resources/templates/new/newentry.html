@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:insert="standarditems :: htmlhead"></head>
+<head th:insert="design/standarditems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
-<div th:insert="standarditems :: navbar"></div>
+<nav th:insert="design/standarditems :: navbar"></nav>
+
 <div th:if="${sessionUser != null}">
     <h3>New Entry</h3>
     <form method="post" th:action="@{/newEntry}" th:object="${entry}">
@@ -24,6 +25,7 @@
 <div th:if="${sessionUser == null}">
     Please Login to add a new entry!
 </div>
-<div th:insert="standarditems :: footer"></div>
+
+<footer th:insert="design/standarditems :: footer"></footer>
 </body>
 </html>

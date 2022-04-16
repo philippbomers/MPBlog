@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:insert="standarditems :: htmlhead"></head>
+<head th:insert="design/standarditems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
-<div th:insert="standarditems :: navbar"></div>
+<nav th:insert="design/standarditems :: navbar"></nav>
+
 <div class="container is-centered has-text-centered">
     <h1 class="title mt-5">Blog Entry</h1>
     <div class="tile is-parent">
@@ -30,6 +31,6 @@
     <a class="button" th:href="@{/{id}/newcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>
 </div>
 
-<div th:insert="standarditems :: footer"></div>
+<footer th:insert="design/standarditems :: footer"></footer>
 </body>
 </html>

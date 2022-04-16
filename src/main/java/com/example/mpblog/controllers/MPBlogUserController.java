@@ -17,7 +17,7 @@ public class MPBlogUserController {
         this.mpBlogUserService = mpBlogUserService;
     }
 
-    @GetMapping("/registerdialog")
+    @GetMapping("/newuser")
     public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
         if(sessionId != null){
             return "redirect:/";

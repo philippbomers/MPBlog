@@ -32,7 +32,7 @@ public class MPBlogSessionController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("login", new MPBlogUser());
-        return "login";
+        return "helpers/login";
     }
 
     @PostMapping("/login")
@@ -47,7 +47,7 @@ public class MPBlogSessionController {
             response.addCookie(cookie);
             return "redirect:/";
         }
-        return "login";
+        return "helpers/login";
     }
 
     @GetMapping("/")
