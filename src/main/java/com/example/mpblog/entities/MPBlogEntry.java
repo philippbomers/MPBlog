@@ -1,5 +1,6 @@
 package com.example.mpblog.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
@@ -22,7 +23,7 @@ public class MPBlogEntry {
     @Length(min = 3)
     private String content;
 
-    @UpdateTimestamp
+    @CreationTimestamp
     private Date date;
 
     @ManyToOne
