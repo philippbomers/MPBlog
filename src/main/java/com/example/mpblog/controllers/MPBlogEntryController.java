@@ -47,8 +47,8 @@ public class MPBlogEntryController {
         MPBlogEntry entry = mpBlogEntryRepository.findById(id);
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
         if (optionalSession.isPresent() &&
-                entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
-                optionalSession.get().getMpBlogUser().isAdminRights()) {
+                (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
+                optionalSession.get().getMpBlogUser().isAdminRights())) {
             mpBlogEntryRepository.delete(entry);
             return "redirect:/showentries";
         }
