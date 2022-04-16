@@ -59,18 +59,16 @@ public class MPBlogSessionController {
     public String logout(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, HttpServletResponse response) {
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
         optionalSession.ifPresent(this.mpBlogSessionRepository::delete);
-
         Cookie cookie = new Cookie("sessionId", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-
         return "redirect:/";
     }
 
 
     @ModelAttribute("sessionUser")
     public MPBlogUser sessionUser(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
-        if (!sessionId.isEmpty()) {
+        if (sessionId != null && !sessionId.isEmpty() && !sessionId.isBlank()) {
             Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
             if (optionalSession.isPresent()) {
                 MPBlogSession session = optionalSession.get();

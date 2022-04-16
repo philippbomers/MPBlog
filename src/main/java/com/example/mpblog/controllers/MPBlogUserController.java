@@ -20,7 +20,7 @@ public class MPBlogUserController {
 
     @GetMapping("/registerdialog")
     public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
-        if(sessionId != null || !sessionId.isEmpty()){
+        if(sessionId != null){
             return "redirect:/";
         }
         model.addAttribute("mpBlogUser", new MPBlogUser());

@@ -4,17 +4,23 @@
 <body class="is-centered has-text-centered">
 <div th:insert="standarditems :: navbar"></div>
 <div th:if="${sessionUser != null}">
-    <h3>Comment Form</h3>
-    <form method="post" th:action="@{/{id}/addcomment(id=${entryId})}" th:object="${comment}">
-        <label for="inputarea">
-            Insert your Comment:
-        </label><br>
-        <textarea id="inputarea" th:field="*{userComment}"></textarea>
-        <p th:errors="*{userComment}" th:if="${#fields.hasErrors('userComment')}"></p>
-        <br>
-        <button type="submit">Send</button>
-    </form>
+    <div class="container">
+        <h3 class="title">Comment Form</h3>
+        <form method="post" th:action="@{/{id}/addcomment(id=${entryId})}" th:object="${comment}">
+            <div class="field">
+                <label for="inputarea" class="label">
+                    Insert your Comment:
+                </label>
+                <textarea id="inputarea" th:field="*{userComment}" class="textarea is-small"></textarea>
+                <p th:errors="*{userComment}" th:if="${#fields.hasErrors('userComment')}"></p>
+            </div>
+            <div class="field">
+                <button type="submit" class="button is-link">Send</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <div th:if="${sessionUser == null}">
     Please Login to add a new comment!
 </div>
