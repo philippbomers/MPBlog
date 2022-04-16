@@ -22,10 +22,10 @@
             <p class="content" th:text="*{comment.userComment}"></p>
             <span th:if="${sessionUser != null}">
                             <a class="button is-danger" th:href="@{/{id}/deleteComment(id=*{comment.id})}"
-                               th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">Delete
-                Comment</a>
+                               th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">
+                                Delete Comment
+                            </a>
             </span>
-
         </article>
     </div>
     <a class="button" th:href="@{/{id}/newcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>

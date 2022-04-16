@@ -5,20 +5,20 @@
 <nav th:insert="design/standarditems :: navbar"></nav>
 
 <div class="container">
-    <h3 class="title">Register a new user:</h3>
+    <h1 class="title">Register a new user:</h1>
     <form action="#" method="post" th:action="@{/newuser}" th:object="${mpBlogUser}">
         <div class="field">
             <label for="username">Username: </label>
-            <input th:field="*{userName}" type="text" id="username" class="input">
+            <input class="input" id="username" th:field="*{userName}" type="text">
             <p th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
         </div>
         <div class="field">
             <label for="password">Password: </label>
-            <input th:field="*{password}" type="text" id="password" class="input">
+            <input class="input" id="password" th:field="*{password}" type="text">
             <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
         </div>
         <div class="field">
-            <button type="submit" class="button is-link"> Send </button>
+            <button class="button is-link" type="submit"> Send</button>
         </div>
     </form>
 </div>

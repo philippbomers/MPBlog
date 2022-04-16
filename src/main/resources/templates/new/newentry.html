@@ -6,31 +6,34 @@
 
 <div th:if="${sessionUser != null}">
     <div class="container">
-        <h3 class="title">New Entry</h3>
+        <h1 class="title">New Entry</h1>
         <form method="post" th:action="@{/newEntry}" th:object="${entry}">
             <div class="field">
-                <label for="title" class="label">
+                <label class="label" for="title">
                     Insert title:
                 </label>
-                <input id="title" th:field="*{title}" type="text" class="input">
+                <input class="input" id="title" th:field="*{title}" type="text">
                 <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
             <div class="field">
-            <label for="inputarea" class="label">
-                Insert your Entry:
-            </label>
-            <textarea id="inputarea" th:field="*{content}" class="textarea"></textarea>
-            <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+                <label class="label" for="inputarea">
+                    Insert your Entry:
+                </label>
+                <textarea class="textarea" id="inputarea" th:field="*{content}"></textarea>
+                <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
             </div>
             <div class="field">
-                <button type="submit" class="button is-link">Send</button>
+                <button class="button is-link" type="submit">Send</button>
             </div>
         </form>
     </div>
 </div>
 
 <div th:if="${sessionUser == null}">
-    Please Login to add a new entry!
+    <h1 class="title">Stop!</h1>
+    <p>
+        Please Login to add a new entry!
+    </p>
 </div>
 
 <footer th:insert="design/standarditems :: footer"></footer>

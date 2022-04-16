@@ -4,7 +4,7 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<h3 class="title">Entries ordered by date</h3>
+<h1 class="title">Entries ordered by date</h1>
 <div class="section">
     <div class="columns is-centered">
         <div class="column is-narrow">
@@ -34,9 +34,9 @@
                     <td>
                         <a th:href="@{/{id}/showentry(id=${entry.id})}">Show Details</a><br>
                         <span th:if="${sessionUser != null}">
-                <a th:href="@{/{id}/deleteEntry(id=${entry.id})}"
-                   th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">Delete</a>
-            </span>
+                            <a th:href="@{/{id}/deleteEntry(id=${entry.id})}"
+                                th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">Delete</a>
+                        </span>
                     </td>
                 </tr>
             </table>

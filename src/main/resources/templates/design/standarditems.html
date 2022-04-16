@@ -27,12 +27,10 @@
 
         body {
             margin: 0 0 100px;
-            /* bottom = footer height */
-            padding: 25px;
+            padding-bottom: 50px;
         }
 
         footer {
-            background-color: orange;
             position: absolute;
             left: 0;
             bottom: 0;
@@ -48,36 +46,33 @@
         <a class="navbar-item" th:href="@{/}">
             <img alt="Logo" th:src="@{/images/logo.png}">
         </a>
-
         <a aria-expanded="false" aria-label="menu" class="navbar-burger" data-target="navbar" role="button">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
     </div>
-
     <div class="navbar-menu" id="navbar">
         <div class="navbar-start">
             <a class="navbar-item" th:href="@{/newEntry}" th:if="${sessionUser?.adminRights}">New Entry</a>
             <a class="navbar-item" th:href="@{/listentries}">Blog</a>
             <a class="navbar-item" th:href="@{/listuser}">Users</a>
         </div>
-    </div>
-
-    <div class="navbar-end">
-        <div class="navbar-item">
+        <div class="navbar-end">
             <div class="buttons">
-                <a class="button is-warning" th:href="@{/newuser}" th:if="${sessionUser == null}">
+                <a class="button is-warning navbar-item" th:href="@{/newuser}" th:if="${sessionUser == null}">
                     <strong>Sign up</strong>
                 </a>
-                <a class="button is-success" th:href="@{/login}" th:if="${sessionUser == null}">
-                    Log in
+                <a class="button is-success navbar-item" th:href="@{/login}" th:if="${sessionUser == null}">
+                    <strong>Log in</strong>
                 </a>
-                <a class="button is-primary" th:href="@{/showuser}" th:if="${sessionUser != null}">
-                    Profile
+                <a class="button is-primary navbar-item" th:href="@{/showuser}" th:if="${sessionUser != null}">
+                    <strong>Profile</strong>
                 </a>
                 <form method="post" th:action="@{/logout}" th:if="${sessionUser != null}">
-                    <button class="button is-danger" type="submit">Logout</button>
+                    <button class="button is-danger navbar-item" type="submit">
+                        <strong>Logout</strong>
+                    </button>
                 </form>
             </div>
         </div>
@@ -87,7 +82,10 @@
 <footer class="footer p-5" th:fragment="footer">
     <div class="content has-text-centered">
         <p>
-            <strong>MP BLOG</strong><br>by <a href="https://github.com/philippbomers">Philip Bomers</a>
+            <strong>MP BLOG</strong>
+        </p>
+        <p>
+            by <a href="https://github.com/philippbomers">Philipp Bomers</a>
             and <a href="https://github.com/mkatran">Mehmet Katran</a>.
         </p>
     </div>

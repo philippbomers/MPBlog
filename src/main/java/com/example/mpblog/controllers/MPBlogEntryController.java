@@ -25,6 +25,7 @@ public class MPBlogEntryController {
         this.mpBlogEntryRepository = mpBlogEntryRepository;
         this.mpBlogSessionService = mpBlogSessionService;
     }
+
     @GetMapping("/newEntry")
     public String entry(Model model) {
         model.addAttribute("entry", new MPBlogEntry());
@@ -64,7 +65,7 @@ public class MPBlogEntryController {
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
         if (optionalSession.isPresent() &&
                 (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
-                optionalSession.get().getMpBlogUser().isAdminRights())) {
+                        optionalSession.get().getMpBlogUser().isAdminRights())) {
             mpBlogEntryRepository.delete(entry);
             return "redirect:/listentries";
         }
