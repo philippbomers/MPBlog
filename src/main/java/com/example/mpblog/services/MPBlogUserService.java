@@ -8,13 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MPBlogUserService {
-
-    private final MPBlogUserRepository mpBlogUserRepository;
-
-    public MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
-        this.mpBlogUserRepository = mpBlogUserRepository;
-    }
+public record MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
 
     public void addMPBlogUser(MPBlogUser mpBlogUser) {
         this.mpBlogUserRepository.save(mpBlogUser);

@@ -8,13 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class MPBlogSessionService {
-
-    private final MPBlogSessionRepository mpBlogSessionRepository;
-
-    public MPBlogSessionService(MPBlogSessionRepository mpBlogSessionRepository) {
-        this.mpBlogSessionRepository = mpBlogSessionRepository;
-    }
+public record MPBlogSessionService(MPBlogSessionRepository mpBlogSessionRepository) {
 
     public void save(MPBlogSession mpBlogSession) {
         this.mpBlogSessionRepository.save(mpBlogSession);

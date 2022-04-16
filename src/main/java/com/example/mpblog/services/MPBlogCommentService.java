@@ -9,12 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-public class MPBlogCommentService {
-    private final MPBlogCommentRepository mpBlogCommentRepository;
-
-    public MPBlogCommentService(MPBlogCommentRepository mpBlogCommentRepository) {
-        this.mpBlogCommentRepository = mpBlogCommentRepository;
-    }
+public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentRepository) {
 
     public void addMPBlogComment(MPBlogComment mpBlogComment) {
         this.mpBlogCommentRepository.save(mpBlogComment);
