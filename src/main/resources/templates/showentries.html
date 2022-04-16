@@ -34,7 +34,10 @@
         <td th:text="*{entry.realDate}"></td>
         <td th:text="*{entry.username}"></td>
         <td>
-            <a th:href="@{/{id}/entrydetails(id=${entry.id})}">Show Details</a>
+            <a th:href="@{/{id}/entrydetails(id=${entry.id})}">Show Details</a><br>
+            <span th:if="${sessionUser != null}">
+                <a th:href="@{/{id}/deleteEntry(id=${entry.id})}" th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">Delete</a>
+            </span>
         </td>
     </tr>
 </table>

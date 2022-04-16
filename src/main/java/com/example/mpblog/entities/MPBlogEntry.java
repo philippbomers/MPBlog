@@ -1,5 +1,6 @@
 package com.example.mpblog.entities;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
@@ -29,6 +30,7 @@ public class MPBlogEntry {
     private MPBlogUser mpBlogUser;
 
     @OneToMany(mappedBy = "mpBlogEntry")
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<MPBlogComment> mpBlogComments;
 
     public MPBlogEntry() {

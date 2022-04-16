@@ -54,10 +54,10 @@ public class MPBlogCommentController {
     }
 
     @GetMapping("/{id}/deleteComment")
-    public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id, Model model) {
+    public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
         MPBlogComment comment = mpBlogCommentRepository.findById(id);
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
-        if(comment.getMpBlogUser() != optionalSession.get().getMpBlogUser()) {
+        if(optionalSession.isPresent() && comment.getMpBlogUser() != optionalSession.get().getMpBlogUser()) {
             throw new IllegalArgumentException("User is not authorized to delete this comment!");
         }
         int newID = comment.getMpBlogEntry().getId();
