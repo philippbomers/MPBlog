@@ -86,7 +86,7 @@ public class MPBlogEntry {
     }
 
     public List<MPBlogComment> getMpBlogComments() {
-        return mpBlogComments.stream().sorted(Comparator.comparing(MPBlogComment::getDate).reversed()).toList();
+        return mpBlogComments.stream().sorted(Comparator.comparing(MPBlogComment::getDate)).toList();
     }
 
     public void setMpBlogComments(List<MPBlogComment> mpBlogComments) {
