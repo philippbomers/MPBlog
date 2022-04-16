@@ -32,7 +32,7 @@ public class MPBlogUserController {
             return "new/newuser";
         } else {
             this.mpBlogUserService.addMPBlogUser(mpBlogUser);
-            return "registersuccessfully";
+            return "helpers/registersuccessfully";
         }
     }
 
