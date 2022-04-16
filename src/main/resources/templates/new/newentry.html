@@ -5,23 +5,30 @@
 <nav th:insert="design/standarditems :: navbar"></nav>
 
 <div th:if="${sessionUser != null}">
-    <h3>New Entry</h3>
-    <form method="post" th:action="@{/newEntry}" th:object="${entry}">
-        <label for="titlearea">
-            Insert title:
-        </label>
-        <br>
-        <textarea id="titlearea" th:field="*{title}"></textarea>
-        <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
-        <label for="inputarea">
-            Insert your Entry:
-        </label><br>
-        <textarea id="inputarea" th:field="*{content}"></textarea>
-        <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-        <br>
-        <button type="submit">Send</button>
-    </form>
+    <div class="container">
+        <h3 class="title">New Entry</h3>
+        <form method="post" th:action="@{/newEntry}" th:object="${entry}">
+            <div class="field">
+                <label for="title" class="label">
+                    Insert title:
+                </label>
+                <input id="title" th:field="*{title}" type="text" class="input">
+                <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
+            </div>
+            <div class="field">
+            <label for="inputarea" class="label">
+                Insert your Entry:
+            </label>
+            <textarea id="inputarea" th:field="*{content}" class="textarea"></textarea>
+            <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+            </div>
+            <div class="field">
+                <button type="submit" class="button is-link">Send</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <div th:if="${sessionUser == null}">
     Please Login to add a new entry!
 </div>
