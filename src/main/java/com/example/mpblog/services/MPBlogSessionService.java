@@ -23,8 +23,4 @@ public class MPBlogSessionService {
     public Optional<MPBlogSession> findByIdAndExpiresAtAfter(String sessionId, Instant instant) {
         return this.mpBlogSessionRepository.findByIdAndExpiresAtAfter(sessionId, instant);
     }
-
-    public Optional<MPBlogSession> findById(int id) {
-        return this.mpBlogSessionRepository.findById(String.valueOf(id));
-    }
 }

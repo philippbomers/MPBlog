@@ -60,10 +60,7 @@ public class MPBlogSessionController {
                     sessionId, Instant.now());
             if (optionalSession.isPresent()) {
                 MPBlogSession session = optionalSession.get();
-// neues Ablaufdatum für die Session
                 session.setExpiresAt(Instant.now().plusSeconds(7 * 24 * 60 * 60));
-                MPBlogUser user = session.getMpBlogUser();
-// User ist eingeloggt....
             }
         }
         return "homepage";
