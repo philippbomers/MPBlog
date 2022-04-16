@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="standarditems :: htmlhead"></head>
+<body class="is-centered has-text-centered">
+<div th:insert="standarditems :: navbar"></div>
+<div th:if="${sessionUser != null}">
+    <h3>New Entry</h3>
+    <form method="post" th:action="@{/newEntry}" th:object="${entry}">
+        <label for="titlearea">
+            Insert title:
+        </label>
+        <br>
+        <textarea th:field="*{title}" id="titlearea"></textarea>
+        <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
+        <label for="inputarea">
+            Insert your Entry:
+        </label><br>
+        <textarea th:field="*{content}" id="inputarea"></textarea>
+        <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+        <br>
+        <button type="submit">Send</button>
+    </form>
+</div>
+<div th:if="${sessionUser == null}">
+    Please Login to add a new entry!
+</div>
+<div th:insert="standarditems :: footer"></div>
+</body>
+</html>

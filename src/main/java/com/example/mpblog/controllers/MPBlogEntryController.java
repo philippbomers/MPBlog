@@ -2,28 +2,47 @@ package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.entities.MPBlogSession;
+import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
+import com.example.mpblog.repositories.MPBlogSessionRepository;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
 public class MPBlogEntryController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogEntryRepository mpBlogEntryRepository;
-
+    private final MPBlogSessionRepository mpBlogSessionRepository;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogSessionRepository mpBlogSessionRepository, MPBlogSessionService mpBlogSessionService) {
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogEntryRepository = mpBlogEntryRepository;
+        this.mpBlogSessionRepository = mpBlogSessionRepository;
         this.mpBlogSessionService = mpBlogSessionService;
+    }
+    @GetMapping("/newEntry")
+    public String entry(Model model) {
+        model.addAttribute("entry", new MPBlogEntry());
+        return "newentry";
+    }
+
+    @PostMapping("/newEntry")
+    public String message(@CookieValue(name = "sessionId") String sessionId, @Valid @ModelAttribute("entry") MPBlogEntry entry, BindingResult bindingResult) {
+        Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
+        if (bindingResult.hasErrors() || mpBlogUser.isEmpty()) {
+            return "newentry";
+        }
+        entry.setMpBlogUser(mpBlogUser.get());
+        mpBlogEntryRepository.save(entry);
+        return "redirect:/showentries";
     }
 
     @GetMapping("/showentries")
