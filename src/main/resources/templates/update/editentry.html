@@ -3,33 +3,36 @@
 <head th:insert="design/standarditems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
+
 <div th:if="${sessionUser != null}">
-    <h3>Entry Edit</h3>
-    <form method="post" th:action="@{/{id}/editEntry(id=*{id})}" th:object="${entry}">
-        <label for="titlearea">
-            Edit title:
-        </label>
-        <br>
-        <textarea id="titlearea" th:field="*{title}"></textarea>
-        <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
-        <label for="inputarea">
-            Edit Entry:
-        </label><br>
-        <textarea id="inputarea" th:field="*{content}"></textarea>
-        <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-        <br>
-        <label for="userarea">
-        User:
-        </label><br>
-        <textarea id="userarea" th:field="*{mpBlogUser.id}"></textarea>
-        <p th:errors="*{mpBlogUser.id}" th:if="${#fields.hasErrors('mpBlogUser.id')}"></p>
-        <br>
-        <button type="submit">Save Changes</button>
-    </form>
+    <div class="container">
+        <h3 class="title">Entry Edit</h3>
+        <form method="post" th:action="@{/{id}/editEntry(id=*{id})}" th:object="${entry}">
+            <div class="field">
+                <label for="title" class="label">
+                    Edit title:
+                </label>
+                <input id="title" th:field="*{title}" class="input"></input>
+                <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
+            </div>
+            <div class="field">
+                <label for="inputarea" class="label">
+                    Edit Entry:
+                </label>
+                <textarea id="inputarea" th:field="*{content}" class="textarea"></textarea>
+                <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+            </div>
+            <div class="field">
+                <button class="button is-link" type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <div th:if="${sessionUser == null}">
     Please Login to edit entry!
 </div>
+
 <footer th:insert="design/standarditems :: footer"></footer>
 </body>
 </html>
