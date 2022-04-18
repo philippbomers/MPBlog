@@ -5,7 +5,7 @@
 <nav th:insert="design/standarditems :: navbar"></nav>
 
 
-<div class="columns is-centered">
+<div class="columns is-centered" th:if="${sessionUser == null || sessionUser == ''}">
     <div class="column is-3">
         <h1 class="title">Login</h1>
         <p th:if="${isInvalid}" class="has-text-danger mb-4">
@@ -29,6 +29,9 @@
         <button class="button is-link" type="submit">Login</button>
     </form>
     </div>
+</div>
+<div th:unless="${sessionUser == null  || sessionUser == ''}">
+    You Shall Not Pass!
 </div>
 
 <footer th:insert="design/standarditems :: footer"></footer>

@@ -37,12 +37,12 @@ public class MPBlogSessionController {
     }
 
     @PostMapping("/login")
-    public String login(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @Valid @ModelAttribute("login") MPBlogUser mpBlogUser, BindingResult bindingResult, HttpServletResponse response, Model model) {
+    public String login(@Valid @ModelAttribute("login") MPBlogUser mpBlogUser, BindingResult bindingResult, HttpServletResponse response, Model model) {
         Optional<MPBlogUser> optionalUser = this.mpBlogUserService.getMPBlogUsers(mpBlogUser);
         boolean isInvalid = false;
-        if (!bindingResult.hasErrors() && !optionalUser.isPresent()) {
+        if (!bindingResult.hasErrors() && optionalUser.isEmpty()) {
             isInvalid = true;
-        } else if (sessionId.isEmpty() && optionalUser.isPresent() && !bindingResult.hasErrors()) {
+        } else if (optionalUser.isPresent() && !bindingResult.hasErrors()) {
             MPBlogSession mpBlogSession = new MPBlogSession();
             mpBlogSession.setMpBlogUser(optionalUser.get());
             mpBlogSession.setExpiresAt();

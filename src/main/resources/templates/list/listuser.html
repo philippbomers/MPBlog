@@ -24,8 +24,17 @@
                             <span th:case="true">Yes</span>
                             <span th:case="false">No</span>
                         </p>
-                        <a th:href="@{/switchAdminRights/{id}/listuser(id=*{mpBlogUser.id})}"
-                           th:if="${sessionUser?.adminRights}"> Switch</a>
+                        <div th:if="${sessionUser != null && sessionUser != ''}">
+                            <a th:href="@{/switchAdminRights/{id}/listuser(id=*{mpBlogUser.id})}"
+                               th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
+                            <span th:if="*{mpBlogUser.adminRights}">
+                                Demote
+                            </span>
+                                <span th:if="*{!mpBlogUser.adminRights}">
+                                Promote
+                            </span>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             </table>

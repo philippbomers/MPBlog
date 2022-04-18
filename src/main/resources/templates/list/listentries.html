@@ -5,15 +5,17 @@
 <nav th:insert="design/standarditems :: navbar"></nav>
 
 <h1 class="title">Welcome
-    <span th:if="${sessionUser != null}">
+    <span th:if="${sessionUser != null && sessionUser != ''}">
         <span th:text="${sessionUser.userName}"></span>
     </span>
-    <span th:if="${sessionUser == null}">
+    <span th:if="${sessionUser == null || sessionUser == ''}">
         Stranger
     </span>
-
 </h1>
-<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left">
+<div th:if="${sessionUser?.adminRights}" class="has-text-right mr-6">
+    <a class="button has-background-info has-text-white" th:href="@{/newEntry}">New Entry</a>
+</div>
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
     <div class="tile is-vertical is-parent">
         <div class="is-child box" th:each="entry:${entries}">
             <article class="tile is-child">
@@ -27,7 +29,7 @@
                     <a th:href="@{/{id}/showentry(id=*{entry.id})}" class="button is-primary">
                         Show Details
                     </a>
-                    <span th:if="${sessionUser != null}">
+                    <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a th:href="@{/{id}/editEntry(id=*{entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
                            class="button is-warning">

@@ -4,7 +4,7 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<div th:if="${sessionUser != null}">
+<div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
         <h1 class="title">New Entry</h1>
         <form method="post" th:action="@{/newEntry}" th:object="${entry}">
@@ -15,21 +15,21 @@
                 <input class="input" id="title" th:field="*{title}" type="text">
                 <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
-            <div class="field">
+            <div class="field" style="height: 60vh">
                 <label class="label" for="inputarea">
                     Insert your Entry:
                 </label>
-                <textarea class="textarea" id="inputarea" th:field="*{content}"></textarea>
+                <textarea class="textarea" id="inputarea" th:field="*{content}" style="height: 90%"></textarea>
                 <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-            </div>
-            <div class="field">
+            <div class="field has-text-right mt-2">
                 <button class="button is-link" type="submit">Send</button>
+            </div>
             </div>
         </form>
     </div>
 </div>
 
-<div th:if="${sessionUser == null}">
+<div th:if="${sessionUser == null || sessionUser == ''}">
     <h1 class="title">Stop!</h1>
     <p>
         Please Login to add a new entry!

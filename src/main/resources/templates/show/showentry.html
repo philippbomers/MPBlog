@@ -4,6 +4,9 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
+<h1 class="title">
+    Our Blogpost
+</h1>
 <div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left">
     <div class="tile is-vertical is-parent">
         <div class="is-child box">
@@ -15,7 +18,7 @@
                 </p>
                 <p class="card-content" th:text="${entry.content}"></p>
                 <p class="has-text-right">
-                    <span th:if="${sessionUser != null}">
+                    <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a th:href="@{/{id}/editEntry(id=${entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
                            class="button is-warning">
@@ -43,7 +46,7 @@
                     <span th:text="*{comment.realDate}"></span>
                 </p>
                 <p class="card-content" th:text="*{comment.userComment}"></p>
-                <div class="has-text-right" th:if="${sessionUser != null}">
+                <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-danger" th:href="@{/{id}/deleteComment(id=*{comment.id})}"
                        th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">
                         Delete Comment

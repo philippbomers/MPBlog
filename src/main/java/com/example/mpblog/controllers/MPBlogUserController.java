@@ -19,9 +19,6 @@ public class MPBlogUserController {
 
     @GetMapping("/newuser")
     public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
-        if (sessionId != null) {
-            return "redirect:/";
-        }
         model.addAttribute("mpBlogUser", new MPBlogUser());
         return "new/newuser";
     }

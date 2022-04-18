@@ -4,13 +4,13 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<div th:if="${sessionUser != null}">
+<div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
-        <h1 class="title">Comment Form</h1>
+        <h1 class="title">What do you think?</h1>
         <form method="post" th:action="@{/{id}/newcomment(id=${entryId})}" th:object="${comment}">
             <div class="field">
                 <label class="label" for="inputarea">
-                    Insert your Comment:
+                    Write a comment
                 </label>
                 <textarea class="textarea is-small" id="inputarea" th:field="*{userComment}"></textarea>
                 <p th:errors="*{userComment}" th:if="${#fields.hasErrors('userComment')}"></p>
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div th:if="${sessionUser == null}">
+<div th:if="${sessionUser == null || sessionUser == ''}">
     <h1 class="title">Stop!</h1>
     <p>
         Please Login to add a new comment!
