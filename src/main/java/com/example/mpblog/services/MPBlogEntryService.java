@@ -23,4 +23,18 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
     public Optional<MPBlogEntry> getMPBlogEntry(Integer id) {
         return this.mpBlogEntryRepository.findById(id);
     }
+
+    public String firstThreeWordsOfContent(String string) {
+
+    String[] arr = string.split("\\s+");
+    int N = 3;
+    String threeWords = "";
+
+    for(int i = 0;i<N;i++) {
+        threeWords = threeWords + " " + arr[i];
+    }
+
+    threeWords = threeWords + "...";
+    return  threeWords;
+    }
 }

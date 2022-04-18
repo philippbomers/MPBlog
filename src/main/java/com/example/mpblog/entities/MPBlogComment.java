@@ -3,10 +3,7 @@ package com.example.mpblog.entities;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +15,7 @@ public class MPBlogComment {
     private int id;
 
     @Length(min = 3)
+    @Column(columnDefinition = "TEXT")
     private String userComment;
 
     @CreationTimestamp

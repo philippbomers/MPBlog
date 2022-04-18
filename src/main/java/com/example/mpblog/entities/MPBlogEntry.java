@@ -19,6 +19,7 @@ public class MPBlogEntry {
     private String title;
 
     @Length(min = 3)
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @CreationTimestamp

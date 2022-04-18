@@ -75,7 +75,7 @@ public class MPBlogEntryController {
     @GetMapping("/{id}/editEntry")
     public String editEntryForm(Model model, @PathVariable int id) {
         model.addAttribute("entry", mpBlogEntryRepository.findById(id));
-        return "update/editentry";
+        return "update/updateentry";
     }
 
     @PostMapping("/{id}/editEntry")
