@@ -49,6 +49,7 @@ public class MPBlogEntryController {
         return "list/listentries";
     }
 
+    @GetMapping("/{id}/showentry")
     public String entryDetails(@PathVariable int id, Model model) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
         if (entry.isPresent()) {
