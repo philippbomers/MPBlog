@@ -58,9 +58,9 @@ public class MPBlogCommentController {
         if (optionalSession.isPresent() && (
                 comment.getMpBlogUser() == optionalSession.get().getMpBlogUser()) ||
                 optionalSession.get().getMpBlogUser().isAdminRights()) {
-            int newID = comment.getMpBlogEntry().getId();
+            int entryID = comment.getMpBlogEntry().getId();
             this.mpBlogCommentRepository.delete(comment);
-            return "redirect:/" + newID + "/showentry";
+            return "redirect:/" + entryID + "/showentry";
         }
         throw new IllegalArgumentException("User is not authorized to delete this comment!");
     }

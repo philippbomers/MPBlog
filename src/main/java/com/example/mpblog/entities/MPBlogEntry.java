@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 @Entity
@@ -33,6 +35,14 @@ public class MPBlogEntry {
     @OneToMany(mappedBy = "mpBlogEntry")
     @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<MPBlogComment> mpBlogComments;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Entry_Category",
+            joinColumns = { @JoinColumn(name = "entry_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
+    )
+    Set<MBBlogCategory> categories = new HashSet<>();
 
     public MPBlogEntry() {
     }
@@ -83,6 +93,14 @@ public class MPBlogEntry {
 
     public String getUsername() {
         return this.getMpBlogUser().getUserName();
+    }
+
+    public Set<MBBlogCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<MBBlogCategory> categories) {
+        this.categories = categories;
     }
 
     public List<MPBlogComment> getMpBlogComments() {
