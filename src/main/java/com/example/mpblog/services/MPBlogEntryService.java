@@ -26,15 +26,15 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
 
     public String firstThreeWordsOfContent(String string) {
 
-    String[] arr = string.split("\\s+");
-    int N = 3;
-    String threeWords = "";
+        String[] arr = string.split("\\s+");
+        int N = 3;
+        String threeWords = "";
 
-    for(int i = 0;i<N;i++) {
-        threeWords = threeWords + " " + arr[i];
-    }
+        for (int i = 0; i < N; i++) {
+            threeWords = threeWords + " " + arr[i];
+        }
 
-    threeWords = threeWords + "...";
-    return  threeWords;
+        threeWords = threeWords + "...";
+        return threeWords;
     }
 }

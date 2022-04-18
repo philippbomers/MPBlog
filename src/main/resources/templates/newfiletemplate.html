@@ -4,10 +4,18 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<h1>Title</h1>
-<p>
-    Content
-</p>
+<h1 class="title">Title</h1>
+<div th:if="${sessionUser != null && sessionUser != ''}">
+    <p>
+        Content when logged in
+    </p>
+</div>
+
+<div th:if="${sessionUser == null || sessionUser == ''}">
+    <p>
+        Content when not logged in
+    </p>
+</div>
 
 <footer th:insert="design/standarditems :: footer"></footer>
 </body>

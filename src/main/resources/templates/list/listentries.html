@@ -12,7 +12,8 @@
         Stranger
     </span>
 </h1>
-<div th:if="${sessionUser?.adminRights}" class="has-text-right mr-6">
+
+<div class="has-text-right mr-6" th:if="${sessionUser?.adminRights}">
     <a class="button has-background-info has-text-white" th:href="@{/newEntry}">New Entry</a>
 </div>
 <div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
@@ -26,18 +27,18 @@
                 </p>
                 <p class="card-content" th:text="*{entry.content}"></p>
                 <p class="has-text-right">
-                    <a th:href="@{/{id}/showentry(id=*{entry.id})}" class="button is-primary">
+                    <a class="button is-primary" th:href="@{/{id}/showentry(id=*{entry.id})}">
                         Show Details
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">
-                        <a th:href="@{/{id}/editEntry(id=*{entry.id})}"
-                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
-                           class="button is-warning">
+                        <a class="button is-warning"
+                           th:href="@{/{id}/editEntry(id=*{entry.id})}"
+                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                                 Edit Entry
                         </a>
-                        <a th:href="@{/{id}/deleteEntry(id=*{entry.id})}"
-                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
-                           class="button is-danger">
+                        <a class="button is-danger"
+                           th:href="@{/{id}/deleteEntry(id=*{entry.id})}"
+                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                             Delete
                         </a>
                     </span>

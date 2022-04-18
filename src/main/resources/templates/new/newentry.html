@@ -19,11 +19,11 @@
                 <label class="label" for="inputarea">
                     Insert your Entry:
                 </label>
-                <textarea class="textarea" id="inputarea" th:field="*{content}" style="height: 90%"></textarea>
+                <textarea class="textarea" id="inputarea" style="height: 90%" th:field="*{content}"></textarea>
                 <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-            <div class="field has-text-right mt-2">
-                <button class="button is-link" type="submit">Send</button>
-            </div>
+                <div class="field has-text-right mt-2">
+                    <button class="button is-link" type="submit">Send</button>
+                </div>
             </div>
         </form>
     </div>

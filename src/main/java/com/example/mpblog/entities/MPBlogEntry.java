@@ -6,7 +6,9 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MPBlogEntry {

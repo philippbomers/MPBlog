@@ -9,21 +9,21 @@
         <h3 class="title">Entry Edit</h3>
         <form method="post" th:action="@{/{id}/editEntry(id=*{id})}" th:object="${entry}">
             <div class="field">
-                <label for="title" class="label">
+                <label class="label" for="title">
                     Edit title:
                 </label>
-                <input id="title" th:field="*{title}" class="input"></input>
+                <input class="input" id="title" th:field="*{title}"></input>
                 <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p><br>
             </div>
             <div class="field" style="height: 60vh">
-                <label for="inputarea" class="label">
+                <label class="label" for="inputarea">
                     Edit Entry:
                 </label>
-                <textarea id="inputarea" th:field="*{content}" class="textarea" style="height: 90%"></textarea>
+                <textarea class="textarea" id="inputarea" style="height: 90%" th:field="*{content}"></textarea>
                 <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-            <div class="field has-text-right mt-2">
-                <button class="button is-link" type="submit">Save Changes</button>
-            </div>
+                <div class="field has-text-right mt-2">
+                    <button class="button is-link" type="submit">Save Changes</button>
+                </div>
             </div>
         </form>
     </div>

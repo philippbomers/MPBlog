@@ -4,32 +4,32 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-
 <div class="columns is-centered" th:if="${sessionUser == null || sessionUser == ''}">
     <div class="column is-3">
         <h1 class="title">Login</h1>
-        <p th:if="${isInvalid}" class="has-text-danger mb-4">
+        <p class="has-text-danger mb-4" th:if="${isInvalid}">
             Username and/or password are incorrect. Please try again or sign up.
         </p>
-    <form method="post" th:action="@{/login}" th:object="${login}">
-        <div class="field">
-            <label class="label" for="username">
-                Username
-            </label>
-            <input class="input" id="username" th:field="*{userName}" type="text">
-            <p th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
-        </div>
-        <div class="field">
-            <label class="label" for="password">
-                Password
-            </label>
-            <input class="input" id="password" th:field="*{password}" type="password"><br/>
-            <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
-        </div>
-        <button class="button is-link" type="submit">Login</button>
-    </form>
+        <form method="post" th:action="@{/login}" th:object="${login}">
+            <div class="field">
+                <label class="label" for="username">
+                    Username
+                </label>
+                <input class="input" id="username" th:field="*{userName}" type="text">
+                <p th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
+            </div>
+            <div class="field">
+                <label class="label" for="password">
+                    Password
+                </label>
+                <input class="input" id="password" th:field="*{password}" type="password"><br/>
+                <p th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+            </div>
+            <button class="button is-link" type="submit">Login</button>
+        </form>
     </div>
 </div>
+
 <div th:unless="${sessionUser == null  || sessionUser == ''}">
     You Shall Not Pass!
 </div>

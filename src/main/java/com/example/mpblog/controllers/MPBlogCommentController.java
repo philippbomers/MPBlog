@@ -48,7 +48,7 @@ public class MPBlogCommentController {
         comment.setMpBlogUser(mpBlogUser.get());
         mpBlogCommentService.save(comment);
         model.addAttribute("entry", blogEntry.get());
-        return "redirect:/"+id+"/showentry";
+        return "redirect:/" + id + "/showentry";
     }
 
     @GetMapping("/{id}/deleteComment")
