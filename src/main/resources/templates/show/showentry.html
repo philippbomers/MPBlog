@@ -16,7 +16,7 @@
                     <span th:text="${entry.username}"></span>,&nbsp;
                     <span th:text="${entry.realDate}"></span>
                 </p>
-                <p class="card-content" th:text="${entry.content}"></p>
+                <p class="card-content" style="white-space: pre-line" th:text="${entry.content}"></p>
                 <p class="has-text-right">
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning"

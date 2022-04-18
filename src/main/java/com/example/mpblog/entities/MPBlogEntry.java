@@ -94,7 +94,7 @@ public class MPBlogEntry {
     }
 
     public String getShortContent() {
-        String[] shortContentArray = content.split("\\n");
+        String[] shortContentArray = content.split("(\r\n|\n)");
         return shortContentArray[0];
     }
 }
