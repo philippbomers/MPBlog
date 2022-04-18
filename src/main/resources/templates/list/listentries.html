@@ -4,42 +4,43 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<h1 class="title">Entries ordered by date</h1>
-<div class="section">
-    <div class="columns is-centered">
-        <div class="column is-narrow">
-            <table class="table">
-                <tr>
-                    <th>
-                        Title
-                    </th>
-                    <th>
-                        Content
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                    <th>
-                        Created by
-                    </th>
-                    <th>
-                        Other
-                    </th>
-                </tr>
-                <tr th:each="entry:${entries}">
-                    <td th:text="*{entry.title}"></td>
-                    <td th:text="*{entry.content}"></td>
-                    <td th:text="*{entry.realDate}"></td>
-                    <td th:text="*{entry.username}"></td>
-                    <td>
-                        <a th:href="@{/{id}/showentry(id=${entry.id})}">Show Details</a><br>
-                        <span th:if="${sessionUser != null}">
-                            <a th:href="@{/{id}/deleteEntry(id=${entry.id})}"
-                                th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">Delete</a>
-                        </span>
-                    </td>
-                </tr>
-            </table>
+<h1 class="title">Welcome
+    <span th:if="${sessionUser != null}">
+        <span th:text="${sessionUser.userName}"></span>
+    </span>
+    <span th:if="${sessionUser == null}">
+        Hello Stranger
+    </span>
+
+</h1>
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4">
+    <div class="tile is-vertical is-parent">
+        <div class="is-child box" th:each="entry:${entries}">
+            <article class="tile is-child">
+                <p class="title" th:text="*{entry.title}"></p>
+                <p class="card-header-title">
+                    <span th:text="*{entry.username}"></span>:&nbsp;
+                    <span th:text="*{entry.realDate}"></span>
+                </p>
+                <p class="card-content" th:text="*{entry.content}"></p>
+                <p>
+                    <a th:href="@{/{id}/showentry(id=*{entry.id})}" class="button is-primary">
+                        Show Details
+                    </a>
+                    <span th:if="${sessionUser != null}">
+                        <a th:href="@{/{id}/editEntry(id=*{entry.id})}"
+                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
+                           class="button is-warning">
+                                Edit Entry
+                        </a>
+                        <a th:href="@{/{id}/deleteEntry(id=*{entry.id})}"
+                           th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
+                           class="button is-danger">
+                            Delete
+                        </a>
+                    </span>
+                </p>
+            </article>
         </div>
     </div>
 </div>

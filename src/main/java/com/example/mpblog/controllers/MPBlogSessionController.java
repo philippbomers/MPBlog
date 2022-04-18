@@ -3,6 +3,7 @@ package com.example.mpblog.controllers;
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogSessionRepository;
+import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
@@ -48,11 +49,6 @@ public class MPBlogSessionController {
             return "redirect:/";
         }
         return "helpers/login";
-    }
-
-    @GetMapping("/")
-    public String home() {
-        return "homepage";
     }
 
     @PostMapping("/logout")

@@ -43,13 +43,12 @@ public class MPBlogEntryController {
         return "redirect:/listentries";
     }
 
-    @GetMapping("/listentries")
+    @GetMapping({"/listentries", "/"})
     public String showEntries(Model model) {
         model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
         return "list/listentries";
     }
 
-    @GetMapping("/{id}/showentry")
     public String entryDetails(@PathVariable int id, Model model) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
         if (entry.isPresent()) {

@@ -4,38 +4,53 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standarditems :: navbar"></nav>
 
-<div class="container is-centered has-text-centered">
-    <h1 class="title mt-5">Blog Entry</h1>
-    <div class="tile is-parent">
-        <article class="tile is-child notification is-info">
-            <p class="title" th:text="*{entry.title}"></p>
-            <p class="subtitle" th:text="*{entry.realDate}"></p>
-            <p class="subtitle" th:text="*{entry.username}"></p>
-            <p class="content" th:text="*{entry.content}"></p>
-        </article>
-    </div>
-    <span th:if="${sessionUser != null}">
-                            <a class="button is-warning" th:href="@{/{id}/editEntry(id=*{entry.id})}"
-                               th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4">
+    <div class="tile is-vertical is-parent">
+        <div class="is-child box">
+            <article class="tile is-child">
+                <p class="title" th:text="${entry.title}"></p>
+                <p class="card-header-title">
+                    <span th:text="${entry.realDate}"></span>:&nbsp;
+                    <span th:text="${entry.username}"></span>
+                </p>
+                <p class="card-content" th:text="${entry.content}"></p>
+            </article>
+        </div>
+        <span th:if="${sessionUser != null}">
+                <a class="button is-warning" th:href="@{/{id}/editEntry(id=${entry.id})}"
+                   th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                                 Edit Entry
-                            </a>
+                </a>
+                <a th:href="@{/{id}/deleteEntry(id=${entry.id})}"
+                   th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}"
+                   class="button is-danger">
+                            Delete
+                </a>
             </span>
-    <h1 class="title mt-5">Comments</h1>
-    <div class="tile is-parent" th:each="comment:*{entry.mpBlogComments}">
-        <article class="tile is-child notification is-primary">
-            <p class="title" th:text="*{comment.mpBlogUser.userName}"></p>
-            <p class="subtitle" th:text="*{comment.realDate}"></p>
-            <p class="content" th:text="*{comment.userComment}"></p>
-            <span th:if="${sessionUser != null}">
+    </div>
+</div>
+
+<h1 class="title mt-5">Comments</h1>
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4">
+    <div class="tile is-vertical is-parent">
+        <div class="is-child box" th:each="comment:${entry.mpBlogComments}">
+            <article class="tile is-child">
+                <p class="title" th:text="*{comment.mpBlogUser.userName}"></p>
+                <p class="card-header-title">
+                    <span th:text="*{comment.realDate}"></span>
+                </p>
+                <p class="card-content" th:text="*{comment.userComment}"></p>
+                <span th:if="${sessionUser != null}">
                             <a class="button is-danger" th:href="@{/{id}/deleteComment(id=*{comment.id})}"
                                th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">
                                 Delete Comment
                             </a>
-            </span>
-
-        </article>
+                    </span>
+            </article>
+        </div>
+        <a class="button" th:href="@{/{id}/newcomment(id=${entry.id})}" th:if="${sessionUser != null}">New
+            Comment</a>
     </div>
-    <a class="button" th:href="@{/{id}/newcomment(id=*{entry.id})}" th:if="${sessionUser != null}">New Comment</a>
 </div>
 
 <footer th:insert="design/standarditems :: footer"></footer>
