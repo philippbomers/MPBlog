@@ -46,20 +46,20 @@ public class MPBlogCommentController {
         }
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogUser.get());
-        mpBlogCommentService.save(comment);
+        this.mpBlogCommentService.save(comment);
         model.addAttribute("entry", blogEntry.get());
         return "redirect:/" + id + "/showentry";
     }
 
     @GetMapping("/{id}/deleteComment")
     public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
-        MPBlogComment comment = mpBlogCommentRepository.findById(id);
+        MPBlogComment comment = this.mpBlogCommentRepository.findById(id);
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
         if (optionalSession.isPresent() && (
                 comment.getMpBlogUser() == optionalSession.get().getMpBlogUser()) ||
                 optionalSession.get().getMpBlogUser().isAdminRights()) {
             int newID = comment.getMpBlogEntry().getId();
-            mpBlogCommentRepository.delete(comment);
+            this.mpBlogCommentRepository.delete(comment);
             return "redirect:/" + newID + "/showentry";
         }
         throw new IllegalArgumentException("User is not authorized to delete this comment!");

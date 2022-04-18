@@ -13,14 +13,14 @@
                     Insert title:
                 </label>
                 <input class="input" id="title" th:field="*{title}" type="text">
-                <p th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
+                <p class="is-danger" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
             <div class="field" style="height: 60vh">
                 <label class="label" for="inputarea">
                     Insert your Entry:
                 </label>
                 <textarea class="textarea" id="inputarea" style="height: 90%" th:field="*{content}"></textarea>
-                <p th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+                <p class="is-danger" th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
                 <div class="field has-text-right mt-2">
                     <button class="button is-link" type="submit">Send</button>
                 </div>

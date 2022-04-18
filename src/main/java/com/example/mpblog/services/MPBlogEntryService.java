@@ -4,10 +4,7 @@ import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
@@ -26,9 +23,13 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
     }
 
     public HashMap<Integer, String> mapTheShortContent(List<MPBlogEntry> entryList) {
-        HashMap result = new HashMap<Integer, String>();
+        HashMap<Integer, String> result = new HashMap<Integer, String>();
         for (MPBlogEntry blogEntry : entryList) {
-            result.put(blogEntry.getId(), blogEntry.getShortContent());
+            if (Objects.equals(blogEntry.getContent(), blogEntry.getShortContent())) {
+                result.put(blogEntry.getId(), blogEntry.getContent());
+            } else {
+                result.put(blogEntry.getId(), blogEntry.getShortContent() + " [...]");
+            }
         }
         return result;
     }

@@ -28,7 +28,7 @@
                 <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
                 <p class="has-text-right">
                     <a class="button is-primary" th:href="@{/{id}/showentry(id=*{entry.id})}">
-                        Show Details
+                        Show more
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning"
