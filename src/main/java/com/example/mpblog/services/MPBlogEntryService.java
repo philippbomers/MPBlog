@@ -5,6 +5,7 @@ import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,17 +25,12 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
         return this.mpBlogEntryRepository.findById(id);
     }
 
-    public String firstThreeWordsOfContent(String string) {
-
-        String[] arr = string.split("\\s+");
-        int N = 3;
-        String threeWords = "";
-
-        for (int i = 0; i < N; i++) {
-            threeWords = threeWords + " " + arr[i];
+    public HashMap<Integer, String> mapTheShortContent(List<MPBlogEntry> entryList) {
+        HashMap result = new HashMap<Integer, String>();
+        for (MPBlogEntry blogEntry : entryList) {
+            result.put(blogEntry.getId(), blogEntry.getShortContent());
         }
-
-        threeWords = threeWords + "...";
-        return threeWords;
+        return result;
     }
+
 }

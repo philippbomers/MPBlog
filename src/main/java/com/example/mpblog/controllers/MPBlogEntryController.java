@@ -46,6 +46,7 @@ public class MPBlogEntryController {
     @GetMapping({"/listentries", "/"})
     public String showEntries(Model model) {
         model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
+        model.addAttribute("shortEntries", mpBlogEntryService.mapTheShortContent(mpBlogEntryRepository.findAll()));
         return "list/listentries";
     }
 

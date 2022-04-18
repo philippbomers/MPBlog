@@ -25,7 +25,7 @@
                     <span th:text="*{entry.username}"></span>,&nbsp;
                     <span th:text="*{entry.realDate}"></span>
                 </p>
-                <p class="card-content" th:text="*{entry.content}"></p>
+                <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
                 <p class="has-text-right">
                     <a class="button is-primary" th:href="@{/{id}/showentry(id=*{entry.id})}">
                         Show Details

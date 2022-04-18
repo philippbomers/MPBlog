@@ -92,4 +92,9 @@ public class MPBlogEntry {
     public void setMpBlogComments(List<MPBlogComment> mpBlogComments) {
         this.mpBlogComments = mpBlogComments;
     }
+
+    public String getShortContent() {
+        String[] shortContentArray = content.split("\\n");
+        return shortContentArray[0];
+    }
 }
