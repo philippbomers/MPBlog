@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface MPBlogCommentRepository extends CrudRepository<MPBlogComment, Integer> {
+
     List<MPBlogComment> findAll();
 
     MPBlogComment findById(int id);

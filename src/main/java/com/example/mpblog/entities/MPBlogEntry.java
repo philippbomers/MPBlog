@@ -23,10 +23,10 @@ public class MPBlogEntry {
     @GeneratedValue
     private int id;
 
-    @Length(min = 3)
+    @Length(min = 3, max = 50)
     private String title;
 
-    @Length(min = 3)
+    @Length(min = 1, max = 65000)
     @Column(columnDefinition = "TEXT")
     private String content;
 
@@ -47,10 +47,6 @@ public class MPBlogEntry {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return this.title;
     }
@@ -69,10 +65,6 @@ public class MPBlogEntry {
 
     public Date getDate() {
         return this.date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getRealDate() {
@@ -109,4 +101,9 @@ public class MPBlogEntry {
             throw new RuntimeException(e);
         }
     }
+
+    public List<MPBlogComment> getMpBlogComments() {
+        return mpBlogComments;
+    }
+
 }

@@ -11,43 +11,64 @@ import javax.validation.Valid;
 
 @Controller
 public class MPBlogUserController {
+
     private final MPBlogUserService mpBlogUserService;
 
     public MPBlogUserController(MPBlogUserService mpBlogUserService) {
+
         this.mpBlogUserService = mpBlogUserService;
     }
 
-    @GetMapping("/newuser")
-    public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
+    @GetMapping("/newUser")
+    public String newUser(Model model) {
+
         model.addAttribute("mpBlogUser", new MPBlogUser());
-        return "newUser";
+        return "new/newUser";
     }
 
-    @PostMapping("/newuser")
-    public String register(@Valid @ModelAttribute("mpBlogUser") MPBlogUser mpBlogUser, BindingResult bindingResult) {
+    @PostMapping("/newUser")
+    public String newUserResult(@Valid @ModelAttribute("mpBlogUser") MPBlogUser mpBlogUser,
+                                BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
-            return "newUser";
-        } else {
-            this.mpBlogUserService.addMPBlogUser(mpBlogUser);
-            return "registerSuccessfully";
+            return "new/newUser";
         }
+
+        this.mpBlogUserService.addMPBlogUser(mpBlogUser);
+        return "registerSuccessfully";
     }
 
-    @GetMapping("/listuser")
-    public String userList(Model model) {
+    @GetMapping("/listUser")
+    public String listUser(Model model) {
+
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "listUser";
+        return "list/listUser";
     }
 
-    @GetMapping("/switchAdminRights/{id}/listuser")
-    public String register(@PathVariable int id, Model model) {
-        this.mpBlogUserService.changeUserAdminStatus(this.mpBlogUserService.getMPBlogUser(id));
+    @GetMapping("/switchAdminRights/{id}/listUser")
+    public String switchAdminRights(@PathVariable int id,
+                                    Model model) {
+
+        this.mpBlogUserService.
+                changeUserAdminStatus(this.mpBlogUserService.
+                        getMPBlogUser(id));
+
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "redirect:/listuser";
+        return "redirect:/listUser";
     }
 
-    @GetMapping("/showuser")
-    public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
-        return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "showUser";
+    @GetMapping("/showUser")
+    public String showUser(@CookieValue(name = "sessionId", required = false) String sessionId,
+                           Model model) {
+
+        this.session
+        this.mpBlogUserService.getMPBlogUser(id);
+
+        model.addAttribute("numberOfEntries", this.)
+
+        return sessionId == null ||
+                sessionId.isEmpty() ?
+                "redirect:/" :
+                "show/showUser";
     }
 }

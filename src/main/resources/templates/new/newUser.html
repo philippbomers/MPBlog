@@ -7,7 +7,7 @@
 <div class="columns is-centered">
     <div class="column is-3">
         <h1 class="title">Register a new user</h1>
-        <form action="#" method="post" th:action="@{/newuser}" th:object="${mpBlogUser}">
+        <form action="#" method="post" th:action="@{/newUser}" th:object="${mpBlogUser}">
             <div class="field">
                 <label class="label" for="username">Username </label>
                 <input class="input" id="username" th:field="*{userName}" type="text">

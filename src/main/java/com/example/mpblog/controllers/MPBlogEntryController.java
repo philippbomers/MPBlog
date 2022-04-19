@@ -22,36 +22,35 @@ public class MPBlogEntryController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService,
+                                 MPBlogSessionService mpBlogSessionService) {
+
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogSessionService = mpBlogSessionService;
     }
 
     @GetMapping("/newEntry")
-    public String entry(Model model) {
+    public String newEntry(Model model) {
+
         MPBlogEntry mpBlogEntry = new MPBlogEntry();
+
         model.addAttribute("entry", mpBlogEntry);
-        return "newEntry";
-    }
 
-    @GetMapping("/{id}/updatepicture")
-    public String updatepicture(@PathVariable int id, Model model) {
-        model.addAttribute("entry", this.mpBlogEntryService.getMPBlogEntry(id).get());
-        return "updatePicture";
-    }
-
-    @PostMapping("/{id}/updatepicture")
-    public String updatepictureresult(@PathVariable int id, @RequestParam("picture") MultipartFile picture) {
-        this.mpBlogEntryService.getMPBlogEntry(id).ifPresent(mpBlogEntry -> mpBlogEntry.setPicture(picture));
-        return "redirect:/" + id + "/showentry";
+        return "new/newEntry";
     }
 
     @PostMapping("/newEntry")
-    public String message(@CookieValue(name = "sessionId") String sessionId, @Valid @ModelAttribute("entry") MPBlogEntry entry, BindingResult bindingResult) {
+    public String newEntrySubmit(@CookieValue(name = "sessionId") String sessionId,
+                                 @Valid @ModelAttribute("entry") MPBlogEntry entry,
+                                 BindingResult bindingResult) {
+
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
-        if (bindingResult.hasErrors() || mpBlogUser.isEmpty()) {
-            return "newEntry";
+
+        if (bindingResult.hasErrors() ||
+                mpBlogUser.isEmpty()) {
+            return "new/newEntry";
         }
+
         MPBlogEntry newEntry = new MPBlogEntry();
         newEntry.setTitle(entry.getTitle());
         newEntry.setContent(entry.getContent());
@@ -60,57 +59,110 @@ public class MPBlogEntryController {
 
         try {
             FileInputStream input = new FileInputStream("src/main/java/com/example/mpblog/images/standardpicture.jpeg");
-            MultipartFile multipartFile = new MockMultipartFile("fileItem",
-                    "entry", "image/png", input);
-            Optional<MPBlogEntry> currentEntry = this.mpBlogEntryService.getMPBlogEntry().stream().distinct().findFirst();
-            currentEntry.ifPresent(mpBlogEntry -> mpBlogEntry.setPicture(multipartFile));
+
+            MultipartFile multipartFile = new MockMultipartFile(
+                    "fileItem",
+                    "entry",
+                    "image/jpeg",
+                    input);
+
+            this.mpBlogEntryService.
+                    getMPBlogEntry().
+                    stream().
+                    distinct().
+                    findFirst().
+                    ifPresent(mpBlogEntry -> mpBlogEntry.
+                            setPicture(multipartFile));
+
         } catch (IOException ioException) {
-            return "redirect:/listentries";
+            return "redirect:/listEntries";
         }
-
-        return "redirect:/listentries";
+        return "redirect:/listEntries";
     }
 
-    @GetMapping({"/listentries", "/"})
-    public String showEntries(Model model) {
-        model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
-        model.addAttribute("shortEntries", mpBlogEntryService.mapTheShortContent(this.mpBlogEntryService.findAll()));
-        return "listEntries";
-    }
+    @GetMapping("/{id}/updatePicture")
+    public String updatePicture(@PathVariable int id,
+                                Model model) {
 
-    @GetMapping("/{id}/showentry")
-    public String entryDetails(@PathVariable int id, Model model) {
         Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
+
         if (entry.isPresent()) {
             model.addAttribute("entry", entry.get());
-            return "showEntry";
+            return "update/updatePicture";
         }
-        return "redirect:/showentry";
+        return "redirect:/" + id + "/showEntry";
+    }
+
+    @PostMapping("/{id}/updatePicture")
+    public String updatePictureResult(@PathVariable int id,
+                                      @RequestParam("picture") MultipartFile picture) {
+
+        this.mpBlogEntryService.
+                getMPBlogEntry(id).
+                ifPresent(mpBlogEntry -> mpBlogEntry.setPicture(picture));
+
+        return "redirect:/" + id + "/showEntry";
+    }
+
+    @GetMapping({"/listEntries", "/"})
+    public String listEntries(Model model) {
+
+        model.addAttribute("entries",
+                this.mpBlogEntryService
+                        .getMPBlogEntry());
+
+        model.addAttribute("shortEntries",
+                mpBlogEntryService
+                        .mapTheShortContent(this.mpBlogEntryService.
+                                findAll()));
+
+        return "list/listEntries";
+    }
+
+    @GetMapping("/{id}/showEntry")
+    public String showEntry(@PathVariable int id,
+                            Model model) {
+
+        Optional<MPBlogEntry> entry = this.mpBlogEntryService.getMPBlogEntry(id);
+
+        if (entry.isPresent()) {
+            model.addAttribute("entry", entry.get());
+            return "show/showEntry";
+        }
+        return "redirect:/showEntry";
     }
 
     @GetMapping("/{id}/deleteEntry")
-    public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
+    public String deleteEntry(@CookieValue(value = "sessionId", defaultValue = "") String sessionId,
+                              @PathVariable int id) {
+
         MPBlogEntry entry = this.mpBlogEntryService.findById(id);
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
+
         if (optionalSession.isPresent() &&
                 (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
                         optionalSession.get().getMpBlogUser().isAdminRights())) {
+
             this.mpBlogEntryService.delete(entry);
-            return "redirect:/listentries";
+            return "redirect:/listEntries";
         }
         throw new IllegalArgumentException("User is not authorized to delete this entry!");
     }
 
     @GetMapping("/{id}/updateEntry")
-    public String editEntryForm(Model model, @PathVariable int id) {
+    public String updateEntry(Model model,
+                              @PathVariable int id) {
+
         model.addAttribute("entry", this.mpBlogEntryService.findById(id));
-        return "updateEntry";
+        return "update/updateEntry";
     }
 
     @PostMapping("/{id}/updateEntry")
-    public String updateEntry(@ModelAttribute("MPBlogEntry") MPBlogEntry mpBlogEntry, @PathVariable int id) {
+    public String updateEntry(@ModelAttribute("MPBlogEntry") MPBlogEntry mpBlogEntry,
+                              @PathVariable int id) {
+
         this.mpBlogEntryService.updateTitle(id, mpBlogEntry.getTitle());
         this.mpBlogEntryService.updateContent(id, mpBlogEntry.getContent());
-        return "redirect:/listentries";
+        return "redirect:/listEntries";
     }
 }

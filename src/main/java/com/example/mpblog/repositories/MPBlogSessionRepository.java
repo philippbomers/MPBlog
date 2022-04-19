@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface MPBlogSessionRepository extends CrudRepository<MPBlogSession, String> {
+
     Optional<MPBlogSession> findById(String sessionId);
 
     Optional<MPBlogSession> findMPBlogUserById(String sessionId);

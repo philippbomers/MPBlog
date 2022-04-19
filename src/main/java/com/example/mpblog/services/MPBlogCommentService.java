@@ -16,8 +16,14 @@ public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentReposito
     }
 
     public List<MPBlogComment> getMPBlogComment() {
+
         List<MPBlogComment> result = this.mpBlogCommentRepository.findAll();
-        return result.stream().sorted(Comparator.comparing(MPBlogComment::getDate).reversed()).toList();
+
+        return result.
+                stream().
+                sorted(Comparator.comparing(MPBlogComment::getDate).
+                        reversed()).
+                toList();
     }
 
     public MPBlogComment getMPBlogComment(int id) {

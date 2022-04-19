@@ -18,7 +18,7 @@
                 </div>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-light"
-                       th:href="@{/{id}/updatepicture(id=${entry.id})}"
+                       th:href="@{/{id}/updatePicture(id=${entry.id})}"
                        th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                         Edit Picture
                     </a>
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<a class="button is-primary" th:href="@{/{id}/newcomment(id=${entry.id})}" th:if="${sessionUser != null}">
+<a class="button is-primary" th:href="@{/{id}/newComment(id=${entry.id})}" th:if="${sessionUser != null}">
     New Comment
 </a>
 

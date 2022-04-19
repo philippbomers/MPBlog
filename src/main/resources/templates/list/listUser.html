@@ -25,7 +25,7 @@
                             <span th:case="false">No</span>
                         </p>
                         <div th:if="${sessionUser != null && sessionUser != ''}">
-                            <a th:href="@{/switchAdminRights/{id}/listuser(id=*{mpBlogUser.id})}"
+                            <a th:href="@{/switchAdminRights/{id}/listUser(id=*{mpBlogUser.id})}"
                                th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
                             <span th:if="*{mpBlogUser.adminRights}">
                                 Demote

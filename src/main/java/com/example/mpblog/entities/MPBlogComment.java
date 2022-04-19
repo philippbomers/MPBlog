@@ -14,7 +14,7 @@ public class MPBlogComment {
     @GeneratedValue
     private int id;
 
-    @Length(min = 3)
+    @Length(min = 1, max = 65000)
     @Column(columnDefinition = "TEXT")
     private String userComment;
 
@@ -30,13 +30,8 @@ public class MPBlogComment {
     public MPBlogComment() {
     }
 
-
     public int getId() {
         return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUserComment() {
@@ -49,10 +44,6 @@ public class MPBlogComment {
 
     public Date getDate() {
         return this.date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getRealDate() {

@@ -21,48 +21,62 @@ public class MPBlogCommentController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogCommentController(
-            MPBlogCommentService mpBlogCommentService,
-            MPBlogEntryService mpBlogEntryService,
-            MPBlogSessionService mpBlogSessionService
-    ) {
+    public MPBlogCommentController(MPBlogCommentService mpBlogCommentService,
+                                   MPBlogEntryService mpBlogEntryService,
+                                   MPBlogSessionService mpBlogSessionService) {
+
         this.mpBlogCommentService = mpBlogCommentService;
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogSessionService = mpBlogSessionService;
     }
 
-    @GetMapping("/{id}/newcomment")
-    public String entryDetails(Model model, @PathVariable int id) {
+    @GetMapping("/{id}/newComment")
+    public String newComment(@PathVariable int id, Model model) {
+
         model.addAttribute("entryId", id);
         model.addAttribute("comment", new MPBlogComment());
-        return "newComment";
+        return "new/newComment";
     }
 
-    @PostMapping("/{id}/newcomment")
-    public String message(@CookieValue(name = "sessionId") String sessionId, @Valid @ModelAttribute("comment") MPBlogComment comment, BindingResult bindingResult, @PathVariable int id, Model model) {
+    @PostMapping("/{id}/newComment")
+    public String newCommentSubmit(@CookieValue(name = "sessionId") String sessionId,
+                                   @Valid @ModelAttribute("comment") MPBlogComment comment,
+                                   BindingResult bindingResult,
+                                   @PathVariable int id) {
+
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
-        if (bindingResult.hasErrors() || blogEntry.isEmpty() || mpBlogUser.isEmpty()) {
-            return "newComment";
+
+        if (bindingResult.hasErrors() ||
+                blogEntry.isEmpty() ||
+                mpBlogUser.isEmpty()) {
+            return "new/newComment";
         }
+
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogUser.get());
         this.mpBlogCommentService.save(comment);
-        model.addAttribute("entry", blogEntry.get());
-        return "redirect:/" + id + "/showentry";
+
+        return "redirect:/" + id + "/showEntry";
     }
 
     @GetMapping("/{id}/deleteComment")
-    public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
+    public String deleteComment(@CookieValue(value = "sessionId", defaultValue = "") String sessionId,
+                                @PathVariable int id) {
+
         MPBlogComment comment = this.mpBlogCommentService.findById(id);
+
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
-        if (optionalSession.isPresent() && (
-                comment.getMpBlogUser() == optionalSession.get().getMpBlogUser()) ||
+
+        if (optionalSession.isPresent() &&
+                (comment.getMpBlogUser() == optionalSession.get().getMpBlogUser()) ||
                 optionalSession.get().getMpBlogUser().isAdminRights()) {
-            int newID = comment.getMpBlogEntry().getId();
+
             this.mpBlogCommentService.delete(comment);
-            return "redirect:/" + newID + "/showentry";
+
+            return "redirect:/" + comment.getMpBlogEntry().getId() + "/showEntry";
         }
+
         throw new IllegalArgumentException("User is not authorized to delete this comment!");
     }
 }

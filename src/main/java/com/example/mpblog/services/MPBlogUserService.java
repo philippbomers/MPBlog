@@ -32,6 +32,7 @@ public record MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
     }
 
     public void changeUserAdminStatus(MPBlogUser mpBlogUser) {
+
         mpBlogUser.setAdminRights(!mpBlogUser.isAdminRights());
         this.mpBlogUserRepository.save(mpBlogUser);
     }

@@ -24,14 +24,16 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
     }
 
     public HashMap<Integer, String> mapTheShortContent(List<MPBlogEntry> entryList) {
-        HashMap<Integer, String> result = new HashMap<Integer, String>();
-        for (MPBlogEntry blogEntry : entryList) {
-            if (Objects.equals(blogEntry.getContent(), blogEntry.getShortContent())) {
-                result.put(blogEntry.getId(), blogEntry.getContent());
-            } else {
-                result.put(blogEntry.getId(), blogEntry.getShortContent() + " [...]");
-            }
-        }
+
+        HashMap<Integer, String> result = new HashMap<>();
+
+        entryList.forEach(blogEntry -> {
+            result.
+                    put(blogEntry.getId(), Objects.equals(blogEntry.getContent(), blogEntry.getShortContent()) ?
+                            blogEntry.getContent() :
+                            blogEntry.getShortContent() + " [...]");
+        });
+
         return result;
     }
 
@@ -56,7 +58,9 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
     }
 
     public void delete(MPBlogEntry entry) {
+
         this.mpBlogEntryRepository.delete(entry);
+
         File file = new File("src/main/resources/static/images/blogpost/blog_" + entry.getId() + ".jpeg");
         file.delete();
     }

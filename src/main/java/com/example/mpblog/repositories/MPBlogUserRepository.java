@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface MPBlogUserRepository extends CrudRepository<MPBlogUser, Integer> {
+
     List<MPBlogUser> findAll();
 
     MPBlogUser findById(int id);

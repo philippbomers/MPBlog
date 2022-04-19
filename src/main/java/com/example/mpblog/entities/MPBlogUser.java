@@ -38,9 +38,6 @@ public class MPBlogUser {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return this.userName;

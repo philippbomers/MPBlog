@@ -7,7 +7,7 @@
 <div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
         <h1 class="title">What do you think?</h1>
-        <form method="post" th:action="@{/{id}/newcomment(id=${entryId})}" th:object="${comment}">
+        <form method="post" th:action="@{/{id}/newComment(id=${entryId})}" th:object="${comment}">
             <div class="field">
                 <label class="label" for="inputarea">
                     Write a comment

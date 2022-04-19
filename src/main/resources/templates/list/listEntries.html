@@ -27,7 +27,7 @@
                 </div>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-light"
-                       th:href="@{/{id}/updatepicture(id=*{entry.id})}"
+                       th:href="@{/{id}/updatePicture(id=*{entry.id})}"
                        th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                         Edit Picture
                     </a>
@@ -39,7 +39,7 @@
                 </p>
                 <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
                 <p class="has-text-right">
-                    <a class="button is-primary" th:href="@{/{id}/showentry(id=*{entry.id})}">
+                    <a class="button is-primary" th:href="@{/{id}/showEntry(id=*{entry.id})}">
                         Show more
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">

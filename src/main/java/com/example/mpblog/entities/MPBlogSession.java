@@ -24,10 +24,6 @@ public class MPBlogSession {
         return this.id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public MPBlogUser getMpBlogUser() {
         return this.mpBlogUser;
     }

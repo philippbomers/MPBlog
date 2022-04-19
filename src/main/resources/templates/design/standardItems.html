@@ -56,12 +56,12 @@
     <div class="navbar-menu" id="navbar">
         <div class="navbar-start">
             <a class="navbar-item" th:href="@{/newEntry}" th:if="${sessionUser?.adminRights}">New Entry</a>
-            <a class="navbar-item" th:href="@{/listentries}">Blog</a>
-            <a class="navbar-item" th:href="@{/listuser}">Users</a>
+            <a class="navbar-item" th:href="@{/listEntries}">Blog</a>
+            <a class="navbar-item" th:href="@{/listUser}">Users</a>
         </div>
         <div class="navbar-end">
             <div class="buttons">
-                <a class="button is-warning navbar-item" th:href="@{/newuser}"
+                <a class="button is-warning navbar-item" th:href="@{/newUser}"
                    th:if="${sessionUser == null || sessionUser == ''}">
                     <strong>Sign up</strong>
                 </a>
@@ -69,15 +69,14 @@
                    th:if="${sessionUser == null || sessionUser == ''}">
                     <strong>Log in</strong>
                 </a>
-                <a class="button is-primary navbar-item" th:href="@{/showuser}"
+                <a class="button is-primary navbar-item" th:href="@{/showUser}"
                    th:if="${sessionUser != null && sessionUser != ''}">
                     <strong>Profile</strong>
                 </a>
-                <form method="post" th:action="@{/logout}" th:if="${sessionUser != null && sessionUser != ''}">
-                    <button class="button is-danger navbar-item" type="submit">
-                        <strong>Logout</strong>
-                    </button>
-                </form>
+                <a class="button is-danger navbar-item" th:href="@{/logout}"
+                        th:if="${sessionUser != null && sessionUser != ''}">
+                    <strong>Logout</strong>
+                </a>
             </div>
         </div>
     </div>
