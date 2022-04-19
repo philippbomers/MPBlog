@@ -34,4 +34,19 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
         return result;
     }
 
+    public void updateTitle(int id, String title) {
+        this.mpBlogEntryRepository.updateTitle(id, title);
+    }
+
+    public void updateContent(int id, String content) {
+        this.mpBlogEntryRepository.updateContent(id, content);
+    }
+
+    public List<MPBlogEntry> findAll() {
+        return this.mpBlogEntryRepository.findAll();
+    }
+
+    public void save(MPBlogEntry entry) {
+        this.mpBlogEntryRepository.save(entry);
+    }
 }

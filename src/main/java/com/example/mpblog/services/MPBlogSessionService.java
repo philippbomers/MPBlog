@@ -21,4 +21,8 @@ public record MPBlogSessionService(MPBlogSessionRepository mpBlogSessionReposito
     public Optional<MPBlogUser> findMPBlogUserById(String sessionId) {
         return this.findById(sessionId).map(MPBlogSession::getMpBlogUser);
     }
+
+    public void delete(MPBlogSession entry) {
+        this.mpBlogSessionRepository.delete(entry);
+    }
 }

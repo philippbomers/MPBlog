@@ -2,7 +2,6 @@ package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
-import com.example.mpblog.repositories.MPBlogSessionRepository;
 import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
@@ -21,12 +20,9 @@ public class MPBlogSessionController {
     private final MPBlogSessionService mpBlogSessionService;
     private final MPBlogUserService mpBlogUserService;
 
-    private final MPBlogSessionRepository mpBlogSessionRepository;
-
-    public MPBlogSessionController(MPBlogSessionService mpBlogSessionService, MPBlogUserService mpBlogUserService, MPBlogSessionRepository mpBlogSessionRepository) {
+    public MPBlogSessionController(MPBlogSessionService mpBlogSessionService, MPBlogUserService mpBlogUserService) {
         this.mpBlogSessionService = mpBlogSessionService;
         this.mpBlogUserService = mpBlogUserService;
-        this.mpBlogSessionRepository = mpBlogSessionRepository;
     }
 
     @GetMapping("/login")
@@ -57,7 +53,7 @@ public class MPBlogSessionController {
     @PostMapping("/logout")
     public String logout(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, HttpServletResponse response) {
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
-        optionalSession.ifPresent(this.mpBlogSessionRepository::delete);
+        optionalSession.ifPresent(this.mpBlogSessionService::delete);
         Cookie cookie = new Cookie("sessionId", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);

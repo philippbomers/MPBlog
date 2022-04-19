@@ -3,7 +3,6 @@ package com.example.mpblog.controllers;
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
-import com.example.mpblog.repositories.MPBlogEntryRepository;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import org.springframework.stereotype.Controller;
@@ -17,12 +16,10 @@ import java.util.Optional;
 @Controller
 public class MPBlogEntryController {
     private final MPBlogEntryService mpBlogEntryService;
-    private final MPBlogEntryRepository mpBlogEntryRepository;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogSessionService mpBlogSessionService) {
         this.mpBlogEntryService = mpBlogEntryService;
-        this.mpBlogEntryRepository = mpBlogEntryRepository;
         this.mpBlogSessionService = mpBlogSessionService;
     }
 
@@ -38,15 +35,18 @@ public class MPBlogEntryController {
         if (bindingResult.hasErrors() || mpBlogUser.isEmpty()) {
             return "new/newentry";
         }
-        entry.setMpBlogUser(mpBlogUser.get());
-        mpBlogEntryRepository.save(entry);
+        MPBlogEntry newEntry = new MPBlogEntry();
+        newEntry.setTitle(entry.getTitle());
+        newEntry.setContent(entry.getContent());
+        newEntry.setMpBlogUser(mpBlogUser.get());
+        this.mpBlogEntryService.save(newEntry);
         return "redirect:/listentries";
     }
 
     @GetMapping({"/listentries", "/"})
     public String showEntries(Model model) {
         model.addAttribute("entries", this.mpBlogEntryService.getMPBlogEntry());
-        model.addAttribute("shortEntries", mpBlogEntryService.mapTheShortContent(mpBlogEntryRepository.findAll()));
+        model.addAttribute("shortEntries", mpBlogEntryService.mapTheShortContent(this.mpBlogEntryService.findAll()));
         return "list/listentries";
     }
 
@@ -62,12 +62,12 @@ public class MPBlogEntryController {
 
     @GetMapping("/{id}/deleteEntry")
     public String delete(@CookieValue(value = "sessionId", defaultValue = "") String sessionId, @PathVariable int id) {
-        MPBlogEntry entry = mpBlogEntryRepository.findById(id);
+        Optional<MPBlogSession> entry = this.mpBlogSessionService.findById(String.valueOf(id));
         Optional<MPBlogSession> optionalSession = this.mpBlogSessionService.findById(sessionId);
         if (optionalSession.isPresent() &&
-                (entry.getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
+                (entry.get().getMpBlogUser() == optionalSession.get().getMpBlogUser() ||
                         optionalSession.get().getMpBlogUser().isAdminRights())) {
-            mpBlogEntryRepository.delete(entry);
+            this.mpBlogSessionService.delete(entry.get());
             return "redirect:/listentries";
         }
         throw new IllegalArgumentException("User is not authorized to delete this entry!");
@@ -75,15 +75,15 @@ public class MPBlogEntryController {
 
     @GetMapping("/{id}/editEntry")
     public String editEntryForm(Model model, @PathVariable int id) {
-        model.addAttribute("entry", mpBlogEntryRepository.findById(id));
+        model.addAttribute("entry", this.mpBlogSessionService.findById(String.valueOf(id)));
         return "update/updateentry";
     }
 
     @PostMapping("/{id}/editEntry")
     public String updateEntry(@ModelAttribute("MPBlogEntry") MPBlogEntry mpBlogEntry, @PathVariable int id) {
         //update entry in the database
-        mpBlogEntryRepository.updateTitle(id, mpBlogEntry.getTitle());
-        mpBlogEntryRepository.updateContent(id, mpBlogEntry.getContent());
+        this.mpBlogEntryService.updateTitle(id, mpBlogEntry.getTitle());
+        this.mpBlogEntryService.updateContent(id, mpBlogEntry.getContent());
         return "redirect:/listentries";
     }
     /*@PostMapping("/{id}/editEntry")

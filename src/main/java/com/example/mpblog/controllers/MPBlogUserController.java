@@ -50,5 +50,4 @@ public class MPBlogUserController {
     public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
         return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "show/showuser";
     }
-
 }

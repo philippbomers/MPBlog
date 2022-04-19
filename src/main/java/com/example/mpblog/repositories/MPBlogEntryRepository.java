@@ -20,10 +20,10 @@ public interface MPBlogEntryRepository extends CrudRepository<MPBlogEntry, Integ
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("UPDATE MPBlogEntry mpbe SET mpbe.title= :title WHERE mpbe.id = :entryId")
-    int updateTitle(@Param("entryId") int entryId, @Param("title") String title);
+    void updateTitle(@Param("entryId") int entryId, @Param("title") String title);
 
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("UPDATE MPBlogEntry mpbe SET mpbe.content= :content WHERE mpbe.id = :entryId")
-    int updateContent(@Param("entryId") int entryId, @Param("content") String content);
+    void updateContent(@Param("entryId") int entryId, @Param("content") String content);
 }

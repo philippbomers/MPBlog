@@ -31,4 +31,12 @@ public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentReposito
     public void save(MPBlogComment mpBlogComment) {
         mpBlogCommentRepository.save(mpBlogComment);
     }
+
+    public void delete(MPBlogComment comment) {
+        this.mpBlogCommentRepository.delete(comment);
+    }
+
+    public MPBlogComment findById(int id) {
+        return this.mpBlogCommentRepository.findById(id);
+    }
 }
