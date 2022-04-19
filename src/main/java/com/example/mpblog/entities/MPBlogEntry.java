@@ -93,7 +93,6 @@ public class MPBlogEntry {
     }
 
     public void setPicture(MultipartFile file) {
-        String rootLocation = System.getProperty("user.dir");
         Path destinationFile = Paths.get("src/main/resources/static/images/blogpost/blog_" + this.id + ".jpeg");
         try (InputStream inputStream = file.getInputStream()) {
             Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);

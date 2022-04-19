@@ -1,6 +1,7 @@
 package com.example.mpblog.services;
 
 import com.example.mpblog.entities.MPBlogEntry;
+import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +64,9 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
 
         File file = new File("src/main/resources/static/images/blogpost/blog_" + entry.getId() + ".jpeg");
         file.delete();
+    }
+
+    public int countByMpBlogUser(Optional<MPBlogUser> mpBlogUser) {
+        return this.mpBlogEntryRepository.countByMpBlogUser(mpBlogUser);
     }
 }

@@ -2,11 +2,13 @@ package com.example.mpblog.services;
 
 import com.example.mpblog.entities.MPBlogComment;
 import com.example.mpblog.entities.MPBlogEntry;
+import com.example.mpblog.entities.MPBlogUser;
 import com.example.mpblog.repositories.MPBlogCommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentRepository) {
@@ -44,5 +46,9 @@ public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentReposito
 
     public MPBlogComment findById(int id) {
         return this.mpBlogCommentRepository.findById(id);
+    }
+
+    public int countByMpBlogUser(Optional<MPBlogUser> mpBlogUser) {
+        return this.mpBlogCommentRepository.countByMpBlogUser(mpBlogUser);
     }
 }
