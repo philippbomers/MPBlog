@@ -7,7 +7,7 @@
 <h1 class="title">Update Picture</h1>
 <div th:if="${sessionUser != null && sessionUser != ''}">
     <div th:if="${sessionUser == entry.mpBlogUser || sessionUser.adminRights}">
-        <form enctype="multipart/form-data" method="post" th:action="@{/{id}/updatePicture(id=${entry.id})}">
+        <form enctype="multipart/form-data" method="post" th:action="@{/{id}/updatePicture(id=${entry.id})}" class="box">
             <div class="field">
                 <input accept="image/jpeg" id="picture" name="picture" type="file">
             </div>

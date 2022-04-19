@@ -10,7 +10,7 @@
         <p class="has-text-danger mb-4" th:if="${isInvalid}">
             Username and/or password are incorrect. Please try again or sign up.
         </p>
-        <form method="post" th:action="@{/login}" th:object="${login}">
+        <form method="post" th:action="@{/login}" th:object="${login}" class="box">
             <div class="field">
                 <label class="label" for="username">
                     Username

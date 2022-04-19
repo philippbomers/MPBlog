@@ -7,7 +7,7 @@
 <div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
         <h1 class="title">New Entry</h1>
-        <form method="post" th:action="@{/newEntry}" th:object="${entry}">
+        <form method="post" th:action="@{/newEntry}" th:object="${entry}" class="box">
             <div class="field">
                 <label class="label" for="title">
                     Insert title:
