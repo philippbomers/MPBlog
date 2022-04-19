@@ -1,19 +1,16 @@
 package com.example.mpblog.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class MBBlogCategory {
+public class MPBlogCategory {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private int id;
 
-    private MPBlogCategoryOption MPBlogCategoryOption;
+    private String name;
 
     @ManyToMany(mappedBy = "categories")
     private Set<MPBlogEntry> entries = new HashSet<>();
@@ -26,12 +23,12 @@ public class MBBlogCategory {
         this.id = id;
     }
 
-    public MPBlogCategoryOption getCategoryOption() {
-        return MPBlogCategoryOption;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryOption(MPBlogCategoryOption MPBlogCategoryOption) {
-        this.MPBlogCategoryOption = MPBlogCategoryOption;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<MPBlogEntry> getEntries() {

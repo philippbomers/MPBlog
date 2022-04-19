@@ -1,8 +1,10 @@
 package com.example.mpblog.controllers;
 
+import com.example.mpblog.entities.MPBlogCategory;
 import com.example.mpblog.entities.MPBlogEntry;
 import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.entities.MPBlogUser;
+import com.example.mpblog.services.MPBlogCategoryService;
 import com.example.mpblog.services.MPBlogEntryService;
 import com.example.mpblog.services.MPBlogSessionService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -14,22 +16,28 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.io.*;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class MPBlogEntryController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogSessionService mpBlogSessionService;
+    private final MPBlogCategoryService mpBlogCategoryService;
 
-    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogEntryController(MPBlogEntryService mpBlogEntryService, MPBlogSessionService mpBlogSessionService, MPBlogCategoryService mpBlogCategoryService) {
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogSessionService = mpBlogSessionService;
+        this.mpBlogCategoryService = mpBlogCategoryService;
     }
 
     @GetMapping("/newEntry")
     public String entry(Model model) {
-        model.addAttribute("entry", new MPBlogEntry());
+        MPBlogEntry mpBlogEntry = new MPBlogEntry();
+        mpBlogEntry.setCategories(Set.copyOf(this.mpBlogCategoryService.findAll()));
+        model.addAttribute("entry", mpBlogEntry);
         return "new/newentry";
     }
 
@@ -54,6 +62,7 @@ public class MPBlogEntryController {
         MPBlogEntry newEntry = new MPBlogEntry();
         newEntry.setTitle(entry.getTitle());
         newEntry.setContent(entry.getContent());
+        newEntry.setCategories(entry.getCategories());
         newEntry.setMpBlogUser(mpBlogUser.get());
         this.mpBlogEntryService.save(newEntry);
 

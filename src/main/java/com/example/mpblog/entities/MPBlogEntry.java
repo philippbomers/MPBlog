@@ -1,5 +1,6 @@
 package com.example.mpblog.entities;
 
+import jdk.jfr.Category;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -45,7 +46,11 @@ public class MPBlogEntry {
             joinColumns = { @JoinColumn(name = "entry_id") },
             inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
-    Set<MBBlogCategory> categories = new HashSet<>();
+    Set<MPBlogCategory> categories = new HashSet<>();
+    public void setCategory(MPBlogCategory mpBlogCategory) {
+        this.categories.clear();
+        categories.add(mpBlogCategory);
+    }
 
     public MPBlogEntry() {
     }
@@ -98,11 +103,12 @@ public class MPBlogEntry {
         return this.getMpBlogUser().getUserName();
     }
 
-    public Set<MBBlogCategory> getCategories() {
+    public Set<MPBlogCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<MBBlogCategory> categories) {
+    public void setCategories(Set<MPBlogCategory> categories) {
+        this.categories.clear();
         this.categories = categories;
     }
 

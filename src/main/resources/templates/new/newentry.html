@@ -15,16 +15,23 @@
                 <input class="input" id="title" th:field="*{title}" type="text">
                 <p class="is-danger" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
-            <div class="field" style="height: 60vh">
+            <div class="field" style="height: 40vh">
                 <label class="label" for="inputarea">
                     Insert your Entry:
                 </label>
-                <textarea class="textarea" id="inputarea" style="height: 90%" th:field="*{content}"></textarea>
+                <textarea class="textarea" id="inputarea" style="height: 70%" th:field="*{content}"></textarea>
                 <p class="is-danger" th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
+                <div>
+                    <label for="dropDownList">Choose a category:</label>
+                    <select class="form-control" id="dropDownList" multiple>
+                        <option th:each="category : *{categories}" th:value="${category}" th:text="${category.name}" th.field="*{category}"></option>
+                    </select>
+                </div>
                 <div class="field has-text-right mt-2">
                     <button class="button is-link" type="submit">Send</button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
