@@ -1,6 +1,7 @@
 package com.example.mpblog.repositories;
 
 import com.example.mpblog.entities.MPBlogEntry;
+import com.example.mpblog.entities.MPBlogUser;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MPBlogEntryRepository extends CrudRepository<MPBlogEntry, Integer> {
@@ -16,6 +18,8 @@ public interface MPBlogEntryRepository extends CrudRepository<MPBlogEntry, Integ
     List<MPBlogEntry> findAll();
 
     MPBlogEntry findById(int id);
+
+    int countByMpBlogUser(Optional<MPBlogUser> mpBlogUser);
 
     @Transactional
     @Modifying(clearAutomatically = true)

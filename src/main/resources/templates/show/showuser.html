@@ -8,6 +8,12 @@
 <p>
     Username: <span th:text="${sessionUser.userName}"></span>
 </p>
+<p>
+    Entries: <span th:text="${numberOfEntries}"></span>
+</p>
+<p>
+    Comments: <span th:text="${numberOfComments}"></span>
+</p>
 
 <footer th:insert="design/standarditems :: footer"></footer>
 </body>
