@@ -1,9 +1,6 @@
 package com.example.mpblog.controllers;
 
 import com.example.mpblog.entities.MPBlogUser;
-import com.example.mpblog.repositories.MPBlogCommentRepository;
-import com.example.mpblog.repositories.MPBlogEntryRepository;
-import com.example.mpblog.services.MPBlogSessionService;
 import com.example.mpblog.services.MPBlogUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +8,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class MPBlogUserController {
     private final MPBlogUserService mpBlogUserService;
-    private final MPBlogSessionService mpBlogSessionService;
-    private final MPBlogEntryRepository mpBlogEntryRepository;
-    private final MPBlogCommentRepository mpBlogCommentRepository;
 
-    public MPBlogUserController(MPBlogUserService mpBlogUserService, MPBlogSessionService mpBlogSessionService, MPBlogEntryRepository mpBlogEntryRepository, MPBlogCommentRepository mpBlogCommentRepository) {
+    public MPBlogUserController(MPBlogUserService mpBlogUserService) {
         this.mpBlogUserService = mpBlogUserService;
-        this.mpBlogSessionService = mpBlogSessionService;
-        this.mpBlogEntryRepository = mpBlogEntryRepository;
-        this.mpBlogCommentRepository = mpBlogCommentRepository;
     }
 
     @GetMapping("/newuser")
@@ -57,10 +47,7 @@ public class MPBlogUserController {
     }
 
     @GetMapping("/showuser")
-    public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
-        Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
-        model.addAttribute("numberOfEntries", mpBlogEntryRepository.countByMpBlogUser(mpBlogUser));
-        model.addAttribute("numberOfComments", mpBlogCommentRepository.countByMpBlogUser(mpBlogUser));
+    public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
         return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "show/showuser";
     }
 }
