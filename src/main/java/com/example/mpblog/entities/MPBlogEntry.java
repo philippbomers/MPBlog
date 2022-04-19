@@ -1,6 +1,5 @@
 package com.example.mpblog.entities;
 
-import jdk.jfr.Category;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
@@ -14,7 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MPBlogEntry {
@@ -39,18 +39,6 @@ public class MPBlogEntry {
     @OneToMany(mappedBy = "mpBlogEntry")
     @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<MPBlogComment> mpBlogComments;
-
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "Entry_Category",
-            joinColumns = { @JoinColumn(name = "entry_id") },
-            inverseJoinColumns = { @JoinColumn(name = "category_id") }
-    )
-    Set<MPBlogCategory> categories = new HashSet<>();
-    public void setCategory(MPBlogCategory mpBlogCategory) {
-        this.categories.clear();
-        categories.add(mpBlogCategory);
-    }
 
     public MPBlogEntry() {
     }
@@ -103,39 +91,22 @@ public class MPBlogEntry {
         return this.getMpBlogUser().getUserName();
     }
 
-    public Set<MPBlogCategory> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<MPBlogCategory> categories) {
-        this.categories.clear();
-        this.categories = categories;
-    }
-
-    public List<MPBlogComment> getMpBlogComments() {
-        return mpBlogComments.stream().sorted(Comparator.comparing(MPBlogComment::getDate)).toList();
-    }
-
-    public void setMpBlogComments(List<MPBlogComment> mpBlogComments) {
-        this.mpBlogComments = mpBlogComments;
-    }
-
     public String getShortContent() {
         String[] shortContentArray = content.split("(\r\n|\n)");
         return shortContentArray[0];
     }
 
+    public String getPicture() {
+        return "blog_" + this.id + ".jpeg";
+    }
+
     public void setPicture(MultipartFile file) {
         String rootLocation = System.getProperty("user.dir");
-        Path destinationFile = Paths.get("src/main/resources/static/images/blogpost/blog_"+ this.id +".jpeg");
+        Path destinationFile = Paths.get("src/main/resources/static/images/blogpost/blog_" + this.id + ".jpeg");
         try (InputStream inputStream = file.getInputStream()) {
             Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public String getPicture(){
-        return "blog_"+ this.id +".jpeg";
     }
 }

@@ -20,23 +20,23 @@ public class MPBlogUserController {
     @GetMapping("/newuser")
     public String registerDialog(@CookieValue(name = "sessionId", required = false) String sessionId, Model model) {
         model.addAttribute("mpBlogUser", new MPBlogUser());
-        return "new/newuser";
+        return "newUser";
     }
 
     @PostMapping("/newuser")
     public String register(@Valid @ModelAttribute("mpBlogUser") MPBlogUser mpBlogUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "new/newuser";
+            return "newUser";
         } else {
             this.mpBlogUserService.addMPBlogUser(mpBlogUser);
-            return "helpers/registersuccessfully";
+            return "registerSuccessfully";
         }
     }
 
     @GetMapping("/listuser")
     public String userList(Model model) {
         model.addAttribute("mpBlogUsers", this.mpBlogUserService.getMPBlogUsers());
-        return "list/listuser";
+        return "listUser";
     }
 
     @GetMapping("/switchAdminRights/{id}/listuser")
@@ -48,6 +48,6 @@ public class MPBlogUserController {
 
     @GetMapping("/showuser")
     public String userDetails(@CookieValue(name = "sessionId", required = false) String sessionId) {
-        return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "show/showuser";
+        return sessionId == null || sessionId.isEmpty() ? "redirect:/" : "showUser";
     }
 }

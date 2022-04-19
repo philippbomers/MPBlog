@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:insert="design/standarditems :: htmlhead"></head>
+<head th:insert="design/standardItems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
-<nav th:insert="design/standarditems :: navbar"></nav>
+<nav th:insert="design/standardItems :: navbar"></nav>
 
 <div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
@@ -21,12 +21,6 @@
                 </label>
                 <textarea class="textarea" id="inputarea" style="height: 70%" th:field="*{content}"></textarea>
                 <p class="is-danger" th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
-                <div>
-                    <label for="dropDownList">Choose a category:</label>
-                    <select class="form-control" id="dropDownList" multiple>
-                        <option th:each="category : *{categories}" th:value="${category}" th:text="${category.name}" th.field="*{category}"></option>
-                    </select>
-                </div>
                 <div class="field has-text-right mt-2">
                     <button class="button is-link" type="submit">Send</button>
                 </div>
@@ -43,6 +37,6 @@
     </p>
 </div>
 
-<footer th:insert="design/standarditems :: footer"></footer>
+<footer th:insert="design/standardItems :: footer"></footer>
 </body>
 </html>

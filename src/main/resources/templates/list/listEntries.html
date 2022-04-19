@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:insert="design/standarditems :: htmlhead"></head>
+<head th:insert="design/standardItems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
-<nav th:insert="design/standarditems :: navbar"></nav>
+<nav th:insert="design/standardItems :: navbar"></nav>
 
 <h1 class="title">Welcome
     <span th:if="${sessionUser != null && sessionUser != ''}">
@@ -22,10 +22,10 @@
             <article class="tile is-child">
                 <div class="columns is-centered">
                     <div class="column is-narrow is-6 is-5-desktop">
-                        <img th:src="@{/images/blogpost/{filename}(filename=*{entry.picture})}" alt="Blog Post Image">
+                        <img alt="Blog Post Image" th:src="@{/images/blogpost/{filename}(filename=*{entry.picture})}">
                     </div>
                 </div>
-                <div th:if="${sessionUser != null && sessionUser != ''}" class="has-text-right">
+                <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-light"
                        th:href="@{/{id}/updatepicture(id=*{entry.id})}"
                        th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
@@ -44,7 +44,7 @@
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning"
-                           th:href="@{/{id}/editEntry(id=*{entry.id})}"
+                           th:href="@{/{id}/updateEntry(id=*{entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                                 Edit Entry
                         </a>
@@ -60,6 +60,6 @@
     </div>
 </div>
 
-<footer th:insert="design/standarditems :: footer"></footer>
+<footer th:insert="design/standardItems :: footer"></footer>
 </body>
 </html>

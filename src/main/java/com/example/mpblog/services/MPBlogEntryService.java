@@ -1,7 +1,6 @@
 package com.example.mpblog.services;
 
 import com.example.mpblog.entities.MPBlogEntry;
-import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +57,7 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
 
     public void delete(MPBlogEntry entry) {
         this.mpBlogEntryRepository.delete(entry);
-        File file = new File("src/main/resources/static/images/blogpost/blog_"+ entry.getId() +".jpeg");
+        File file = new File("src/main/resources/static/images/blogpost/blog_" + entry.getId() + ".jpeg");
         file.delete();
     }
 }

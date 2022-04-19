@@ -21,7 +21,11 @@ public class MPBlogCommentController {
     private final MPBlogEntryService mpBlogEntryService;
     private final MPBlogSessionService mpBlogSessionService;
 
-    public MPBlogCommentController(MPBlogCommentService mpBlogCommentService, MPBlogEntryService mpBlogEntryService, MPBlogSessionService mpBlogSessionService) {
+    public MPBlogCommentController(
+            MPBlogCommentService mpBlogCommentService,
+            MPBlogEntryService mpBlogEntryService,
+            MPBlogSessionService mpBlogSessionService
+    ) {
         this.mpBlogCommentService = mpBlogCommentService;
         this.mpBlogEntryService = mpBlogEntryService;
         this.mpBlogSessionService = mpBlogSessionService;
@@ -31,7 +35,7 @@ public class MPBlogCommentController {
     public String entryDetails(Model model, @PathVariable int id) {
         model.addAttribute("entryId", id);
         model.addAttribute("comment", new MPBlogComment());
-        return "new/newcomment";
+        return "newComment";
     }
 
     @PostMapping("/{id}/newcomment")
@@ -39,7 +43,7 @@ public class MPBlogCommentController {
         Optional<MPBlogEntry> blogEntry = this.mpBlogEntryService.getMPBlogEntry(id);
         Optional<MPBlogUser> mpBlogUser = this.mpBlogSessionService.findMPBlogUserById(sessionId);
         if (bindingResult.hasErrors() || blogEntry.isEmpty() || mpBlogUser.isEmpty()) {
-            return "new/newcomment";
+            return "newComment";
         }
         comment.setMpBlogEntry(blogEntry.get());
         comment.setMpBlogUser(mpBlogUser.get());

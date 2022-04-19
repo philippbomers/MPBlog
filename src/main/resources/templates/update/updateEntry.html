@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head th:insert="design/standarditems :: htmlhead"></head>
+<head th:insert="design/standardItems :: htmlhead"></head>
 <body class="is-centered has-text-centered">
-<nav th:insert="design/standarditems :: navbar"></nav>
+<nav th:insert="design/standardItems :: navbar"></nav>
 
 <div th:if="${sessionUser != null && sessionUser != ''}">
     <div class="container">
         <h3 class="title">Entry Edit</h3>
-        <form method="post" th:action="@{/{id}/editEntry(id=*{id})}" th:object="${entry}">
+        <form method="post" th:action="@{/{id}/updateEntry(id=*{id})}" th:object="${entry}">
             <div class="field">
                 <label class="label" for="title">
                     Edit title:
@@ -33,6 +33,6 @@
     Please Login to edit entry!
 </div>
 
-<footer th:insert="design/standarditems :: footer"></footer>
+<footer th:insert="design/standardItems :: footer"></footer>
 </body>
 </html>
