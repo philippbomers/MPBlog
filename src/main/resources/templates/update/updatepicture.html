@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="design/standarditems :: htmlhead"></head>
+<body class="is-centered has-text-centered">
+<nav th:insert="design/standarditems :: navbar"></nav>
+
+<h1 class="title">Update Picture</h1>
+<div th:if="${sessionUser != null && sessionUser != ''}">
+  <div th:if="${sessionUser == entry.mpBlogUser || sessionUser.adminRights}">
+    <form method="post" th:action="@{/{id}/updatepicture(id=${entry.id})}" enctype="multipart/form-data">
+      <div class="field">
+        <input type="file" name="picture" accept="image/jpeg" id="picture">
+      </div>
+      <div class="field has-text-right mt-2">
+        <button class="button is-link" type="submit">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div th:if="${sessionUser == null || sessionUser == ''}">
+  <p class="has-text-danger">
+    You are not allowed to change the picture!
+  </p>
+</div>
+
+<footer th:insert="design/standarditems :: footer"></footer>
+</body>
+</html>

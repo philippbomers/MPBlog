@@ -1,6 +1,7 @@
 package com.example.mpblog.services;
 
 import com.example.mpblog.entities.MPBlogEntry;
+import com.example.mpblog.entities.MPBlogSession;
 import com.example.mpblog.repositories.MPBlogEntryRepository;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,13 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
 
     public void save(MPBlogEntry entry) {
         this.mpBlogEntryRepository.save(entry);
+    }
+
+    public MPBlogEntry findById(int id) {
+        return this.mpBlogEntryRepository.findById(id);
+    }
+
+    public void delete(MPBlogEntry entry) {
+        this.mpBlogEntryRepository.delete(entry);
     }
 }

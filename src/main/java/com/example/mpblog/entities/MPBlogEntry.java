@@ -3,14 +3,17 @@ package com.example.mpblog.entities;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class MPBlogEntry {
@@ -114,5 +117,19 @@ public class MPBlogEntry {
     public String getShortContent() {
         String[] shortContentArray = content.split("(\r\n|\n)");
         return shortContentArray[0];
+    }
+
+    public void setPicture(MultipartFile file) {
+        String rootLocation = System.getProperty("user.dir");
+        Path destinationFile = Paths.get("src/main/resources/static/images/blogpost/blog_"+ this.id +".jpeg");
+        try (InputStream inputStream = file.getInputStream()) {
+            Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getPicture(){
+        return "blog_"+ this.id +".jpeg";
     }
 }

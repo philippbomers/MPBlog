@@ -20,6 +20,18 @@
     <div class="tile is-vertical is-parent">
         <div class="is-child box" th:each="entry:${entries}">
             <article class="tile is-child">
+                <div class="columns is-centered">
+                    <div class="column is-narrow is-6 is-5-desktop">
+                        <img th:src="@{/images/blogpost/{filename}(filename=*{entry.picture})}" alt="Blog Post Image">
+                    </div>
+                </div>
+                <div th:if="${sessionUser != null && sessionUser != ''}" class="has-text-right">
+                    <a class="button is-light"
+                       th:href="@{/{id}/updatepicture(id=*{entry.id})}"
+                       th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
+                        Edit Picture
+                    </a>
+                </div>
                 <p class="title" th:text="*{entry.title}"></p>
                 <p class="subtitle">
                     <span th:text="*{entry.username}"></span>,&nbsp;
