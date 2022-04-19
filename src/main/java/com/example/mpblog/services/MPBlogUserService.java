@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class (record) for the user class.
+ *
+ * @param mpBlogUserRepository is used to access the necessary database queries for users
+ */
 @Service
 public record MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
 
@@ -31,6 +36,11 @@ public record MPBlogUserService(MPBlogUserRepository mpBlogUserRepository) {
         return this.mpBlogUserRepository.findByUserNameAndPassword(mpBlogUser.getUserName(), mpBlogUser.getPassword());
     }
 
+    /**
+     * Method to change the admin status of a certain user
+     *
+     * @param mpBlogUser takes the blog user as parameter
+     */
     public void changeUserAdminStatus(MPBlogUser mpBlogUser) {
         mpBlogUser.setAdminRights(!mpBlogUser.isAdminRights());
         this.mpBlogUserRepository.save(mpBlogUser);

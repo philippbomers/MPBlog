@@ -16,8 +16,8 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 /**
- * Controller class for comments.
- * Uses comment, entry and session services.
+ * Controller class for managing the comments
+ * Uses comment, entry and session services
  */
 @Controller
 public class MPBlogCommentController {

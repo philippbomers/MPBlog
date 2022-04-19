@@ -15,6 +15,10 @@ import javax.validation.Valid;
 import java.time.Instant;
 import java.util.Optional;
 
+/**
+ * Controller class for managing the sessions
+ * Uses the session and user services
+ */
 @Controller
 @ControllerAdvice
 public class MPBlogSessionController {
@@ -28,6 +32,12 @@ public class MPBlogSessionController {
         this.mpBlogUserService = mpBlogUserService;
     }
 
+    /**
+     * Getmapping method for the user login
+     *
+     * @param model used to transfer data from model to view through the controller
+     * @return to the login template by view
+     */
     @GetMapping("/login")
     public String login(Model model) {
 
@@ -35,6 +45,16 @@ public class MPBlogSessionController {
         return "helpers/login";
     }
 
+    /**
+     * Postmapping method for the user login
+     *
+     * @param mpBlogUser is the user, whose credentials are given through the login Getmapping
+     * @param bindingResult set of rules that the data should follow
+     * @param response HttpServletResponse object to save the cookie(session) information
+     * @param model used to transfer data from model to view through the controller
+     * @return to the homepage if all the conditions are met and login is successful,
+     *         to the login page otherwise.
+     */
     @PostMapping("/login")
     public String loginResult(@Valid @ModelAttribute("login") MPBlogUser mpBlogUser,
                               BindingResult bindingResult,
@@ -63,6 +83,13 @@ public class MPBlogSessionController {
         return "helpers/login";
     }
 
+    /**
+     * Getmapping method to end an ongoing session
+     *
+     * @param sessionId id of the current session
+     * @param response HttpServletResponse object to save the cookie(session) information
+     * @return to the homepage after deleting the current session and clearing the cookie
+     */
     @GetMapping("/logout")
     public String logout(@CookieValue(value = "sessionId", defaultValue = "") String sessionId,
                          HttpServletResponse response) {
@@ -78,7 +105,12 @@ public class MPBlogSessionController {
         return "redirect:/";
     }
 
-
+    /**
+     * Model attribute method to determine the current user through the session information
+     *
+     * @param sessionId id of the current session
+     * @return the user of the current session, if the user exists, null otherwise
+     */
     @ModelAttribute("sessionUser")
     public MPBlogUser sessionUser(@CookieValue(value = "sessionId", defaultValue = "") String sessionId) {
 

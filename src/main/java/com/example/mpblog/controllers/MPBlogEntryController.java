@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 /**
- * Controller class for entries.
- * Uses entry and session services.
+ * Controller class for managing the entries
+ * Uses entry and session services
  */
 @Controller
 public class MPBlogEntryController {

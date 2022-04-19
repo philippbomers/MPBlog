@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for the comment class.
+ * Responsible for query methods that are required and used through comment service
+ */
 @Repository
 public interface MPBlogCommentRepository extends CrudRepository<MPBlogComment, Integer> {
 

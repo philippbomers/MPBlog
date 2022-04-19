@@ -6,6 +6,10 @@ import javax.persistence.ManyToOne;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Entity class that holds the sessions, their relation with other entity classes and their binding conditions
+ * The class is only responsible for standard getter and setter methods
+ */
 @Entity
 public class MPBlogSession {
 

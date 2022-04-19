@@ -10,6 +10,10 @@ import javax.persistence.OneToMany;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Entity class that holds the users, their relation with other entity classes and their binding conditions
+ * The class is only responsible for standard getter and setter methods
+ */
 @Entity
 public class MPBlogUser {
 

@@ -16,6 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Entity class that holds the entries, their relation with other entity classes and their binding conditions
+ * The class is only responsible for standard getter and setter methods
+ */
 @Entity
 public class MPBlogEntry {
 

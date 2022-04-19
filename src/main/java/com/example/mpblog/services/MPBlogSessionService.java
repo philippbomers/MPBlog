@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service class (record) for the session class.
+ *
+ * @param mpBlogSessionRepository is used to access the necessary database queries for sessions
+ */
 @Service
 public record MPBlogSessionService(MPBlogSessionRepository mpBlogSessionRepository) {
 

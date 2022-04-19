@@ -7,6 +7,10 @@ import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Entity class that holds the comments, their relation with other entity classes and their binding conditions
+ * The class is only responsible for standard getter and setter methods
+ */
 @Entity
 public class MPBlogComment {
 
