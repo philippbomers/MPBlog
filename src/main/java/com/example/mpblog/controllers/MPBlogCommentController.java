@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+/**
+ * Controller class for comments.
+ * Uses comment, entry and session services.
+ */
 @Controller
 public class MPBlogCommentController {
     private final MPBlogCommentService mpBlogCommentService;
@@ -30,6 +34,14 @@ public class MPBlogCommentController {
         this.mpBlogSessionService = mpBlogSessionService;
     }
 
+    /**
+     * GetMapping method to call the html data that is responsible for creating a new comment
+     *
+     *@param id path variable regarding the entry that the comment belongs to
+     *@param model used to transfer data from model to view through the controller
+     *
+     * @return directory pad of the regarding html data
+     */
     @GetMapping("/{id}/newComment")
     public String newComment(@PathVariable int id, Model model) {
 
@@ -38,7 +50,17 @@ public class MPBlogCommentController {
         return "new/newComment";
     }
 
-    @PostMapping("/{id}/newComment")
+    /**
+     * Postmapping method to check the user input through the comment creation template
+     * Checks the user input and creates a new comment when the conditions are met
+     *
+     * @param sessionId id of the current session
+     * @param comment the comment created through get mapping
+     * @param bindingResult set of rules that the data should follow
+     * @param id path variable regarding the entry that the comment belongs to
+     * @return to the comment form, when the conditions are not met, to the related entry when the comment is
+     * successfully created
+     */
     public String newCommentSubmit(@CookieValue(name = "sessionId") String sessionId,
                                    @Valid @ModelAttribute("comment") MPBlogComment comment,
                                    BindingResult bindingResult,
@@ -60,6 +82,13 @@ public class MPBlogCommentController {
         return "redirect:/" + id + "/showEntry";
     }
 
+    /**
+     * Getmapping method to delete a certain comment
+     *
+     * @param sessionId id of the current session
+     * @param id the id of the comment to be deleted
+     * @return to the entry that the comment once belonged to
+     */
     @GetMapping("/{id}/deleteComment")
     public String deleteComment(@CookieValue(value = "sessionId", defaultValue = "") String sessionId,
                                 @PathVariable int id) {
