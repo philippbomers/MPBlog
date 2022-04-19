@@ -27,10 +27,10 @@
                         <div th:if="${sessionUser != null && sessionUser != ''}">
                             <a th:href="@{/switchAdminRights/{id}/listUser(id=*{mpBlogUser.id})}"
                                th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
-                            <span th:if="*{mpBlogUser.adminRights}">
+                            <span class="has-text-danger" th:if="*{mpBlogUser.adminRights}">
                                 Demote
                             </span>
-                                <span th:if="*{!mpBlogUser.adminRights}">
+                                <span class="has-text-success" th:if="*{!mpBlogUser.adminRights}">
                                 Promote
                             </span>
                             </a>
