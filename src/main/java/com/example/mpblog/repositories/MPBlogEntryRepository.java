@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for the entry class.
+ * Responsible for query methods that are required and used through entry service
+ */
 @Repository
 public interface MPBlogEntryRepository extends CrudRepository<MPBlogEntry, Integer> {
 

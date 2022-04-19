@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for the user class.
+ * Responsible for query methods that are required and used through user service
+ */
 @Repository
 public interface MPBlogUserRepository extends CrudRepository<MPBlogUser, Integer> {
 

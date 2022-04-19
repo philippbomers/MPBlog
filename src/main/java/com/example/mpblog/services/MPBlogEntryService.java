@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Service class (record) for the entry class.
+ *
+ * @param mpBlogEntryRepository is used to access the necessary database queries for entries
+ */
 @Service
 public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
 
@@ -15,6 +20,11 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
         this.mpBlogEntryRepository.save(mpBlogEntry);
     }
 
+    /**
+     * Modified version of the get method for entries. Ensures that entries are sorted in reverse order
+     * with respect to their creation date
+     * @return the reversed list of all entries in database
+     */
     public List<MPBlogEntry> getMPBlogEntry() {
         List<MPBlogEntry> result = this.mpBlogEntryRepository.findAll();
         return result.stream().sorted(Comparator.comparing(MPBlogEntry::getDate).reversed()).toList();
@@ -24,6 +34,13 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
         return this.mpBlogEntryRepository.findById(id);
     }
 
+    /**
+     * Method to create a map of short versions of the entry contents to be used in list views, mapped by entry id.
+     *
+     * @param entryList the list of entries to be processed
+     * @return a hash map of content indexed through entry ids. If the original text consists of only one paragraph,
+     * it would not be shortened and will be kept as it is.
+     */
     public HashMap<Integer, String> mapTheShortContent(List<MPBlogEntry> entryList) {
 
         HashMap<Integer, String> result = new HashMap<>();
@@ -66,6 +83,11 @@ public record MPBlogEntryService(MPBlogEntryRepository mpBlogEntryRepository) {
         file.delete();
     }
 
+    /**
+     * Method returns the number of entries written by a certain user
+     * @param mpBlogUser the user is taken as query parameter
+     * @return total number of entries of the user
+     */
     public int countByMpBlogUser(Optional<MPBlogUser> mpBlogUser) {
         return this.mpBlogEntryRepository.countByMpBlogUser(mpBlogUser);
     }

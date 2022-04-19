@@ -10,6 +10,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class (record) for the comment class.
+ *
+ * @param mpBlogCommentRepository is used to access the necessary database queries for comments
+ */
 @Service
 public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentRepository) {
 
@@ -17,6 +22,11 @@ public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentReposito
         this.mpBlogCommentRepository.save(mpBlogComment);
     }
 
+    /**
+     * Modified version of the get method for comments. Ensures that comments are sorted in reverse order
+     * with respect to their creation date
+     * @return the reversed list of all comments in database
+     */
     public List<MPBlogComment> getMPBlogComment() {
 
         List<MPBlogComment> result = this.mpBlogCommentRepository.findAll();
@@ -48,6 +58,11 @@ public record MPBlogCommentService(MPBlogCommentRepository mpBlogCommentReposito
         return this.mpBlogCommentRepository.findById(id);
     }
 
+    /**
+     * Method returns the number of comments written by a certain user
+     * @param mpBlogUser the user is taken as query parameter
+     * @return total number of comments of the user
+     */
     public int countByMpBlogUser(Optional<MPBlogUser> mpBlogUser) {
         return this.mpBlogCommentRepository.countByMpBlogUser(mpBlogUser);
     }
