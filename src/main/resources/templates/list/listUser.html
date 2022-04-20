@@ -5,7 +5,7 @@
 <nav th:insert="design/standardItems :: navbar"></nav>
 
 
-<div class="card modal-card">
+<div class="card modal-card ">
     <h1 class="title">Users</h1>
     <table class="table">
         <tr>
@@ -20,20 +20,25 @@
             <td th:text="*{mpBlogUser.userName}"></td>
             <td>
                 <p th:switch="*{mpBlogUser.adminRights}">
-                    <span th:case="true">Yes</span>
-                    <span th:case="false">No</span>
-                </p>
-                <div th:if="${sessionUser != null && sessionUser != ''}">
+                    <span class="mr-2" th:case="true">Yes</span>
+                    <span class="mr-2" th:case="false">No</span>
+
+                <span th:if="${sessionUser != null && sessionUser != ''}">
                     <a th:href="@{/switchAdminRights/{id}/listUser(id=*{mpBlogUser.id})}"
                        th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
-                            <span class="has-text-danger" th:if="*{mpBlogUser.adminRights}">
-                                Demote
+                            <span class="button is-danger is-small" th:if="*{mpBlogUser.adminRights}">
+                                <span class="icon is-small">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </span>
                             </span>
-                        <span class="has-text-success" th:if="*{!mpBlogUser.adminRights}">
-                                Promote
+                        <span class="button is-success is-small" th:if="*{!mpBlogUser.adminRights}">
+                                <span class="icon is-small">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </span>
                             </span>
                     </a>
-                </div>
+                </span>
+                </p>
             </td>
         </tr>
     </table>
