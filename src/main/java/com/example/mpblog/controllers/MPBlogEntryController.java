@@ -145,7 +145,7 @@ public class MPBlogEntryController {
      * @param model used to transfer data from model to view through the controller
      * @return the data containing the information to the homepage with the list of entries, latest shown first.
      */
-    @GetMapping({"/listEntries", "/"})
+    @GetMapping({"/listEntries", "/", "/listentries"})
     public String listEntries(Model model) {
 
         model.addAttribute("entries",

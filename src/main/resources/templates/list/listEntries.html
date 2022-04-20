@@ -15,17 +15,16 @@
     </h1>
 </div>
 
-
-<div class="has-text-right mr-6" th:if="${sessionUser?.adminRights}">
-    <a class="button has-background-info has-text-white" th:href="@{/newEntry}">
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
+    <div class="tile is-vertical is-parent">
+        <div class="has-text-right mb-3" th:if="${sessionUser?.adminRights}">
+            <a class="button has-background-info has-text-white" th:href="@{/newEntry}">
         <span class="icon is-small">
             <i class="fas fa-blog"></i>
         </span>
-        <span>Create</span>
-    </a>
-</div>
-<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
-    <div class="tile is-vertical is-parent">
+                <span>Create</span>
+            </a>
+        </div>
         <div class="is-child box" th:each="entry:${entries}">
             <article class="tile is-child">
                 <div class="columns is-centered">
@@ -40,7 +39,7 @@
                             <span class="icon is-small">
                                 <i class="fas fa-images"></i>
                             </span>
-                        <span>Edit Image</span>
+                        <span class="is-hidden-mobile">Edit Image</span>
                     </a>
                 </div>
                 <p class="title" th:text="*{entry.title}"></p>
@@ -49,12 +48,12 @@
                     <span th:text="*{entry.realDate}"></span>
                 </p>
                 <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
-                <p class="has-text-right">
+                <p class="has-text-right has-text-centered-mobile">
                     <a class="button is-primary" th:href="@{/{id}/showEntry(id=*{entry.id})}">
                         <span class="icon is-small">
                             <i class="fas fa-info"></i>
                         </span>
-                        <span>More</span>
+                        <span class="is-hidden-mobile">More</span>
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning"
@@ -63,7 +62,7 @@
                                 <span class="icon is-small">
                                     <i class="fas fa-pen"></i>
                                 </span>
-                                <span>Edit</span>
+                                <span class="is-hidden-mobile">Edit</span>
                         </a>
                         <a class="button is-danger"
                            th:href="@{/{id}/deleteEntry(id=*{entry.id})}"
@@ -71,7 +70,7 @@
                             <span class="icon is-small">
                                 <i class="fas fa-trash"></i>
                             </span>
-                            <span>Delete</span>
+                            <span class="is-hidden-mobile">Delete</span>
                         </a>
                     </span>
                 </p>

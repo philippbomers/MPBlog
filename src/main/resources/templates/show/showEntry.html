@@ -31,9 +31,9 @@
                     <b th:text="*{entry.mpBlogUser.userName}"></b>
                 </p>
                 <p class="card-content" style="white-space: pre-line" th:text="${entry.content}"></p>
-                <p class="has-text-right">
+                <p class="has-text-right has-text-centered-mobile">
                     <span th:if="${sessionUser != null && sessionUser != ''}">
-                        <a class="button is-warning"
+                        <a class="button is-warning is-small-mobile"
                            th:href="@{/{id}/updateEntry(id=${entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
                             <span class="icon is-small">
