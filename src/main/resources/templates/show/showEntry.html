@@ -30,7 +30,7 @@
                     <span class="are-small" th:text="*{entry.realDate}"></span><br>
                     <b th:text="*{entry.mpBlogUser.userName}"></b>
                 </p>
-                <p class="card-content" style="white-space: pre-line" th:text="${entry.content}"></p>
+                <p class="card-content has-text-justified" style="white-space: pre-line" th:text="${entry.content}"></p>
                 <p class="has-text-right has-text-centered-mobile">
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning is-small-mobile"
@@ -65,7 +65,7 @@
                     <span class="are-small" th:text="*{comment.realDate}"></span><br>
                     <b th:text="*{comment.mpBlogUser.userName}"></b>
                 </p>
-                <p class="card-content" th:text="*{comment.userComment}"></p>
+                <p class="card-content has-text-justified" th:text="*{comment.userComment}"></p>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-danger" th:href="@{/{id}/deleteComment(id=*{comment.id})}"
                        th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">

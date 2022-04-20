@@ -15,7 +15,7 @@
     </h1>
 </div>
 
-<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
+<div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-2">
     <div class="tile is-vertical is-parent">
         <div class="has-text-right mb-3" th:if="${sessionUser?.adminRights}">
             <a class="button has-background-info has-text-white" th:href="@{/newEntry}">
@@ -47,7 +47,7 @@
                     <span th:text="*{entry.username}"></span>,&nbsp;
                     <span th:text="*{entry.realDate}"></span>
                 </p>
-                <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
+                <p class="card-content has-text-justified" th:text="*{shortEntries.get(entry.id)}"></p>
                 <p class="has-text-right has-text-centered-mobile">
                     <a class="button is-primary" th:href="@{/{id}/showEntry(id=*{entry.id})}">
                         <span class="icon is-small">

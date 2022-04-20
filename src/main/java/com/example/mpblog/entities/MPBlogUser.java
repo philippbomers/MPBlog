@@ -27,7 +27,7 @@ public class MPBlogUser {
     @BooleanFlag
     private boolean adminRights;
 
-    @Length(min = 3, max = 30)
+    @Length(min = 6, max = 30)
     private String password;
 
     @OneToMany(mappedBy = "mpBlogUser")
