@@ -108,7 +108,6 @@ public class MPBlogEntryController {
      * @param model used to transfer data from model to view through the controller
      * @return to the regarding html data when the conditions are met, if not back to the entry detail page
      */
-
     @GetMapping("/{id}/updatePicture")
     public String updatePicture(@PathVariable int id,
                                 Model model) {
