@@ -5,19 +5,19 @@
 <nav th:insert="design/standardItems :: navbar"></nav>
 
 <div th:if="${sessionUser != null && sessionUser != ''}">
-    <div class="container">
-        <h1 class="title">New Entry</h1>
-        <form method="post" th:action="@{/newEntry}" th:object="${entry}" class="box">
+    <div class="card modal-card">
+        <h1 class="title">Another Blog Post</h1>
+        <form class="box" method="post" th:action="@{/newEntry}" th:object="${entry}">
             <div class="field">
                 <label class="label" for="title">
-                    Insert title:
+                    Title:
                 </label>
                 <input class="input" id="title" th:field="*{title}" type="text">
                 <p class="has-text-danger" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
             </div>
             <div class="field" style="height: 40vh">
                 <label class="label" for="inputarea">
-                    Insert your Entry:
+                    Content:
                 </label>
                 <textarea class="textarea" id="inputarea" style="height: 70%" th:field="*{content}"></textarea>
                 <p class="has-text-danger" th:errors="*{content}" th:if="${#fields.hasErrors('content')}"></p>
@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div th:if="${sessionUser == null || sessionUser == ''}">
+<div class="card modal-card" th:if="${sessionUser == null || sessionUser == ''}">
     <h1 class="title">Stop!</h1>
     <p>
         Please Login to add a new entry!

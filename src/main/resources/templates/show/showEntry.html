@@ -4,12 +4,12 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">
-    Our Blogpost
-</h1>
 <div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left">
     <div class="tile is-vertical is-parent">
         <div class="is-child box">
+            <div class="has-text-centered">
+                <h1 class="title" th:text="${entry.title}"></h1><br>
+            </div>
             <article class="tile is-child">
                 <div class="columns is-centered">
                     <div class="column is-narrow is-6 is-5-desktop">
@@ -17,16 +17,18 @@
                     </div>
                 </div>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
-                    <a class="button is-light"
+                    <a class="button is-link is-light"
                        th:href="@{/{id}/updatePicture(id=${entry.id})}"
                        th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                        Edit Picture
+                        <span class="icon is-small">
+                            <i class="fas fa-images"></i>
+                        </span>
+                        <span>Edit Image</span>
                     </a>
                 </div>
-                <p class="title" th:text="${entry.title}"></p>
                 <p class="subtitle">
-                    <span th:text="${entry.username}"></span>,&nbsp;
-                    <span th:text="${entry.realDate}"></span>
+                    <span class="are-small" th:text="*{entry.realDate}"></span><br>
+                    <b th:text="*{entry.mpBlogUser.userName}"></b>
                 </p>
                 <p class="card-content" style="white-space: pre-line" th:text="${entry.content}"></p>
                 <p class="has-text-right">
@@ -34,12 +36,18 @@
                         <a class="button is-warning"
                            th:href="@{/{id}/updateEntry(id=${entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                                Edit Entry
+                            <span class="icon is-small">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                            <span>Edit</span>
                         </a>
                         <a class="button is-danger"
                            th:href="@{/{id}/deleteEntry(id=${entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                            Delete
+                            <span class="icon is-small">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span>Delete</span>
                         </a>
                     </span>
                 </p>
@@ -54,14 +62,17 @@
         <div class="is-child box" th:each="comment:${entry.mpBlogComments}">
             <article class="tile is-child">
                 <p class="subtitle">
-                    <span th:text="*{comment.mpBlogUser.userName}"></span>,
-                    <span th:text="*{comment.realDate}"></span>
+                    <span class="are-small" th:text="*{comment.realDate}"></span><br>
+                    <b th:text="*{comment.mpBlogUser.userName}"></b>
                 </p>
                 <p class="card-content" th:text="*{comment.userComment}"></p>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
                     <a class="button is-danger" th:href="@{/{id}/deleteComment(id=*{comment.id})}"
                        th:if="${sessionUser == comment.mpBlogUser or sessionUser.adminRights}">
-                        Delete Comment
+                        <span class="icon is-small">
+                            <i class="fas fa-comment-slash"></i>
+                        </span>
+                        <span>Delete</span>
                     </a>
                 </div>
             </article>
@@ -69,7 +80,10 @@
     </div>
 </div>
 <a class="button is-primary" th:href="@{/{id}/newComment(id=${entry.id})}" th:if="${sessionUser != null}">
-    New Comment
+    <span class="icon is-small">
+        <i class="fas fa-comment-dots"></i>
+    </span>
+    <span> What Do You Think?</span>
 </a>
 
 <footer th:insert="design/standardItems :: footer"></footer>

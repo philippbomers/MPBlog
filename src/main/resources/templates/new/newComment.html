@@ -5,9 +5,9 @@
 <nav th:insert="design/standardItems :: navbar"></nav>
 
 <div th:if="${sessionUser != null && sessionUser != ''}">
-    <div class="container">
+    <div class="card modal-card">
         <h1 class="title">What do you think?</h1>
-        <form method="post" th:action="@{/{id}/newComment(id=${entryId})}" th:object="${comment}" class="box">
+        <form class="box" method="post" th:action="@{/{id}/newComment(id=${entryId})}" th:object="${comment}">
             <div class="field">
                 <label class="label" for="input-area">
                     Write a comment
@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<div th:if="${sessionUser == null || sessionUser == ''}">
+<div class="card modal-card" th:if="${sessionUser == null || sessionUser == ''}">
     <h1 class="title">Stop!</h1>
     <p>
         Please Login to add a new comment!

@@ -4,10 +4,15 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">Success</h1>
-<p class="has-text-success">
-    You successfully registered the new User. You now can log in.
-</p>
+<div class="card modal-card">
+    <h1 class="title">Success</h1>
+    <p class="has-text-success">
+    <span class="icon">
+        <i class="fas fa-circle-check"></i>
+    </span>
+        <span> You successfully registered the new User. You now can log in.</span>
+    </p>
+</div>
 
 <footer th:insert="design/standardItems :: footer"></footer>
 </body>

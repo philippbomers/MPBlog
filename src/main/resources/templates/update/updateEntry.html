@@ -5,9 +5,9 @@
 <nav th:insert="design/standardItems :: navbar"></nav>
 
 <div th:if="${sessionUser != null && sessionUser != ''}">
-    <div class="container">
-        <h3 class="title">Entry Edit</h3>
-        <form method="post" th:action="@{/{id}/updateEntry(id=*{id})}" th:object="${entry}" class="box">
+    <div class="card modal-card p-6">
+        <h1 class="title">Entry Edit</h1>
+        <form class="content" method="post" th:action="@{/{id}/updateEntry(id=*{id})}" th:object="${entry}">
             <div class="field">
                 <label class="label" for="title">
                     Edit title:

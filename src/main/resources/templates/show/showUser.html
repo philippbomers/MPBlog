@@ -4,16 +4,20 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">User Details</h1>
-<p>
-    Username: <span th:text="${sessionUser.userName}"></span>
-</p>
-<p>
-    Entries: <span th:text="${numberOfEntries}"></span>
-</p>
-<p>
-    Comments: <span th:text="${numberOfComments}"></span>
-</p>
+
+<div class="card modal-card p-4">
+    <h1 class="title">User Details</h1>
+    <p>
+    <h2 class="subtitle">
+        <span th:text="${sessionUser.userName}"></span>
+    </h2>
+    <p>
+        Entries: <span th:text="${numberOfEntries}"></span>
+    </p>
+    <p>
+        Comments: <span th:text="${numberOfComments}"></span>
+    </p>
+</div>
 
 <footer th:insert="design/standardItems :: footer"></footer>
 </body>

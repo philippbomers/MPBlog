@@ -17,6 +17,7 @@
             }
         });
     </script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/45ffc1acae.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" rel="stylesheet">
     <link rel="icon" th:href="@{/images/logo.png}" type="image/png">
     <style>
@@ -55,27 +56,62 @@
     </div>
     <div class="navbar-menu" id="navbar">
         <div class="navbar-start">
-            <a class="navbar-item" th:href="@{/newEntry}" th:if="${sessionUser?.adminRights}">New Entry</a>
-            <a class="navbar-item" th:href="@{/listEntries}">Blog</a>
-            <a class="navbar-item" th:href="@{/listUser}">Users</a>
+            <a class="navbar-item" th:href="@{/newEntry}" th:if="${sessionUser?.adminRights}">
+                <span class="icon">
+                    <i class="fas fa-blog"></i>
+                </span>
+                <span> New</span>
+            </a>
+            <a class="navbar-item" th:href="@{/listEntries}">
+                <span class="icon">
+                    <i class="fas fa-glasses"></i>
+                </span>
+                <span> Blog</span>
+            </a>
+            <a class="navbar-item" th:href="@{/listUser}">
+                <span class="icon">
+                    <i class="fas fa-users"></i>
+                </span>
+                <span> Users</span>
+            </a>
         </div>
         <div class="navbar-end">
             <div class="buttons">
                 <a class="button is-warning navbar-item" th:href="@{/newUser}"
                    th:if="${sessionUser == null || sessionUser == ''}">
-                    <strong>Sign up</strong>
+                    <strong>
+                        <span class="icon is-small">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                        <span> Register</span>
+                    </strong>
                 </a>
                 <a class="button is-success navbar-item" th:href="@{/login}"
                    th:if="${sessionUser == null || sessionUser == ''}">
-                    <strong>Log in</strong>
+                    <strong>
+                        <span class="icon">
+                            <i class="fas fa-arrow-right-to-bracket"></i>
+                        </span>
+                        <span> LogIn</span>
+                    </strong>
                 </a>
                 <a class="button is-primary navbar-item" th:href="@{/showUser}"
                    th:if="${sessionUser != null && sessionUser != ''}">
-                    <strong>Profile</strong>
+                    <strong>
+                        <span class="icon">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <span> Profile</span>
+                    </strong>
                 </a>
                 <a class="button is-danger navbar-item" th:href="@{/logout}"
-                        th:if="${sessionUser != null && sessionUser != ''}">
-                    <strong>Logout</strong>
+                   th:if="${sessionUser != null && sessionUser != ''}">
+                    <strong>
+                        <span class="icon">
+                            <i class="fas fa-arrow-right-from-bracket"></i>
+                        </span>
+                        <span> Logout</span>
+                    </strong>
                 </a>
             </div>
         </div>
@@ -85,7 +121,12 @@
 <footer class="footer p-5" th:fragment="footer">
     <div class="content has-text-centered">
         <p>
-            <strong>MP BLOG</strong>
+            <span class="icon">
+                <i class="fas fa-hand-holding-heart"></i>
+            </span>
+            <span>
+                <strong> MP-BLOG</strong>
+            </span>
         </p>
         <p>
             by <a href="https://github.com/philippbomers">Philipp Bomers</a>

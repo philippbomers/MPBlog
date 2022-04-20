@@ -4,24 +4,27 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">Update Picture</h1>
-<div th:if="${sessionUser != null && sessionUser != ''}">
-    <div th:if="${sessionUser == entry.mpBlogUser || sessionUser.adminRights}">
-        <form enctype="multipart/form-data" method="post" th:action="@{/{id}/updatePicture(id=${entry.id})}" class="box">
-            <div class="field">
-                <input accept="image/jpeg" id="picture" name="picture" type="file">
-            </div>
-            <div class="field mt-6">
-                <button class="button is-link" type="submit">Upload</button>
-            </div>
-        </form>
+<div class="card modal-card">
+    <h1 class="title">Select a new Image</h1>
+    <div th:if="${sessionUser != null && sessionUser != ''}">
+        <div th:if="${sessionUser == entry.mpBlogUser || sessionUser.adminRights}">
+            <form class="box" enctype="multipart/form-data" method="post"
+                  th:action="@{/{id}/updatePicture(id=${entry.id})}">
+                <div class="field">
+                    <input accept="image/jpeg" id="picture" name="picture" type="file">
+                </div>
+                <div class="field mt-6">
+                    <button class="button is-link" type="submit">Upload</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div th:if="${sessionUser == null || sessionUser == ''}">
-    <p class="has-text-danger">
-        You are not allowed to change the picture!
-    </p>
+    <div th:if="${sessionUser == null || sessionUser == ''}">
+        <p class="has-text-danger">
+            You are not allowed to change the picture!
+        </p>
+    </div>
 </div>
 
 <footer th:insert="design/standardItems :: footer"></footer>

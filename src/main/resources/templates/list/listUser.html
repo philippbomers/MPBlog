@@ -4,42 +4,39 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">Users</h1>
-<div class="section">
-    <div class="columns is-centered">
-        <div class="column is-narrow">
-            <table class="table">
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Administrator Rights
-                    </th>
-                </tr>
-                <tr th:each="mpBlogUser:${mpBlogUsers}">
-                    <td th:text="*{mpBlogUser.userName}"></td>
-                    <td>
-                        <p th:switch="*{mpBlogUser.adminRights}">
-                            <span th:case="true">Yes</span>
-                            <span th:case="false">No</span>
-                        </p>
-                        <div th:if="${sessionUser != null && sessionUser != ''}">
-                            <a th:href="@{/switchAdminRights/{id}/listUser(id=*{mpBlogUser.id})}"
-                               th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
+
+<div class="card modal-card">
+    <h1 class="title">Users</h1>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Administrator Rights
+            </th>
+        </tr>
+        <tr th:each="mpBlogUser:${mpBlogUsers}">
+            <td th:text="*{mpBlogUser.userName}"></td>
+            <td>
+                <p th:switch="*{mpBlogUser.adminRights}">
+                    <span th:case="true">Yes</span>
+                    <span th:case="false">No</span>
+                </p>
+                <div th:if="${sessionUser != null && sessionUser != ''}">
+                    <a th:href="@{/switchAdminRights/{id}/listUser(id=*{mpBlogUser.id})}"
+                       th:if="${sessionUser?.adminRights && mpBlogUser != sessionUser}">
                             <span class="has-text-danger" th:if="*{mpBlogUser.adminRights}">
                                 Demote
                             </span>
-                                <span class="has-text-success" th:if="*{!mpBlogUser.adminRights}">
+                        <span class="has-text-success" th:if="*{!mpBlogUser.adminRights}">
                                 Promote
                             </span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <footer th:insert="design/standardItems :: footer"></footer>

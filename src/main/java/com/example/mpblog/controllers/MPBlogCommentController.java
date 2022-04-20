@@ -61,6 +61,7 @@ public class MPBlogCommentController {
      * @return to the comment form, when the conditions are not met, to the related entry when the comment is
      * successfully created
      */
+    @PostMapping("/{id}/newComment")
     public String newCommentSubmit(@CookieValue(name = "sessionId") String sessionId,
                                    @Valid @ModelAttribute("comment") MPBlogComment comment,
                                    BindingResult bindingResult,

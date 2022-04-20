@@ -4,25 +4,28 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<div class="columns is-centered">
-    <div class="column is-3">
-        <h1 class="title">Register a new user</h1>
-        <form action="#" method="post" th:action="@{/newUser}" th:object="${mpBlogUser}" class="box">
-            <div class="field">
-                <label class="label" for="username">Username </label>
-                <input class="input" id="username" th:field="*{userName}" type="text">
-                <p class="has-text-danger" th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
-            </div>
-            <div class="field">
-                <label class="label" for="password">Password </label>
-                <input class="input" id="password" th:field="*{password}" type="password">
-                <p class="has-text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
-            </div>
-            <div class="field">
-                <button class="button is-link" type="submit">Register</button>
-            </div>
-        </form>
-    </div>
+<div class="card modal-card">
+    <h1 class="title">Register a new user</h1>
+    <form action="#" class="box" method="post" th:action="@{/newUser}" th:object="${mpBlogUser}">
+        <div class="field">
+            <label class="label" for="username">Username </label>
+            <input class="input" id="username" th:field="*{userName}" type="text">
+            <p class="has-text-danger" th:errors="*{userName}" th:if="${#fields.hasErrors('userName')}"></p>
+        </div>
+        <div class="field">
+            <label class="label" for="password">Password </label>
+            <input class="input" id="password" th:field="*{password}" type="password">
+            <p class="has-text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
+        </div>
+        <div class="field">
+            <button class="button is-link" type="submit">
+                    <span class="icon is-small">
+                        <i class="fas fa-user-plus"></i>
+                    </span>
+                <span>Register</span>
+            </button>
+        </div>
+    </form>
 </div>
 
 <footer th:insert="design/standardItems :: footer"></footer>

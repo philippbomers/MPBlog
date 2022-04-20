@@ -4,17 +4,25 @@
 <body class="is-centered has-text-centered">
 <nav th:insert="design/standardItems :: navbar"></nav>
 
-<h1 class="title">Welcome
-    <span th:if="${sessionUser != null && sessionUser != ''}">
+<div class="header card modal-card p-4">
+    <h1 class="title">Welcome
+        <span th:if="${sessionUser != null && sessionUser != ''}">
         <span th:text="${sessionUser.userName}"></span>
     </span>
-    <span th:if="${sessionUser == null || sessionUser == ''}">
+        <span th:if="${sessionUser == null || sessionUser == ''}">
         Stranger
     </span>
-</h1>
+    </h1>
+</div>
+
 
 <div class="has-text-right mr-6" th:if="${sessionUser?.adminRights}">
-    <a class="button has-background-info has-text-white" th:href="@{/newEntry}">New Entry</a>
+    <a class="button has-background-info has-text-white" th:href="@{/newEntry}">
+        <span class="icon is-small">
+            <i class="fas fa-blog"></i>
+        </span>
+        <span>Create</span>
+    </a>
 </div>
 <div class="tile is-ancestor ml-6 mr-6 is-flex-grow-4 has-text-left mt-4">
     <div class="tile is-vertical is-parent">
@@ -26,10 +34,13 @@
                     </div>
                 </div>
                 <div class="has-text-right" th:if="${sessionUser != null && sessionUser != ''}">
-                    <a class="button is-light"
+                    <a class="button is-link is-light"
                        th:href="@{/{id}/updatePicture(id=*{entry.id})}"
                        th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                        Edit Picture
+                            <span class="icon is-small">
+                                <i class="fas fa-images"></i>
+                            </span>
+                        <span>Edit Image</span>
                     </a>
                 </div>
                 <p class="title" th:text="*{entry.title}"></p>
@@ -40,18 +51,27 @@
                 <p class="card-content" th:text="*{shortEntries.get(entry.id)}"></p>
                 <p class="has-text-right">
                     <a class="button is-primary" th:href="@{/{id}/showEntry(id=*{entry.id})}">
-                        Show more
+                        <span class="icon is-small">
+                            <i class="fas fa-info"></i>
+                        </span>
+                        <span>More</span>
                     </a>
                     <span th:if="${sessionUser != null && sessionUser != ''}">
                         <a class="button is-warning"
                            th:href="@{/{id}/updateEntry(id=*{entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                                Edit Entry
+                                <span class="icon is-small">
+                                    <i class="fas fa-pen"></i>
+                                </span>
+                                <span>Edit</span>
                         </a>
                         <a class="button is-danger"
                            th:href="@{/{id}/deleteEntry(id=*{entry.id})}"
                            th:if="${sessionUser == entry.mpBlogUser or sessionUser.adminRights}">
-                            Delete
+                            <span class="icon is-small">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span>Delete</span>
                         </a>
                     </span>
                 </p>
